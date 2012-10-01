@@ -3,6 +3,7 @@ all: rapport abstract
 
 rapport:
 	pdflatex rapport.tex
+	pdflatex rapport.tex
 abstract:
 
 clean:
