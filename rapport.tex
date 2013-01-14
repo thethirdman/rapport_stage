@@ -3,9 +3,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 
-\newcommand{\pir}[0]{\xspace\textbf{$\pi r^2$}\xspace}
-\newcommand{\coq}[0]{\xspace\textbf{Coq}\xspace}
-\newcommand{\coqdoc}[0]{\xspace\textbf{Coqdoc}\xspace}
+\newcommand{\pir}[0]{\textbf{$\pi r^2$}~}
+\newcommand{\coq}[0]{\textbf{Coq}\xspace}
+\newcommand{\coqdoc}[0]{\textbf{Coqdoc}\xspace}
+\newcommand{\yrg}[0]{\xspace\textbf{Yann Régis-Gianas}\xspace}
+\newcommand{\epita}[0]{EPITA}
 
 \title{Rapport de stage de fin de tronc Commun: \\
   Réécriture de Coqdoc}
@@ -21,33 +23,65 @@
 
 \setcounter{page}{0}
 \chapter{Introduction}
-  Le présent rapport présente les travaux effectués au cours du stage de fin
-  de tronc commun à L'epita, réalisé du 3 Septembre 2012 au 11 Janvier 2013.
+  %% 3 -> 5 pages
+  Le présent rapport détaille travaux effectués au cours du stage de fin
+  de tronc commun à l'\epita, réalisé du 3 Septembre 2012 au 11 Janvier 2013.
 
-  Celui s'est déroule au sein de l'INRIA, l'institut national de recherche en
-  informatique et en automatique. Celui ci s'est déroule au seins de locaux
-  de l'INRIA Rocquencourt, plus particulièrement dans l'antenne Parisienne
-  située avenue d'Italie.
-  J'ai été intégré au sein de l'équipe de projet \pir qui travaille sur le
-  projet \coq, ... %%FIXME
-
-  Le travail principal consistait en la ré-écriture complète du logiciel de
-  documentation de la suite d'outils \coq. ... %%FIXME
+  Le sujet du stage consiste en la refonte complète du logiciel de
+  documentation \coqdoc.
 
   \section{Contexte du stage}
+  Ce stage s'est déroulé au sein de l'INRIA, plus particulièrement dans
+  l'équipe \pir.
+
+  L'INRIA est l'institut national de recherche en informatique et en
+  automatique. C'est un établissement public à caractère scientifique et
+  technologique, qui est l'acteur principal de la recherche en informatique en
+  France.
+
+  Je fut intégré à l'équipe \pir appartenant au laboratoire Preuves, Programmes et
+  Systèmes.
+
+  Le laboratoire \textbf{Preuve, programmes et systèmes} est une unité mixte
+  de recherche, rattachée à plusieurs établissements scientifiques (INRIA,
+  CNRS, et l'université Paris Diderot), qui regroupe à la fois des
+  chercheurs en informatique et en logique mathématique, au sein d'une même
+  thématique, celle des langages de programmation, des systèmes distribués,
+  et de leurs fondements logiques.
+
+  Au sein de ce laboratoire, l'équipe \pir se concentre sur la recherche
+  autour de la correspondance entre preuves et programmes, ayant donné
+  naissance à l'assistant de preuves \coq, et le formalisme qui sous-tend
+  l'implémentation d'un tel logiciel.
+
+  Ce stage fut effectué sous la direction de \yrg, maître de conférence à
+  l'université Paris Diderot.
+  %% FIXME
+
   \section{Problématique du stage}
+  L'objectif de ce stage est de refaire le logiciel de documentation de
+  l'assistant de preuves \coq, ne répondant plus aux attentes de ses
+  utilisateurs.
+  En effet, bien que celui-ci remplisse correctement sa tache il souffre d'un
+  manque crucial d'extensibilité et s'intègre mal dans la suite d'outils
+  fournie avec \coq. Il s'agit donc de refaire entièrement \coqdoc{} afin de
+  mieux l'intégrer dans \coq, tout en concevant une architecture qui permette
+  de l'étendre facilement par la suite.
+
   \section{Motivations et perspectives}
-  Le stage offre des perspectives très intéressantes en relation directes
+  Le stage offre des perspectives très intéressantes en relation directe
   avec mes objectifs professionnels, tout en mettant en application les
   compétences que j'ai acquises au cours de cycle de tronc commun.
+  %%% FIXME
+
   \subsection{Validation des acquis de tronc commun}
   Le projet proposé met en jeu des compétences propres au métier d'ingénieur.
-  En effet, la conception d'un nouveau logiciel divers enjeux en relation directe
-  avec les enseignement de l'Epita:
+  En effet, la conception d'un nouveau logiciel est en relation directe
+  avec les enseignements de l'\epita:
   \begin{itemize}
-    \item \textbf{Conception d'un logiciel:} le stage a pour but la ré-écriture à
-      neuf d'un logiciel pré-existant. L'objectif est de créer un outil
-      s'intégrant bien dans la suite \coq, paliant aux problèmes de l'outil
+    \item \textbf{Conception d'un logiciel:} le stage a pour but la réécriture à
+      neuf d'un logiciel préexistant: \coqdoc. L'objectif est de créer un outil
+      s'intégrant bien dans la suite \coq, palliant aux problèmes de l'outil
       précédent, mais également en réutilisant les éléments intéressants pour
       la nouvelle version de \coqdoc.
 
@@ -55,7 +89,7 @@
       les compétences de programmation mais également des aspects
       annexes concernant le développement de projet, telle que
       la documentation du code ou la réalisation de tests unitaires.
-    \item \textbf{Gestion de projet:} Ecrire un nouveau logiciel
+    \item \textbf{Gestion de projet:} Écrire un nouveau logiciel
       apporte également des problématiques concernant la gestion de
       ce projet: il faut choisir un cycle de développement
       approprié permettant dans le temps du stage, de réaliser
@@ -63,31 +97,66 @@
       des utilisateurs concernant le projet, et de faciliter l'intégration
       du logiciel au sein de la suite d'outils \coq.
   \end{itemize}
+
   \subsection{Introduction au monde de la recherche}
   Ce stage représente également une bonne introduction aux problématiques
-  de recherche abordées dans le domaine. En effet, le travail
-  au sein de l'équipe de recherche travaillant sur \coq permet d'aborder les
-  sujets de recherche liés à la preuve de programme et aux langages
-  fonctionnels.
+  de recherche abordées dans le domaine de l'équipe \pir.
 
-  En plus de cette introduction aux problématiques de recherche dans le domaine,
-  ce stage m'offrait une occasion d'élargir mon champ de vision concernant les
-  autres domaines de la recherche informatique.
+  En effet, bien que le sujet de stage mette en jeu des compétences surtout
+  liées au domaine de l'ingénierie, le contexte scientifique du stage me
+  permet de découvrir les problématiques de recherche dans le laboratoire PPS
+  et plus particulièrement l'équipe de recherche \pir.
+
+  Cela répond directement à mes objectifs professionnels puisque après l'\epita,
+  j'ai l'intention de poursuivre dans le monde de la recherche. Ce stage me
+  permet donc de valider cet objectif professionnel, tout en tissant des liens
+  avec les scientifiques travaillant dans ce domaine.
 
   %%FIXME: parler du CV ?
   \section{Phases de déroulement et introduction du rapport}
+  Ce rapport retrace les différentes phases de déroulement du stage :
+  \begin{itemize}
+    \item la prise de connaissance des problématiques à résoudre
+    \item la conception du logiciel de documentation
+    \item l'implémentation de ce logiciel
+  \end{itemize}
 
+  Une première partie présentes les différentes structures au sein desquelles
+  s'est effectué mon stage, ainsi que l'intégration des réalisation de ce stage
+  dans les travaux de l'entreprise. \\
+  Dans une deuxième partie, analysons l'existant et définissons la méthodologie
+  et les objectifs du stage. \\
+  La troisième partie détaillera la phase de réalisation technique.
+  Enfin, dans une dernière partie, nous offrons une analyse critique des
+  résultats de ce stage.
 
 \chapter{Présentation de l'entreprise}
+%% 5 -> 10
+  Le stage proposé s'est fait au sein de l'équipe \pir, appartenant au
+  laboratoire PPS, regroupant des chercheurs de plusieurs instituts de
+  recherche. Cette section présente les instituts de recherche ainsi que le
+  laboratoire PPS.
   \section{Le secteur d'activité}
   \section{L'entreprise}
   \section{Le service}
   \section{Le positionnement du stage dans les travaux de l'entreprise}
 \chapter{Travail effectué}
+%% 40 -> 50
   \section{Le cahier des charges}
+    \subsection{But général}
+    \subsection{Analyse de l'existant}
+    \subsection{Nouveau éléments du logiciel}
   \section{Compte-rendu d'activité}
+    \subsection{Conception de l'architecture du logiciel}
+    \subsection{Choix techniques de la conception}
+    \subsection{Déroulement du développement logiciel}
+    \subsection{Résultats du stage}
   \section{Interprétation et critique des résultats}
+    \subsection{Version préliminaire de Coqdoc stable}
+    \subsection{Extensibilité du logiciel}
+    \subsection{Finalisation de Coqdoc}
 \chapter{Conclusion générale}
+%% 2
 \chapter{Bibliographie \& glossaire}
 \chapter{Annexes}
   \section{Sommaire des Annexes}
@@ -95,3 +164,4 @@
   \section{Documentation sur le matériel/les logiciels}
   \section{Résultats bruts}
 \end{document}
+
