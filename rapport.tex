@@ -2,12 +2,15 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
+\usepackage{eurosym}
+\usepackage{graphicx}
 
-\newcommand{\pir}[0]{\textbf{$\pi r^2$}~}
+\newcommand{\pir}[0]{\textbf{$\pi r^2$}\xspace}
 \newcommand{\coq}[0]{\textbf{Coq}\xspace}
 \newcommand{\coqdoc}[0]{\textbf{Coqdoc}\xspace}
 \newcommand{\yrg}[0]{\xspace\textbf{Yann Régis-Gianas}\xspace}
 \newcommand{\epita}[0]{EPITA}
+\newcommand{\lc}[0]{$\lambda$-calcul\xspace}
 
 \title{Rapport de stage de fin de tronc Commun: \\
   Réécriture de Coqdoc}
@@ -137,9 +140,281 @@
   recherche. Cette section présente les instituts de recherche ainsi que le
   laboratoire PPS.
   \section{Le secteur d'activité}
+  L'INRIA est un acteur majeur de la recherche informatique, aussi bien en
+  France qu'à l'international.
+
+  % \subsection{Activités de recherche}
+  Les activités de recherche de l'INRIA sont regroupées en 5 thèmes qui visent
+  à décrire une \textbf{activité scientifique} très large :
+  \begin{itemize}
+    \item Mathématiques appliquées, calcul et simulation
+    \item Algorithmique, programmation, logiciels et architectures
+    \item Réseaux, systèmes et services, calcul distribué
+    \item Perception, cognition, interaction
+    \item STIC pour les sciences de la vie et de l'environnement
+  \end{itemize}
+
+  % \subsection{Collaborations avec l'industrie}
+  L'INRIA travaille avec de nombreux \textbf{partenaires industriels}.
+  Les principaux partenaires sont les suivants :
+  \begin{itemize}
+    \item Alcatel-Lucent
+    \item EDF R\&D
+    \item STMicroelectronics
+    \item Bull
+    \item Andra
+    \item Microsoft-research \\
+  \end{itemize}
+
+  L'institut ne se contente pas uniquement de collaborations avec l'industrie,
+  c'est également un créateur \textbf{Start-up}, qui commercialisent des
+  produits issus des prototypes de recherche, et du savoir-faire de l'INRIA
+
+  L'INRIA possède également de nombreux \textbf{partenariats à
+  l'international}, tant avec des universités mondialement reconnues qu'avec
+  des sociétés multinationales.
+
   \section{L'entreprise}
+    \subsection{Présentation générale}
+    La fondation d'INRIA remonte à 1967 sous le nom de IRIA (Institut de
+    recherche en informatique et en automatique). L'IRIA est devenu l'Institut
+    national de recherche en informatique et en automatique (INRIA) en 1979.
+    L'INRIA est placé sous la double tutelle du ministère de la recherche et
+    du ministère de l'économie, des finances et de l'industrie. \\
+    INRIA est signataire du Pacte PME depuis le 17 décembre 2008, et l'institut
+    participe à l'espace européen de la recherche à travers le consortium
+    ERCIM, dont il a été l'un des membres fondateurs en 1989.
+
+    L’INRIA a pour vocation d’entreprendre des recherches fondamentales et
+    appliquées dans les domaines des sciences et technologies de l’information
+    et de la communication (STIC). L’institut assure également un fort
+    transfert technologique en accordant une grande attention à la formation
+    par la recherche, à la diffusion de l’information scientifique et
+    technique, à la valorisation, à l’expertise et à la participation à des
+    programmes internationaux. Jouant un rôle fédérateur au sein de la
+    communauté scientifique de son domaine et au contact des acteurs
+    industriels, l’INRIA est un acteur majeur dans le développement des STIC en
+    France.
+
+    L’INRIA est actif au sein d’instances de normalisation comme l’IETF,
+    l’ISO ou le W3C dont il a été le pilote européen de 1995 à fin 2002.
+    Enfin l’institut entretient d’importantes relations internationales : en
+    Europe, l’INRIA s’implique fortement dans le 6ème PCRDT où il participe
+    à plus de 40 actions ainsi que dans le consortium ERCIM, qui regroupe 17
+    organismes de recherche. A l’international, l’institut collabore avec de
+    nombreuses institutions scientifiques via plusieurs laboratoires de
+    recherche conjoints (LIAMA, PPS), les « équipes de recherche associées »,
+    et différents programmes de coopération.
+
+    \subsection{Les missions de l'INRIA}
+    Les grandes missions de l'INRIA se résuments dans les points suivants:
+    \begin{itemize}
+     \item Concevoir et maîtriser les futures infrastructures des réseaux et
+     des services de communication
+     \item Développer le traitement des informations et données multimédia
+     \item Garantir la fiabilité et la sécurité des systèmes à logiciel
+     prépondérant
+     \item Coupler modéles et données pour simuler et contrôler les systèmes
+     complexes
+     \item Combiner simulation, visualisation et interaction
+     \item Modéliser le vivant
+     \item Intégrer pleinement les STIC dans les technologies médicales
+    \end{itemize}
+    \subsection{Organisation}
+    L'organisation de l'INRIA est établie par le décret du 2 août 1985.
+    L'institut est dirigé par un conseil d'administration, dont son
+    président, assure également les fonctions de directeur général.
+    Il peut s'appuyer sur les compétences de deux instances scientifiques :
+    \begin{itemize}
+      \item \textbf{le conseil scientifique}, instance de réflexion et de
+      proposition de l'institut en matière de politique scientifique,
+      \item \textbf{la commission d’évaluation}, instance chargée de procéder à
+      l'évaluation des équipes de recherche et des personnels scientifiques
+      et qui contribue à définir les orientations des activités de l'institut.
+    \end{itemize}
+
+    Le conseil d'administration regroupe :
+    \begin{itemize}
+      \item \textbf{Un membre de droit} : le directeur général du Centre national de
+        la recherche scientifique ou son représentant.
+      \item \textbf{7 représentants de l'Etat désignés} respectivement par les
+        ministres chargés de la recherche, de l'industrie, du budget, de
+        l'enseignement supérieur, de la défense, des relations extérieures et
+        des télécommunications.
+      \item \textbf{8 personnalités} : deux personnalités de l'industrie de
+        l'informatique et de l'automatique, deux personnalités scientifiques,
+        deux personnalités représentatives du monde du travail, deux
+        personnalités choisies parmi les utilisateurs de l'informatique et de
+        l'automatique désignées par le ministre chargé de l'industrie.
+      \item \textbf{4 représentants du personnel} de l'institut ou leurs
+        suppléants dont deux chercheurs, élus pour une durée de quatre ans
+        renouvelable une fois, selon des modalités fixées par arrêté du
+        ministre chargé de la recherche et du ministre chargé de l'industrie.
+    \end{itemize}
+
+    L'INRIA est structuré en 6 unités de recherche à travers la France :
+    Rocquencourt et son antenne Parisienne, Rennes, Sophia Antipolis, Grenoble,
+    Nancy, Bordeau, Lille, Saclay, Marseille, Lyon et Metz. \\
+
+    En tout, ces sites regroupent (données de février 2011):
+    \begin{itemize}
+      \item 4200 personnes, dont 2500 rémunérées par l'INRIA
+      \item 3150 scientifiques: 1200 doctorants, 250 post-doctorants et 600
+        ingénieurs R\&D
+      \item 300 stagiaires
+    \end{itemize}
+    Au sein de ces scientifiques, on compte notamment :
+    \begin{itemize}
+      \item 6 membres de \textbf{l'académie de sciences}
+      \item 16 lauréats du \textbf{conseil européen de la recherche}
+    \end{itemize}
+
+    Les chiffres clefs de la recherche scientifique à l'INRIA :
+    \begin{itemize}
+      \item 200 équipes projets
+      \item 67 équipes associées, de dimension internationale
+      \item 4500 publications scientifiques
+      \item 24 conférences internationales
+      \item 105 projets européens dans lesquels s'implique l'INRIA
+    \end{itemize}
+
+    Les chiffres pour les paternariats avec l'industrie :
+    \begin{itemize}
+      \item 230 brevets en activité
+      \item 100 entreprises crées par l'institut
+    \end{itemize}
+
+    L'INRIA bénéficie d'un budget de 231 M\euro{} dont 125,8 M\euro{} alloués à la
+    recherche (54\% du budget) (chiffres pour l'année 2011). La prévision
+    de recette pour l'année 2011 étant de 227,6M\euro{}, cela en fait un institut
+    de recherche presque auto-suffisant.
+
+    L'organigramme \ref{orga} présente les différents services de l'INRIA ainsi
+    que leur directeurs respectifs
+    \begin{figure}
+    \includegraphics[scale=0.75]{organigrammeinria.pdf}
+    \caption{Organigramme des différents services de l'INRIA}
+    \label{orga}
+    \end{figure}
+
+    %% structure logique
+    %% datas sur le pognon et les employés
   \section{Le service}
-  \section{Le positionnement du stage dans les travaux de l'entreprise}
+  Cette section présente le laboratoire PPS. Ce n'est pas à proprement parler
+  un service de l'INRIA, car c'est un groupe de recherche multidisciplinaire
+  regroupant des cherchers de tous horizons, et de toutes structures de
+  recherche.
+    \subsection{Le laboratoire Preuves, Programmes  et Systèmes}
+    PPS est un laboratoire qui regroupe les chercheurs venant de l'informatique
+    et de la logique mathématique autour de l'idée que la logique et d'autres
+    champs des mathématiques peuvent permettre d'élucider le sens de programmes,
+    d'améliorer leur sûreté et réciproquement, que l'informatique est une source
+    permettant aux mathématiques d'avancer.
+
+    La majorité de la recherche menée par PPS gravite autour la correspondance
+    de Curry-Howard: l'équivalence entre preuve et programmes, transformant
+    le \lc\footnote{Le \lc{} est un formalisme mathématique
+    qui constitue les fondements des langages de programmations du paradigme fonctionnels} en un
+    outil utilisé pour établir des preuves mathématiques. Réciproquement, le
+    savoir de la logique mathématique devient un éléments de réponses pour les
+    problèmes posés par l'industrie.
+
+    \subsection{Thématiques de recherche du laboratoire}
+      Les thématiques du laboratoire peuvent être regroupées en six directions
+      principales :
+      \begin{itemize}
+        \item \textbf{Jeux et modèles de la programmation} : \\
+          Les modèles de jeux permettent de modéliser mathématiquement
+          l'interaction d'un programme avec son environnement. Ce champ de
+          recherche débouche aujourd'hui sur des outils d'analyse et de
+          certification des programmes
+        \item \textbf{Théorie de la démonstration et \lc} :
+          Ce domaine d'étude se concentre sur le développement de l'assistant
+          de preuve Coq et les champs de recherche qui lui sont associés,
+          tels que le calcul des constructions inductives.
+        \item \textbf{Spécifications et réalisabilité} :
+          L'objectif est, à partir d'un théorème mathématique, de trouver
+          le programme équivalent. L'approche particulière de ce domaine est
+          qu'au lieu de supposer une formule avant la preuve, la théorie de la
+          réalisabilité considère les formules comme faisant partie des
+          spécifications d'un programme.
+        \item \textbf{Réécriture} :
+          La théorie de la réécriture combine des éléments de la logique, de
+          l'algèbre, du \lc, etc $\ldots$, et a pour but de transformer des
+          programmes (et plus précisément des objets syntaxiques) à travers
+          l'application de règle bien déterminées. Cette théorie propose
+          un formalisme permettant de modéliser à la fois des langages
+          fonctionnels, impératifs ou encore orientés objet.
+          Les applications d'une telle théorie sont très diverses: la plus
+          connue étant probablement l'optimisation d'un programme par le
+          compilateur par le moyen de la réécriture de code.
+          La théorie de la réécriture permet de formaliser et de prouver ces
+          mécanismes de réécriture de codes.
+        \item \textbf{Programmation} : \\
+          Le laboratoire développe de nouvelles méthodes de programmations
+          appliquées à de nombreux domaines qui vont des protocoles réseaux
+          jusqu'au web. Ces développements sont étroitements liés à la
+          logique mathématique, et permettent de mettre en évidence des
+          propriétés sur ces programmes\footnote{Par exemple, le framework de
+          développement web Ocsigen, donne la garantie de générer des pages
+          web valides selon les standards W3C}.
+        \item \textbf{Logique, Concurrence et Modélisation} : \\
+          Un nouveau front de recherche s'est récemment ouvert à PPS, autour
+          de la modélisation de la programmation dite concurrente (calculs de
+          processus) et mobile, qu'il s'agisse d'en rechercher les fondements
+          logiques, ou de les appliquer à une troisième science : la
+          biologie, et plus précisément à la modélisation des processus de
+          la biologie moléculaire.
+      \end{itemize}
+
+      \subsection{L'équipe \pir}
+      L'équipe \pir{} est composée de chercheur faisant partie du laboratoire
+      PPS, mais également de scientifique appartenant à l'université
+      Paris-Diderot, et l'INRIA.
+
+      Ses sujets de recherche sont les suivants :
+      \begin{itemize}
+        \item La recherche fondamentale autour de la correspondance entre preuve et programmes
+        \item La recherche théorique autour du formalisme qui sous-tend les
+          mécanismes de l'assistant de preuves Coq
+        \item Un domaine d'implémentation: Coq, notamment en le considérant comme
+          un langage de programmation avec des types-dépendants.
+      \end{itemize}
+      L'équipe développe notamment deux logiciels, Coq (présenté ci-après),
+      et Pangolin, qui lui permet la certification de programmes fonctionnels.
+      \subsubsection{L'assistant de preuves Coq}
+      Le logiciel Coq est un outil de développement semi-interactif de
+      preuves bâti autour d'un langage de programmation fonctionnelle
+      fortement typé. Développé conjointement par plusieurs équipes INRIA et
+      hors INRIA, Coq est utilisé tant pour la formalisation des
+      mathématiques que pour la certification de propriétés de programmes.
+      Naturellemment doté de types dépendants, Coq a une carte à jouer comme
+      langage de programmation à type riches. Un des objectifs de \pir dans
+      ce cadre est le développement de bibliothèques de programmation
+      certifiés, la certification du processus d'extraction de programme Coq
+      vers des langages fonctionnels comme Objective Caml, ainsi que le
+      développement de nouvelles méthodes de preuves pour Coq.
+
+      Les principaux champs d'applications de Coq sont les suivants :
+      \begin{itemize}
+        \item L'écriture de compilateurs certifiés : le projet Compcert en
+          est un bon exemple
+        \item La validation de preuves mathématiques : les publications
+          scientifiques dans le domaine des mathématiques incluent parfois
+          des preuves de plusieurs centaines de pages. Coq est un outil
+          permettant de valider les preuves ainsi publiées. L'on peut citer
+          le théorème de Fermat-Wiles ou encore Feit-Thompson.
+        \item Dans la recherche fondamentale en Informatique: c'est un outil
+          qui permet de formaliser (et valider) la sémantique des langages de
+          programmation et, qui est utilisé plus largement dans la théorie
+          des langages de programmation.
+      \end{itemize}
+
+      \section{Le positionnement du stage dans les travaux de l'entreprise}
+      %% Importance de coqdoc au sein de coq
+      %% Developpement de l'interprete coq
+      %% Importance de coq au sein de pir
+
 \chapter{Travail effectué}
 %% 40 -> 50
   \section{Le cahier des charges}
@@ -161,6 +436,73 @@
 \chapter{Annexes}
   \section{Sommaire des Annexes}
   \section{Documentation sur l'entreprise}
+  \subsection{Les membres du conseil d'administration de l'INRIA}
+  Le tableau suivant présente les membres actuels (15 janvier 2013) du conseil
+  d'administration de l'INRIA: \par
+      \begin{tabular}{|l|p{8cm}|}
+    \multicolumn{2}{l}{\textbf{Président} : Michel Cosnard, président directeur général de
+    l'INRIA} \\
+    \multicolumn{2}{l}{\textbf{Membre de droit} : Alain Fuchs, président directeur général
+    du CNRS} \\
+        \multicolumn{2}{l}{\textbf{Représentants de l'état} :} \\
+        \hline
+        Marc Bellœil &
+        Chargé de mission, département Organismes spécialisés, DGRI (Recherche) \\
+        \hline
+        Fabien Terraillot & Chef du bureau du logiciel, DGCIS (Industrie) \\
+        François Pouget & Chef du bureau 3 (MIRES), direction du Budget (Budget) \\
+        \hline
+        Éric Grégoire &
+        Conseiller scientifique de formation, DGESIP (Enseignement supérieur) \\
+        \hline
+        Christine Marteau & Responsable du pôle Télécommunications, DGA (Défense) \\
+        \hline
+        Pascal le Deuff &
+        Sous-directeur des échanges scientifiques et de la recherche (Affaires étrangères) \\
+        \hline
+        Cécile Dubarry &
+        Chef du service des technologies de l’information et de la communication, DGCIS (Télécommunications) \\
+        \hline
+        \multicolumn{2}{l}{\textbf{Membres nommés} :}\\
+        \hline
+        Jean-Luc Beylat & Président d’Alcatel-Lucent Bell Labs France \\
+        \hline
+        Bernard Jarry-Lacombe & Secrétaire national CFDT cadres \\
+        \hline
+        Marie-Noëlle Jégo-Laveissière & Directrice recherche et développement,
+        Orange Labs \\
+        \hline
+        Gilles Le Calvez & Directeur R\&D du Groupe Valeo \\
+        \hline
+        Brigitte Plateau & Administrateur général INP Grenoble \\
+        \hline
+        Luc Pabœuf & Président du CESR d’Aquitaine \\
+        \hline
+        Laure Reinhart & Directrice générale déléguée, OSEO et OSEO Innovation \\
+        \hline
+        Gérard Roucairol & Président de l’association Ter@tec \\
+        \hline
+        \multicolumn{2}{l}{\textbf{Membres élus : Représentants des personnels scientifiques}} \\
+        \hline
+        Serge Steer & Directeur de recherche, Inria Paris-Rocquencourt \\
+        \hline
+        Jocelyne Erhel & Directrice de recherche, Inria Rennes - Bretagne Atlantique \\
+        \hline
+        Lisette Calderan & Ingénieur de recherche, Inria Siège \\
+        \hline
+        Laurent Pierron & Ingénieur de recherche, Inria Nancy - Grand Est \\
+        \hline
+        \multicolumn{2}{l}{\textbf{Voix consultatives :}} \\
+        \hline
+        Malika Moha & Contrôleur général \\
+        \hline
+        Marie-Laure Inisan-Ehret & Agent comptable \\
+        \hline
+        Chris Hankin & Président du conseil scientifique \\
+        \hline
+        Antoine Petit & Directeur général adjoint \\
+        \hline
+    \end{tabular}
   \section{Documentation sur le matériel/les logiciels}
   \section{Résultats bruts}
 \end{document}
