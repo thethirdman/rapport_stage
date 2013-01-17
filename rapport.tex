@@ -4,7 +4,9 @@
 \usepackage[french]{babel}
 \usepackage{eurosym}
 \usepackage{graphicx}
+\usepackage{titlesec}
 
+\newcommand{\sectionbreak}{\clearpage}
 \newcommand{\pir}[0]{\textbf{$\pi r^2$}\xspace}
 \newcommand{\coq}[0]{\textbf{Coq}\xspace}
 \newcommand{\coqdoc}[0]{\textbf{Coqdoc}\xspace}
@@ -137,13 +139,12 @@
 %% 5 -> 10
   Le stage proposé s'est fait au sein de l'équipe \pir, appartenant au
   laboratoire PPS, regroupant des chercheurs de plusieurs instituts de
-  recherche. Cette section présente les instituts de recherche ainsi que le
-  laboratoire PPS.
+  recherche. Cette section présente l'institut de recherche qui m'a employé
+  ainsi que le laboratoire PPS, pour enfin présenter l'équipe \pir.
   \section{Le secteur d'activité}
   L'INRIA est un acteur majeur de la recherche informatique, aussi bien en
   France qu'à l'international.
 
-  % \subsection{Activités de recherche}
   Les activités de recherche de l'INRIA sont regroupées en 5 thèmes qui visent
   à décrire une \textbf{activité scientifique} très large :
   \begin{itemize}
@@ -186,7 +187,7 @@
     ERCIM, dont il a été l'un des membres fondateurs en 1989.
 
     L’INRIA a pour vocation d’entreprendre des recherches fondamentales et
-    appliquées dans les domaines des sciences et technologies de l’information
+    appliquées dans les domaines des sciences et des technologies de l’information
     et de la communication (STIC). L’institut assure également un fort
     transfert technologique en accordant une grande attention à la formation
     par la recherche, à la diffusion de l’information scientifique et
@@ -207,14 +208,14 @@
     et différents programmes de coopération.
 
     \subsection{Les missions de l'INRIA}
-    Les grandes missions de l'INRIA se résuments dans les points suivants:
+    Les grandes missions de l'INRIA se résument dans les points suivants:
     \begin{itemize}
      \item Concevoir et maîtriser les futures infrastructures des réseaux et
      des services de communication
      \item Développer le traitement des informations et données multimédia
      \item Garantir la fiabilité et la sécurité des systèmes à logiciel
      prépondérant
-     \item Coupler modéles et données pour simuler et contrôler les systèmes
+     \item Coupler modèles et données pour simuler et contrôler les systèmes
      complexes
      \item Combiner simulation, visualisation et interaction
      \item Modéliser le vivant
@@ -237,7 +238,7 @@
     \begin{itemize}
       \item \textbf{Un membre de droit} : le directeur général du Centre national de
         la recherche scientifique ou son représentant.
-      \item \textbf{7 représentants de l'Etat désignés} respectivement par les
+      \item \textbf{7 représentants de l'état désignés} respectivement par les
         ministres chargés de la recherche, de l'industrie, du budget, de
         l'enseignement supérieur, de la défense, des relations extérieures et
         des télécommunications.
@@ -278,7 +279,7 @@
       \item 105 projets européens dans lesquels s'implique l'INRIA
     \end{itemize}
 
-    Les chiffres pour les paternariats avec l'industrie :
+    Les chiffres pour les partenariats avec l'industrie :
     \begin{itemize}
       \item 230 brevets en activité
       \item 100 entreprises crées par l'institut
@@ -292,7 +293,7 @@
     L'organigramme \ref{orga} présente les différents services de l'INRIA ainsi
     que leur directeurs respectifs
     \begin{figure}
-    \includegraphics[scale=0.75]{organigrammeinria.pdf}
+    \includegraphics[scale=0.85]{organigrammeinria.pdf}
     \caption{Organigramme des différents services de l'INRIA}
     \label{orga}
     \end{figure}
@@ -302,7 +303,7 @@
   \section{Le service}
   Cette section présente le laboratoire PPS. Ce n'est pas à proprement parler
   un service de l'INRIA, car c'est un groupe de recherche multidisciplinaire
-  regroupant des cherchers de tous horizons, et de toutes structures de
+  regroupant des chercheurs de tous horizons, et de toutes structures de
   recherche.
     \subsection{Le laboratoire Preuves, Programmes  et Systèmes}
     PPS est un laboratoire qui regroupe les chercheurs venant de l'informatique
@@ -316,7 +317,7 @@
     le \lc\footnote{Le \lc{} est un formalisme mathématique
     qui constitue les fondements des langages de programmations du paradigme fonctionnels} en un
     outil utilisé pour établir des preuves mathématiques. Réciproquement, le
-    savoir de la logique mathématique devient un éléments de réponses pour les
+    savoir de la logique mathématique devient un élément de réponse pour les
     problèmes posés par l'industrie.
 
     \subsection{Thématiques de recherche du laboratoire}
@@ -349,11 +350,11 @@
           connue étant probablement l'optimisation d'un programme par le
           compilateur par le moyen de la réécriture de code.
           La théorie de la réécriture permet de formaliser et de prouver ces
-          mécanismes de réécriture de codes.
+          mécanismes.
         \item \textbf{Programmation} : \\
           Le laboratoire développe de nouvelles méthodes de programmations
           appliquées à de nombreux domaines qui vont des protocoles réseaux
-          jusqu'au web. Ces développements sont étroitements liés à la
+          jusqu'au web. Ces développements sont étroitement liés à la
           logique mathématique, et permettent de mettre en évidence des
           propriétés sur ces programmes\footnote{Par exemple, le framework de
           développement web Ocsigen, donne la garantie de générer des pages
@@ -388,22 +389,24 @@
       fortement typé. Développé conjointement par plusieurs équipes INRIA et
       hors INRIA, Coq est utilisé tant pour la formalisation des
       mathématiques que pour la certification de propriétés de programmes.
-      Naturellemment doté de types dépendants, Coq a une carte à jouer comme
+      Naturellement doté de types dépendants, Coq a une carte à jouer comme
       langage de programmation à type riches. Un des objectifs de \pir dans
       ce cadre est le développement de bibliothèques de programmation
-      certifiés, la certification du processus d'extraction de programme Coq
+      certifiée, la certification du processus d'extraction de programme Coq
       vers des langages fonctionnels comme Objective Caml, ainsi que le
       développement de nouvelles méthodes de preuves pour Coq.
 
       Les principaux champs d'applications de Coq sont les suivants :
       \begin{itemize}
         \item L'écriture de compilateurs certifiés : le projet Compcert en
-          est un bon exemple
+          est un bon exemple: c'est un compilateur C pour lequel la traduction
+          du C en code machine est mathématiquement prouvée.
         \item La validation de preuves mathématiques : les publications
           scientifiques dans le domaine des mathématiques incluent parfois
           des preuves de plusieurs centaines de pages. Coq est un outil
-          permettant de valider les preuves ainsi publiées. L'on peut citer
-          le théorème de Fermat-Wiles ou encore Feit-Thompson.
+          permettant de valider les preuves ainsi publiées. On peut citer
+          le théorème de Fermat-Wiles ou encore Feit-Thompson comme exemples
+          de cette application.
         \item Dans la recherche fondamentale en Informatique: c'est un outil
           qui permet de formaliser (et valider) la sémantique des langages de
           programmation et, qui est utilisé plus largement dans la théorie
@@ -411,9 +414,35 @@
       \end{itemize}
 
       \section{Le positionnement du stage dans les travaux de l'entreprise}
-      %% Importance de coqdoc au sein de coq
-      %% Developpement de l'interprete coq
-      %% Importance de coq au sein de pir
+      L'utilisation d'un logiciel de documentation est très importante lors du
+      développement d'un projet.
+      Au sein du développement de Coq, Coqdoc possède plusieurs cas
+      d'utilisation qui en font un outil très utilisé, et dont l'amélioration
+      est supposée offrir plusieurs avantage. La liste suivante
+      présente les différents cas d'utilisations de Coqdoc dans le projet :
+      \begin{itemize}
+        \item \textbf{Documentation de développement du compilateur :} \\
+          Bien qu'une importante partie de Coq soit écrit en Caml, l'ensemble
+          des bibliothèques standards, c'est à dire les outils pour Coq
+          fournis avec le compilateur, sont écrites en Coq. Coqdoc permet donc
+          de décrire le fonctionnement d'une importante partie du code source
+          du compilateur.
+        \item \textbf{Documentation utilisateur :} \\
+          Une importante partie de la documentation explique le fonctionnement
+          du projet Coq à l'utilisateur. Dans une documentation utilisateur,
+          le code sert d'exemple aux explication fournies par la documentation.
+        \item \textbf{Écriture de documents :} \\
+          Cette application se distingue de l'écriture de documentation car
+          elle n'est pas directement associée à un code source. L'objectif ici
+          est d'inclure les avantages de Coqdoc (coloration syntaxique,
+          formattage du code) dans des documents qui ne sont pas directement
+          liés au compilateur, tels que des articles scientifiques ou des
+          livres.
+      \end{itemize}
+
+      Coqdoc possède donc une grande importance au sein du projet Coq. La
+      reconception de ce logiciel doit permettre d'offrir des fonctionnalités
+      qui impacteront l'ensemble de ses utilisateurs.
 
 \chapter{Travail effectué}
 %% 40 -> 50
