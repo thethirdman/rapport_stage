@@ -5,6 +5,10 @@
 \usepackage{eurosym}
 \usepackage{graphicx}
 \usepackage{titlesec}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
 
 \newcommand{\sectionbreak}{\clearpage}
 \newcommand{\pir}[0]{\textbf{$\pi r^2$}\xspace}
@@ -13,6 +17,14 @@
 \newcommand{\yrg}[0]{\xspace\textbf{Yann Régis-Gianas}\xspace}
 \newcommand{\epita}[0]{EPITA}
 \newcommand{\lc}[0]{$\lambda$-calcul\xspace}
+
+\lstset{language=Caml, frame=single, language=Caml,
+commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
+\lstset{literate=%
+  {é}{{\'e}}1
+  {è}{{\`e}}1
+  {â}{{\^a}}1
+}
 
 \title{Rapport de stage de fin de tronc Commun: \\
   Réécriture de Coqdoc}
@@ -445,11 +457,149 @@
       qui impacteront l'ensemble de ses utilisateurs.
 
 \chapter{Travail effectué}
+Cette section détaille le travail effectué au cours de ce stage de fin de tronc
+commun. Nous détaillons tout d'abord les objectifs à atteindre en présentant
+les outils utilisés, et en expliquant les spécificités propre à ce stage.
+Nous expliquons ensuite les différentes phases de la conception du logiciel,
+y compris le développement. Enfin, nos offrons une analyse critique des
+résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 %% 40 -> 50
   \section{Le cahier des charges}
-    \subsection{But général}
+  Cette section détaille les objectifs du stage à travers une analyse des outils
+  existants (plus précisément, "l'ancien" Coqdoc, et Coq-tex), un état de
+  l'art sur ce genre d'outils, et nous détaillons les objectif à atteindre pour
+  le nouveau Coqdoc.
+    \subsection{Logiciels de documentation}
+    Lors du développement d'un logiciel, le code source est souvent insuffisant
+    pour détailler le fonctionnement du programme, car il manque en clarté et
+    n'est pas toujours assez explicite.
+    Le rôle de la documentation est de décrire les différents aspects du
+    fonctionnement attendu du code source. Cette documentation est incluse
+    dans les fichiers sources sous forme de commentaires, de façon à ce
+    qu'elle soit facilement accessible aux développeurs.
+
+    Le rôle d'un logiciel de documentation est d'extraire ces informations
+    contenues dans le code source afin d'en constituer un guide de réference
+    ou un manuel, sous forme de pages webs ou de documents PDF.
+    Cela permet au programmeur de bénéficier d'un document décrivant clairement
+    le projet, et de détailler les fonctionnalités accessibles au programmeur.
+
+    L'utilisation d'un générateur de documentation possède plusieurs intérêts :
+    \begin{itemize}
+      \item \textbf{Facilité de mise à jour de la documentation :} \\
+        Parce que la documentation est située dans le code source, lorsqu'un
+        développeur modifie un fichier, il peut facilement mettre à jour cette
+        documentation. Ainsi, le manuel de référence associé au code source
+        évolue en même temps que celui-ci.
+      \item \textbf{Mise en forme automatique de documents :} \\
+        Les logiciels de documentation possèdent des règles de mise en forme
+        des commentaires dans les documents produits. Ainsi, un générateur
+        de documentation sait traiter les informations de mise en forme
+        données par le programmeur, pour avoir une meilleure explication du
+        code source (découpages logiques, titres, mettre en gras les éléments
+        importants dans les commentaires).
+      \item \textbf{Variété des formats de sortie :} \\
+        Enfin, l'un des éléments les plus important est le fait qu'un logiciel
+        de documentation sait gérer plusieurs formats de sorties pour la
+        documentation, allant de la génération de pages webs à la génération de
+        PDF.
+    \end{itemize}
+
+    L'exemple \ref{fig1} présente un morceau de code documenté, et le rendu
+    généré par coqdoc.
+
+    \begin{figure}
+      \lstinputlisting
+        {source1.v}
+      \fbox{
+      \includegraphics[trim=0mm 0mm 2cm 0cm,clip=true, width=\textwidth]{rendu1.png}}
+      \caption{Exemple de rendu généré par coqdoc}
+      \label{fig1}
+    \end{figure}
+
+    \clearpage
+
     \subsection{Analyse de l'existant}
+    Le projet Coq avait déjà un logiciel de documentation de son code source.
+    Cette section détaille les particularités de ce logiciel. L'un des objectifs
+    du stage était d'avoir un nouveau Coqdoc dont le comportement est le plus
+    proche possible de l'ancien : il doit pouvoir gérer les mêmes options et
+    un rendu similaire. Cela permet de :
+    \begin{itemize}
+      \item Faciliter l'intégration du nouveau logiciel grâce à la
+        rétro-compatibilité
+      \item Avoir un rendu similaire par rapport aux pages de documentations
+        générées auparavant
+      \item Se servir de l'ancien logiciel comme référence pour un ensemble
+        de tests fonctionnels et techniques
+    \end{itemize}
+
+    \subsubsection{Format des fichiers d'entrée}
+    Comme beaucoup de logiciels de documentation, Coqdoc propose un langage de
+    mise en forme de la documentation : ce sont des balises, qui, en étant
+    présentes dans le code source, permettent de formater le fichier de sortie.
+    \begin{itemize}
+      \item[] \textbf{Format des lignes de documentation :} \\
+      Comme nous l'avons déjà vu, Coqdoc fait une distinction entre commentaires
+      et documentation. En Coq, les commentaires sont préfixés par "(*" et se
+      terminent par "*)". Coqdoc considère que tout commentaire commençant par
+      "(**" est une portion de texte devant apparaitre dans la documentation
+      générée.
+      \item[] \textbf{Titres :} \\
+      Pour introduire des titres dans le document de sortie, l'utilisateur
+      peut préfixer le début d'une ligne par 1 à 4 astérisques suivies d'une
+      espace. Le nombre d'astérisques déterminant le niveau d'importance du
+      titre.
+      \item[] \textbf{Listes :} \\
+        Tout ligne commençant par un tiret et précédée de \texttt{n} espaces
+        est un élément d'une liste, dont le niveau de profondeur est détérminé
+        par le nombre d'espaces
+      \item[] \textbf{Séparateur horizontal :} \\
+        Une ligne constituée uniquement de 4 tirets ou plus produit un
+        séparateur horizontal
+      \item[] \textbf{Emphase :} \\
+        Il est possible de mettre en valeur des mots en les encadrant
+        de tirets bas ("\texttt{\_}").
+      \item[] \textbf{Verbatim :} \\
+        On peut inclure du code dans de la documentation en encadrant cette
+        portion de code de double chevrons (\texttt{<<} et \texttt{>>})
+      \item[] \textbf{Cacher des portions de code :} \\
+        A des fins de clarté dans la documentation, on peut cacher
+        (ou afficher) des portions de code avec les délimitant avec
+        \texttt{(* begin hide *)} et \texttt{(* end hide *)}
+        (pour forcer l'affichage, il suffit de remplacer \texttt{hide} par \texttt{show})
+      \item[] \textbf{Règles de traduction :} \\
+        L'utilisateur peut définir des règles de traduction avec le mot clef
+        printing, avec les délimiteurs suivants
+        \begin{itemize}
+          \item \texttt{\#} pour une sortie HTML
+          \item \texttt{\%} pour une sortie en LaTeX
+          \item \texttt{\$} pour une notation mathématique en sortie LaTeX
+        \end{itemize}
+    \end{itemize}
+    La figure \ref{source2} donne un exemple de ces règles de formattages
+    dans le fichier d'entrée
+    \begin{figure}
+      \lstinputlisting{source2.v}
+      \caption{Exemple des règles de formattage de Coqdoc}
+      \label{source2}
+    \end{figure}
+
+    \subsubsection{Format des fichiers de sortie :}
+    plop
+    \subsection{But général}
+    %% Detail de l'architecture souhaitée
+    \subsection{Présentation des outils utilisés}
+    %% Ocaml
+    %% Interaction avec coqtop
     \subsection{Nouveau éléments du logiciel}
+    \subsection{Résumé des objectifs}
+    Nous rappelons brièvement les objectifs introduit dans cette section
+    concernant le logiciel produit pendant ce stage :
+    \begin{itemize}
+      \item Le nouveau Coqdoc doit avoir un comportement le plus proche
+        possible de l'ancien Coqdoc.
+    \end{itemize}
   \section{Compte-rendu d'activité}
     \subsection{Conception de l'architecture du logiciel}
     \subsection{Choix techniques de la conception}
