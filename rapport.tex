@@ -300,12 +300,12 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     L'INRIA bénéficie d'un budget de 231 M\euro{} dont 125,8 M\euro{} alloués à la
     recherche (54\% du budget) (chiffres pour l'année 2011). La prévision
     de recette pour l'année 2011 étant de 227,6M\euro{}, cela en fait un institut
-    de recherche presque auto-suffisant.
+    de recherche presque autosuffisant.
 
     L'organigramme \ref{orga} présente les différents services de l'INRIA ainsi
     que leur directeurs respectifs
     \begin{figure}
-    \includegraphics[scale=0.85]{organigrammeinria.pdf}
+    \includegraphics[scale=0.85]{data/organigrammeinria.pdf}
     \caption{Organigramme des différents services de l'INRIA}
     \label{orga}
     \end{figure}
@@ -447,7 +447,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
           Cette application se distingue de l'écriture de documentation car
           elle n'est pas directement associée à un code source. L'objectif ici
           est d'inclure les avantages de Coqdoc (coloration syntaxique,
-          formattage du code) dans des documents qui ne sont pas directement
+          mise en forme du code) dans des documents qui ne sont pas directement
           liés au compilateur, tels que des articles scientifiques ou des
           livres.
       \end{itemize}
@@ -479,8 +479,8 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     qu'elle soit facilement accessible aux développeurs.
 
     Le rôle d'un logiciel de documentation est d'extraire ces informations
-    contenues dans le code source afin d'en constituer un guide de réference
-    ou un manuel, sous forme de pages webs ou de documents PDF.
+    contenues dans le code source afin d'en constituer un guide de référence
+    ou un manuel, sous forme de pages web ou de documents PDF.
     Cela permet au programmeur de bénéficier d'un document décrivant clairement
     le projet, et de détailler les fonctionnalités accessibles au programmeur.
 
@@ -501,7 +501,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \item \textbf{Variété des formats de sortie :} \\
         Enfin, l'un des éléments les plus important est le fait qu'un logiciel
         de documentation sait gérer plusieurs formats de sorties pour la
-        documentation, allant de la génération de pages webs à la génération de
+        documentation, allant de la génération de pages web à la génération de
         PDF.
     \end{itemize}
 
@@ -510,16 +510,16 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 
     \begin{figure}
       \lstinputlisting
-        {source1.v}
+        {data/source1.v}
       \fbox{
-      \includegraphics[trim=0mm 0mm 2cm 0cm,clip=true, width=\textwidth]{rendu1.png}}
+      \includegraphics[trim=0mm 0mm 2cm 0cm,clip=true, width=\textwidth]{data/rendu1.png}}
       \caption{Exemple de rendu généré par coqdoc}
       \label{fig1}
     \end{figure}
 
     \clearpage
 
-    \subsection{Analyse de l'existant}
+    \subsection{Analyse de l'existant : Coqdoc}
     Le projet Coq avait déjà un logiciel de documentation de son code source.
     Cette section détaille les particularités de ce logiciel. L'un des objectifs
     du stage était d'avoir un nouveau Coqdoc dont le comportement est le plus
@@ -537,13 +537,15 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \subsubsection{Format des fichiers d'entrée}
     Comme beaucoup de logiciels de documentation, Coqdoc propose un langage de
     mise en forme de la documentation : ce sont des balises, qui, en étant
-    présentes dans le code source, permettent de formater le fichier de sortie.
+    présentes dans le code source, permettent de mettre en forme le fichier de sortie,
+    et qui permettent de donner de plus amples informations à propos du code
+    documenté.
     \begin{itemize}
       \item[] \textbf{Format des lignes de documentation :} \\
       Comme nous l'avons déjà vu, Coqdoc fait une distinction entre commentaires
       et documentation. En Coq, les commentaires sont préfixés par "(*" et se
       terminent par "*)". Coqdoc considère que tout commentaire commençant par
-      "(**" est une portion de texte devant apparaitre dans la documentation
+      "(**" est une portion de texte devant apparaître dans la documentation
       générée.
       \item[] \textbf{Titres :} \\
       Pour introduire des titres dans le document de sortie, l'utilisateur
@@ -552,7 +554,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       titre.
       \item[] \textbf{Listes :} \\
         Tout ligne commençant par un tiret et précédée de \texttt{n} espaces
-        est un élément d'une liste, dont le niveau de profondeur est détérminé
+        est un élément d'une liste, dont le niveau de profondeur est déterminé
         par le nombre d'espaces
       \item[] \textbf{Séparateur horizontal :} \\
         Une ligne constituée uniquement de 4 tirets ou plus produit un
@@ -577,30 +579,193 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           \item \texttt{\$} pour une notation mathématique en sortie LaTeX
         \end{itemize}
     \end{itemize}
-    La figure \ref{source2} donne un exemple de ces règles de formattages
+    La figure \ref{source2} donne un exemple de ces règles de mise en forme
     dans le fichier d'entrée
     \begin{figure}
-      \lstinputlisting{source2.v}
-      \caption{Exemple des règles de formattage de Coqdoc}
+      \lstinputlisting{data/source2.v}
+      \caption{Exemple des règles de mise en forme de Coqdoc}
       \label{source2}
     \end{figure}
 
     \subsubsection{Format des fichiers de sortie :}
-    plop
+    Le rôle de Coqdoc est d'effectuer une traduction du format d'entrée
+    précédemment présenté vers plusieurs formats de sortie. Au cours
+    de cette traduction, Coqdoc prends en compte les règles de mise en forme
+    données en entrée pour la documentation et fait une analyse syntaxique du
+    code source.
+
+    La liste suivante détaille les différentes caractéristiques de Coqdoc dans
+    la génération des fichiers de sortie
+
+    \begin{itemize}
+      \item \textbf{Mise en forme de la documentation} \\
+        La première étape est la traduction des informations de mise en forme
+        contenues dans la documentation. Le rôle de Coqdoc ici est de générer
+        les balises adéquates dans le format de
+      \item \textbf{Analyse syntaxique du code source} \\
+        Coqdoc a également pour rôle de mettre en forme le code source des
+        fichiers lus en entrée. Pour cela il effectue une analyse syntaxique
+        des sections de code source, et met en forme ces éléments de code
+        source dans le fichier de sortie, en effectuant :
+        \begin{enumerate}
+          \item Une coloration syntaxique du code
+          \item Le \textit{pretty print} de certains symboles selon les règles
+            de traduction par défaut, et également selon celles définies
+            par l'utilisateur. Par exemple, l'ancien coqdoc traduit
+            automatiquement le symbole \texttt{->} en \texttt{$\rightarrow$}.
+            Le tableau \ref{trad:coqdoc} donne une liste exhaustive des
+            symboles traduits par coqdoc.
+        \end{enumerate}
+      \item \textbf{Gestion de la structure logique de la documentation} \\
+        Coqdoc doit également gérer les règles de génération des fichiers selon
+        la volonté de l'utilisateur. Ceci est fait avec des options passées à
+        Coqdoc, qui permettent de définir si un seul fichier doit être généré
+        (pour un manuel de référence par exemple) ou plusieurs
+        (pour une documentation utilisateur). Il y a également des règles par
+        défaut selon le format de fichier de sortie : par exemple, pour une
+        sortie HTML, plusieurs fichiers seront générés, tandis qu'une sortie
+        en LaTeX entraînera la génération d'un seul fichier mettant en commun
+        tous les fichiers d'entrée.
+      \item \textbf{Génération des liens hypertextes} \\
+        Une autre partie du travail de Coq est la génération des liens
+        hypertextes, qui permettent de faire référence à :
+        \begin{enumerate}
+          \item Des \textbf{identifiants déclarés dans d'autres fichiers} : en
+            effet,
+            l'utilisateur fournit souvent plusieurs fichiers à documenter, et
+            un identifiant peut avoir une importance dans plusieurs fichiers.
+            Cette génération de liens permet de faciliter la lecture de la
+            documentation, en proposant un lien vers la déclaration de
+            l'identifiant, pour permettre à l'utilisateur d'obtenir de plus
+            amples informations à propos de celui-ci si nécessaire.
+            Cette génération de liens se base sur des fichiers issus de la
+            compilation ayant pour extension \texttt{.glob} qui détaille les
+            identifiants déclarés dans un fichier. Grâce à ceux ci, Coqdoc peut
+            ainsi générer des références entre plusieurs fichiers.
+          \item Coqdoc propose également de générer des \textbf{références à
+            la documentation de la bibliothèque standard}; cela permet de
+            fournir à l'utilisateur un moyen rapide de s'informer sur un
+            élément faisant partie du langage Coq.
+          \item De la même manière, il est possible de faire \textbf{référence
+            à une bibliothèque externe}, pour pouvoir détailler de celle-ci
+            avec le projet documenté.
+        \end{enumerate}
+    \end{itemize}
+
+    \subsection{Analyse de l'existant : Coq-tex}
+    Un des autres objectifs de ce stage était d'offrir un remplacement pour
+    Coq-tex, un des autres outils du projet Coq. Nous détaillons dans une
+    première partie l'approche qu'offre Coq-tex à propos de la programmation,
+    pour ensuite détailler son fonctionnement.
+
+    \subsubsection{Programmation lettrée}
+    La programmation lettrée (\textit{literate programming}) est une approche
+    de la programmation introduite par \textbf{Donald Knuth} dans laquelle
+    le code source du programme suit le flux de pensée de l'auteur : à la
+    manière d'un article, le programmeur introduit les concepts de son
+    programme dans l'ordre logique de la pensée humaine, au lieu de suivre
+    l'ordre logique et la manière demandée par le compilateur. A travers un
+    ensemble de fonctions (ou plutôt de macros), l'auteur peut cacher
+    l'abstraction demandée par l'ordinateur pour s'exprimer dans un langage
+    plus proche du langage naturel.
+
+    Ainsi les outils pour la programmation lettrée permettent de générer deux
+    versions d'un code source : une nouvelle version du code adaptée à la
+    génération d'un \textbf{programme} par un compilateur, et une autre version
+    qui elle est sous la forme d'une \textbf{documentation} à destination d'un
+    lecteur.
+
+    Cette approche est particulièrement intéressante pour expliquer des
+    programmes Coq car elle permet de changer l'ordre logique des différents
+    éléments du programme pour ainsi avoir une version plus facile à comprendre
+    pour des humains : la preuve de théorèmes mathématiques en Coq peut ainsi
+    être plus facile à comprendre pour un lecteur, et à partir du programme
+    fournissant la preuve, il est possible d'obtenir un article scientifique
+    expliquant cette preuve.
+
+    \subsubsection{Fonctionnement de Coq-tex}
+    Coq-tex est un outil se rapprochant de ce concept de programmation lettrée.
+    Le programme prend en argument un fichier LaTex, et extrait les phrases
+    Coq contenues dans celui-ci, pour y insérer à la place le résultat de
+    leur interprétation.
+
+    La production d'un document LaTeX bénéficie ainsi d'une phase
+    d'interprétation du code Coq contenu dans ce document, pour pouvoir fournir
+    le résultat de l'interprétation de code avec une version récente de
+    l'interprète Coq. Cet outil est notamment utilisé pour générer la documentation
+    officielle du projet Coq.
+
+    Le fonctionnement de Coq-Tex gravite autour de 3 environnements \footnote{Un
+    environnement en LaTeX est une portion de code entourée des balises
+    \texttt{$\backslash$begin\{environnement\}} et
+    \texttt{$\backslash$end\{environnement\}}, où \texttt{environnement} est
+    le nom de l'environnement. Le texte contenu dans ces balises sera ainsi
+    traité selon le type d'environnement dans lequel il est inclut.}
+    insérés
+    dans un fichier LaTeX. La liste suivante détaille le comportement de
+    chacun :
+    \begin{itemize}
+      \item \texttt{coq\_example} : \\
+        Le code contenu dans ces balises sera extrait et évalué par
+        l'interprète phrase par phrase. Chacune de ces phrases sera copiée
+        dans le fichier de sortie, et sera suivie du résultat de son
+        interprétation.
+      \item \texttt{coq\_example*} : \\
+        Le code contenu dans ces balises sera extrait et interprété, et il
+        sera recopié dans le fichier de sortie. Cependant, les réponses de
+        l'interprète seront ignorées;.
+      \item \texttt{coq\_eval} : \\
+        Les phrases contenues dans l'environnement \texttt{coq\_eval} seront
+        évaluées silencieusement. Seulement le résultat de leur évaluation sera
+        inclut dans le document de sortie.
+    \end{itemize}
+
+    \subsubsection{Facilité de fusion avec Coqdoc}
+    Coq-tex reprend la même idée que Coqdoc dans le sens où ces deux outils
+    ont un rôle de traduction : ils prennent un document d'entrée pour effectuer
+    une évaluation de certaines portions du code contenues dans celui-ci, et
+    générer un document mis en forme.
+
+    Ainsi ces deux outils ont des rôles de documentation du code source, et
+    partagent d'importantes similarités dans leur fonctionnement. Une fusion
+    de ces deux outils apparaît donc comme logique puisqu'elle facilitera
+    ainsi la maintenance de l'outil, et regroupera des sections logique qui
+    auparavant étaient dupliquées dans deux programmes.
+
+    Intégrer cet outil dans Coqdoc permet également d'enrichir Coq-tex, en
+    permettant à l'utilisateur de profiter de la diversité des formats de
+    sortie de Coqdoc et en rajoutant les caractéristique de l'outil Coq.
+
     \subsection{But général}
+    %% Detaillers caveats
     %% Detail de l'architecture souhaitée
     \subsection{Présentation des outils utilisés}
     %% Ocaml
     %% Interaction avec coqtop
-    \subsection{Nouveau éléments du logiciel}
+    \subsection{Nouveaux éléments du logiciel}
+    %% Introduire l'interaction avec le toplevel dans les assistants de preuves
+    %% Rm .glob
+    \subsubsection{Interaction avec l'interprète}
+    %% Parler de CoqIDE
+
     \subsection{Résumé des objectifs}
     Nous rappelons brièvement les objectifs introduit dans cette section
     concernant le logiciel produit pendant ce stage :
     \begin{itemize}
       \item Le nouveau Coqdoc doit avoir un comportement le plus proche
         possible de l'ancien Coqdoc.
+      \item Il doit également remplacer Coq-tex, l'outil de programmation
+        lettrée.
+      \item L'attention doit être portée sur une architecture extensible, qui
+        permette aux développeurs de rajouter de nouveaux comportements
+        et d'enrichir le logiciel.
     \end{itemize}
+
+
+
   \section{Compte-rendu d'activité}
+  %% Pour mettre en avant l'extensiblité du logiciel, parler du développement
+  %% de coq-tex : on rajoute un module d'entree, 3 nouvelles requetes, et le tour est joue !
     \subsection{Conception de l'architecture du logiciel}
     \subsection{Choix techniques de la conception}
     \subsection{Déroulement du développement logiciel}
@@ -609,80 +774,11 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \subsection{Version préliminaire de Coqdoc stable}
     \subsection{Extensibilité du logiciel}
     \subsection{Finalisation de Coqdoc}
+    \subsection{Perspectives d'évolution du logiciel}
+    \subsubsection{Protocole d'interaction}
+    \subsubsection{Enrichissement de Coqdoc}
 \chapter{Conclusion générale}
 %% 2
-\chapter{Bibliographie \& glossaire}
-\chapter{Annexes}
-  \section{Sommaire des Annexes}
-  \section{Documentation sur l'entreprise}
-  \subsection{Les membres du conseil d'administration de l'INRIA}
-  Le tableau suivant présente les membres actuels (15 janvier 2013) du conseil
-  d'administration de l'INRIA: \par
-      \begin{tabular}{|l|p{8cm}|}
-    \multicolumn{2}{l}{\textbf{Président} : Michel Cosnard, président directeur général de
-    l'INRIA} \\
-    \multicolumn{2}{l}{\textbf{Membre de droit} : Alain Fuchs, président directeur général
-    du CNRS} \\
-        \multicolumn{2}{l}{\textbf{Représentants de l'état} :} \\
-        \hline
-        Marc Bellœil &
-        Chargé de mission, département Organismes spécialisés, DGRI (Recherche) \\
-        \hline
-        Fabien Terraillot & Chef du bureau du logiciel, DGCIS (Industrie) \\
-        François Pouget & Chef du bureau 3 (MIRES), direction du Budget (Budget) \\
-        \hline
-        Éric Grégoire &
-        Conseiller scientifique de formation, DGESIP (Enseignement supérieur) \\
-        \hline
-        Christine Marteau & Responsable du pôle Télécommunications, DGA (Défense) \\
-        \hline
-        Pascal le Deuff &
-        Sous-directeur des échanges scientifiques et de la recherche (Affaires étrangères) \\
-        \hline
-        Cécile Dubarry &
-        Chef du service des technologies de l’information et de la communication, DGCIS (Télécommunications) \\
-        \hline
-        \multicolumn{2}{l}{\textbf{Membres nommés} :}\\
-        \hline
-        Jean-Luc Beylat & Président d’Alcatel-Lucent Bell Labs France \\
-        \hline
-        Bernard Jarry-Lacombe & Secrétaire national CFDT cadres \\
-        \hline
-        Marie-Noëlle Jégo-Laveissière & Directrice recherche et développement,
-        Orange Labs \\
-        \hline
-        Gilles Le Calvez & Directeur R\&D du Groupe Valeo \\
-        \hline
-        Brigitte Plateau & Administrateur général INP Grenoble \\
-        \hline
-        Luc Pabœuf & Président du CESR d’Aquitaine \\
-        \hline
-        Laure Reinhart & Directrice générale déléguée, OSEO et OSEO Innovation \\
-        \hline
-        Gérard Roucairol & Président de l’association Ter@tec \\
-        \hline
-        \multicolumn{2}{l}{\textbf{Membres élus : Représentants des personnels scientifiques}} \\
-        \hline
-        Serge Steer & Directeur de recherche, Inria Paris-Rocquencourt \\
-        \hline
-        Jocelyne Erhel & Directrice de recherche, Inria Rennes - Bretagne Atlantique \\
-        \hline
-        Lisette Calderan & Ingénieur de recherche, Inria Siège \\
-        \hline
-        Laurent Pierron & Ingénieur de recherche, Inria Nancy - Grand Est \\
-        \hline
-        \multicolumn{2}{l}{\textbf{Voix consultatives :}} \\
-        \hline
-        Malika Moha & Contrôleur général \\
-        \hline
-        Marie-Laure Inisan-Ehret & Agent comptable \\
-        \hline
-        Chris Hankin & Président du conseil scientifique \\
-        \hline
-        Antoine Petit & Directeur général adjoint \\
-        \hline
-    \end{tabular}
-  \section{Documentation sur le matériel/les logiciels}
-  \section{Résultats bruts}
+\input{annexes.tex}
 \end{document}
 
