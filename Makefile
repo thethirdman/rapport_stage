@@ -7,7 +7,7 @@ rapport:
 abstract:
 
 view: rapport
-	evince rapport.pdf&
+	evince rapport.pdf 2>&1 1>/dev/null &
 
 clean:
 	rm -f *.aux *.bbl *.blg *.dvi *.fdb_latexmk *.glg *.glo *.gls *.idx *.ilg \

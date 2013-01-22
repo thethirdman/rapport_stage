@@ -652,6 +652,30 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         \end{enumerate}
     \end{itemize}
 
+    \subsubsection{Nécéssités d'amélioration}
+    %% FIXME ?
+    Nous détaillons dans cette section les raisons qui motivent la refonte
+    du logiciel Coqdoc :
+    \begin{itemize}
+      \item \textbf{Conception du logiciel} : \\
+        La conception de Coqdoc rend difficile son maintien. C'est un logiciel
+        qui manque de structure logique et dont la conception souffre de
+        plusieurs défauts. Une refonte permettrait d'avoir une structure
+        logique plus cohérente, et faciliterait le maintien d'un tel outil.
+      \item \textbf{Extensibilité} : \\
+        Coqdoc possède un manque important d'extensibilité. Un tel outil
+        bénéficierait d'une plus grande variété de cas d'utilisation qui
+        gravitent autour du même concept de présentation de code et de mise
+        en forme d'une documentation autour. On peut par exemple citer
+        la généraiton d'une documentation interactive, où l'on peut rejouer
+        les preuves Coq dans le navigateur internet.
+      \item \textbf{Redondance de certains éléments logiciels} : \\
+        Coqdoc fait une analyse de code source, et celle-ci est faite par de
+        nombreux outils dans la suite logicielle de Coq (le compilateur,
+        l'éditeur CoqIDE, Coq-tex). La redondance de ces éléments peut être
+        retirée en réécrivant Coqdoc, et en proposant une interface unifiée.
+    \end{itemize}
+
     \subsection{Analyse de l'existant : Coq-tex}
     Un des autres objectifs de ce stage était d'offrir un remplacement pour
     Coq-tex, un des autres outils du projet Coq. Nous détaillons dans une
@@ -736,21 +760,13 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     permettant à l'utilisateur de profiter de la diversité des formats de
     sortie de Coqdoc et en rajoutant les caractéristique de l'outil Coq.
 
-    \subsection{But général}
-    %% Detaillers caveats
-    %% Detail de l'architecture souhaitée
-    \subsection{Présentation des outils utilisés}
-    %% Ocaml
-    %% Interaction avec coqtop
-    \subsection{Nouveaux éléments du logiciel}
-    %% Introduire l'interaction avec le toplevel dans les assistants de preuves
-    %% Rm .glob
-    \subsubsection{Interaction avec l'interprète}
-    %% Parler de CoqIDE
-
-    \subsection{Résumé des objectifs}
-    Nous rappelons brièvement les objectifs introduit dans cette section
-    concernant le logiciel produit pendant ce stage :
+    \clearpage
+    \subsection{But général : refonte de Coqdoc}
+    Les sections précédentes on démontré le besoin de réécrire le logiciel
+    Coqdoc. La majeure partie de mon stage s'est concentrée sur la conception
+    et la réécriture de ce logiciel.
+    Nous rappelons brièvement les objectifs introduit dans les sections
+    précédentes concernant le logiciel produit pendant ce stage :
     \begin{itemize}
       \item Le nouveau Coqdoc doit avoir un comportement le plus proche
         possible de l'ancien Coqdoc.
@@ -761,15 +777,33 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         et d'enrichir le logiciel.
     \end{itemize}
 
-
+    En arrivant dans ce stage, j'avais également plusieurs objectifs personnels
+    que je désirais réaliser dans ce stage. Tout d'abord, améliorer
+    mes compétences dans le langage de programmation Ocaml (une présentation
+    du langage est incluse ci-après), qui est un langage dont les spécifictés
+    m'intéressent beaucoup.
+    Une autre aspect était de découvrir les sujets de recherches au sein de
+    l'équipe \pir, et de voir si les sujets explorés m'intéressaient.
+    Enfin, le sujet de ce stage me permet également de valider les acquis de
+    ma formation à travers la conception et l'écriture d'un logiciel complexe.
 
   \section{Compte-rendu d'activité}
+  Nous détaillons dans cette section les différents aspects du développement de Coqdoc au cours de ce stage.
+  Nous introduisons tout d'abord les outils utilisés, puis nous détaillons la phase de conception du logiciel,
+  tout d'abord l'architecture générale puis les choix techniques de cette conception. Enfin, nous détaillons
+  le déroulement du stage.
   %% Pour mettre en avant l'extensiblité du logiciel, parler du développement
   %% de coq-tex : on rajoute un module d'entree, 3 nouvelles requetes, et le tour est joue !
+    \subsection{Présentation des outils utilisés}
+    Cette section introduit le langage de programmation utilisé pour le
+    développement de Coqdoc, et plus généralement de la suite Coq.
     \subsection{Conception de l'architecture du logiciel}
     \subsection{Choix techniques de la conception}
+    \subsection{Nouveaux éléments du logiciel}
+    %% Introduire l'interaction avec le toplevel dans les assistants de preuves
+    %% Rm .glob
+    %% Parler de CoqIDE
     \subsection{Déroulement du développement logiciel}
-    \subsection{Résultats du stage}
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
     \subsection{Extensibilité du logiciel}
