@@ -1,0 +1,27 @@
+digraph Dev
+{
+  graph [rankdir="LR"];
+  node [shape=box, color=red, style=filled];
+  edge [arrowsize=1];
+  V [label="Fichier source de Coq (.v)",color=greenyellow,shape=ellipse];
+  COQTEX [label="Fichier coq-tex (.tex)", color=greenyellow,shape=ellipse];
+  AST1 [label="Représentation abstraite \n avant evaluation"];
+  AST2 [label="Représentation abstraite \n finale"];
+  PP   [label="Module d'impression"];
+  VDOC [label="Fichier Vdoc",color=khaki4,shape=ellipse];
+  HTML [label="Fichier HTML", color=greenyellow,shape=ellipse];
+  LATEX [label="Fichier LaTeX", color=greenyellow,shape=ellipse];
+  PDF [label="Fichier PDF",   color=greenyellow,shape=ellipse];
+
+  {rank=same; V COQTEX VDOC};
+  {rank=same; AST1 AST2 PP};
+  {rank=same; HTML LATEX PDF};
+  V -> AST1;
+  COQTEX -> AST1 [label="Analyse \n syntaxique"];
+  AST1 -> AST2 [label="Evaluation",dir=back];
+  AST2 -> VDOC [label="Sauvegarde"];
+  VDOC -> PP [label="Chargement"];
+  AST2 -> PP;
+  PP -> {HTML;PDF};
+  PP -> LATEX [label="Ecriture"];
+  }

@@ -129,7 +129,6 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
   permet donc de valider cet objectif professionnel, tout en tissant des liens
   avec les scientifiques travaillant dans ce domaine.
 
-  %%FIXME: parler du CV ?
   \section{Phases de déroulement et introduction du rapport}
   Ce rapport retrace les différentes phases de déroulement du stage :
   \begin{itemize}
@@ -410,10 +409,14 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
 
       Les principaux champs d'applications de Coq sont les suivants :
       \begin{itemize}
-        \item L'écriture de compilateurs certifiés : le projet Compcert en
-          est un bon exemple: c'est un compilateur C pour lequel la traduction
-          du C en code machine est mathématiquement prouvée.
-        \item La validation de preuves mathématiques : les publications
+        \item L'écriture de programmes certifiés : les systèmes critiques
+          (les transports, l'énergie, la santé, les télécommunications, la
+          cryptologie, etc $\ldots$) ont besoin d'être rigoureusement conforme
+          à leur spécification, pour pouvoir éviter tout disfonctionnement
+          du logiciel. La preuve de programme consiste à s'assurer
+          mathématiquement que le comportement d'un programme est conforme à
+          ce qui est attendu, et Coq facilite ce travail de preuve de programme.
+      \item La validation de preuves mathématiques : les publications
           scientifiques dans le domaine des mathématiques incluent parfois
           des preuves de plusieurs centaines de pages. Coq est un outil
           permettant de valider les preuves ainsi publiées. On peut citer
@@ -792,18 +795,50 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
   Nous introduisons tout d'abord les outils utilisés, puis nous détaillons la phase de conception du logiciel,
   tout d'abord l'architecture générale puis les choix techniques de cette conception. Enfin, nous détaillons
   le déroulement du stage.
-  %% Pour mettre en avant l'extensiblité du logiciel, parler du développement
-  %% de coq-tex : on rajoute un module d'entree, 3 nouvelles requetes, et le tour est joue !
     \subsection{Présentation des outils utilisés}
-    Cette section introduit le langage de programmation utilisé pour le
-    développement de Coqdoc, et plus généralement de la suite Coq.
+    Le choix du langage s'est naturellement porté sur OCaml pour le
+    développement de Coqdoc, et cela pour plusieurs raisons. La liste
+    suivante détaille les différents avantages à utiliser OCaml :
+    \begin{itemize}
+      \item \textbf{Langage du compilateur Coq} : \\
+        Coq est principalement codé en OCaml. Coq et Ocaml sont des langages
+        de programmations partageant d'important traits communs : ils sont tout
+        deux du paradigme fonctionnel et sont statiquement typés. L'utilisation
+        d'OCaml permet d'apporter des garanties sur la validité du compilateur
+        Coq, et le fait que les deux langages soient proche facilite le
+        développement de Coq.
+      \item \textbf{Ecriture de compilateurs} : \\
+        Ocaml est particulièrement adapté pour l'écriture de compilateurs.
+        Coqdoc peut être considéré comme un compilateur car il passe un fichier
+        en représentation abstraite, procède à une évaluation et génère un
+        document prêt à ètre utilisé. Le typage fort de Ocaml, le haut niveau
+        d'abstraction et l'aspect fonctionnel du langage facilite grandement
+        l'écriture de compilateur.
+      \item \textbf{Limitation des dépendances, et facilité d'intégration} : \\
+        Une raison plus pragmatique est également que pour faciliter la gestion
+        du projet, rajouter des dépendances à d'autres logiciels (par exemple,
+        d'autres compilateurs de langage) n'est pas une bonne chose, tant pour
+        la portabilité que l'évolution de la suite d'outils Coq. Choisir
+        Ocaml et les outils qui lui sont liés facilitent le processus
+        d'intégration de Coqdoc au sein de Coq
+    \end{itemize}
+    %% FIXME ?
     \subsection{Conception de l'architecture du logiciel}
-    \subsection{Choix techniques de la conception}
-    \subsection{Nouveaux éléments du logiciel}
-    %% Introduire l'interaction avec le toplevel dans les assistants de preuves
-    %% Rm .glob
-    %% Parler de CoqIDE
-    \subsection{Déroulement du développement logiciel}
+    Coqdoc se doit d'être extensible. Pour cette raison, nous avons dû apporter
+    une attention particulière sur ce point lors de la conception de
+    l'architecture logicielle.
+    %% Joli graphique, expliquer précisément les différentes parties du
+    \begin{figure}
+      \fbox{\includegraphics[scale=0.4]{data/devchain.png}}
+      \caption{Representation de la chaine de compilation de Coqdoc}
+    \end{figure}
+    %% traitement
+    \subsection{Traitement du langage d'entrée}
+    \subsection{Interactions avec l'interprète}
+    \subsection{Protocole d'interaction avec l'interprète} %% FIXME: fusion ???
+    \subsection{Phase d'évaluation du document}
+    \subsection{Génération des documents finaux}
+    %% Détailler le développement de chaque phase
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
     \subsection{Extensibilité du logiciel}

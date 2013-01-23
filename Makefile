@@ -2,8 +2,10 @@
 all: rapport abstract
 
 rapport:
+	dot -Tpng data/devchain.dot > data/devchain.png
 	pdflatex rapport.tex
 	pdflatex rapport.tex
+
 abstract:
 
 view: rapport
@@ -14,6 +16,7 @@ clean:
 	*.ind *.ist *.lof *.log *.lot *.nav *.nlo *.out *.pdfsync *.ps *.snm       \
 	*.synctex.gz *.toc *.vrb *.maf *.mtc *.mtc0
 	rm -f words.aspell
+	rm -f data/devchain.png
 
 check:
 	aspell --lang=fr --encoding=utf-8 create master ./words.aspell < ./words.dico
