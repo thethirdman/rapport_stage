@@ -7,6 +7,7 @@
 \usepackage{titlesec}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[french]{cleveref}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 
@@ -17,6 +18,9 @@
 \newcommand{\yrg}[0]{\xspace\textbf{Yann Régis-Gianas}\xspace}
 \newcommand{\epita}[0]{EPITA}
 \newcommand{\lc}[0]{$\lambda$-calcul\xspace}
+
+\crefname{lstlisting}{listing}{listings}
+\Crefname{lstlisting}{Listing}{Listings}
 
 \lstset{language=Caml, frame=single, language=Caml,
 commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
@@ -301,7 +305,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     de recette pour l'année 2011 étant de 227,6M\euro{}, cela en fait un institut
     de recherche presque autosuffisant.
 
-    L'organigramme \ref{orga} présente les différents services de l'INRIA ainsi
+    L'organigramme \cref{orga} présente les différents services de l'INRIA ainsi
     que leur directeurs respectifs
     \begin{figure}
     \includegraphics[scale=0.85]{data/organigrammeinria.pdf}
@@ -508,7 +512,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         PDF.
     \end{itemize}
 
-    L'exemple \ref{fig1} présente un morceau de code documenté, et le rendu
+    L'exemple \cref{fig1} présente un morceau de code documenté, et le rendu
     généré par coqdoc.
 
     \begin{figure}
@@ -582,13 +586,9 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           \item \texttt{\$} pour une notation mathématique en sortie LaTeX
         \end{itemize}
     \end{itemize}
-    La figure \ref{source2} donne un exemple de ces règles de mise en forme
+    Le \cref{source2} donne un exemple de ces règles de mise en forme
     dans le fichier d'entrée
-    \begin{figure}
-      \lstinputlisting{data/source2.v}
-      \caption{Exemple des règles de mise en forme de Coqdoc}
-      \label{source2}
-    \end{figure}
+    \lstinputlisting[label=source2,caption=Exemple des règles de mise en forme de Coqdoc]{data/source2.v}
 
     \subsubsection{Format des fichiers de sortie :}
     Le rôle de Coqdoc est d'effectuer une traduction du format d'entrée
@@ -616,7 +616,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
             de traduction par défaut, et également selon celles définies
             par l'utilisateur. Par exemple, l'ancien coqdoc traduit
             automatiquement le symbole \texttt{->} en \texttt{$\rightarrow$}.
-            Le tableau \ref{trad:coqdoc} donne une liste exhaustive des
+            Le tableau \cref{trad.coqdoc} donne une liste exhaustive des
             symboles traduits par coqdoc.
         \end{enumerate}
       \item \textbf{Gestion de la structure logique de la documentation} \\
@@ -791,10 +791,12 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     ma formation à travers la conception et l'écriture d'un logiciel complexe.
 
   \section{Compte-rendu d'activité}
-  Nous détaillons dans cette section les différents aspects du développement de Coqdoc au cours de ce stage.
-  Nous introduisons tout d'abord les outils utilisés, puis nous détaillons la phase de conception du logiciel,
-  tout d'abord l'architecture générale puis les choix techniques de cette conception. Enfin, nous détaillons
-  le déroulement du stage.
+  Nous détaillons dans cette section les différents aspects du développement
+  de Coqdoc au cours de ce stage.  Nous introduisons tout d'abord les outils
+  utilisés, puis nous détaillons la phase de conception du logiciel, tout
+  d'abord l'architecture générale puis les choix techniques de cette
+  conception. Enfin, nous détaillons chaque étape du développement de Coqdoc
+  au cours du stage.
     \subsection{Présentation des outils utilisés}
     Le choix du langage s'est naturellement porté sur OCaml pour le
     développement de Coqdoc, et cela pour plusieurs raisons. La liste
@@ -827,18 +829,131 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     Coqdoc se doit d'être extensible. Pour cette raison, nous avons dû apporter
     une attention particulière sur ce point lors de la conception de
     l'architecture logicielle.
-    %% Joli graphique, expliquer précisément les différentes parties du
+    Le diagramme \cref{fig.devchain} montre l'architecture simplifiée de Coqdoc.
+
+    Nous résumons les différentes étapes d'une compilation effectuée par
+    Coqdoc :
+    \begin{enumerate}
+      \item Lecture d'un ou plusieurs fichiers d'entrée
+      \item A partir de ces fichiers une analyse syntaxique est effectuée.
+        Ils sont alors représentés de manière abstraite, ceci afin de
+        s'affranchir de la structure linéaire des fichiers d'entrée, et de
+        faciliter les différentes phases de traitement.
+      \item La phase d'évaluation permet d'obtenir la représentation finale
+        des fichiers d'entrée : les commandes entrées dans Coqdoc (l'ajout
+        de symbole par exemple) sont évaluées, tandis que le code sera annoté
+        et mis en forme.
+      \item Un des choix suivant est de sauvegarder cette représentation
+        finale sous forme de Vdoc : c'est un format de fichier qui détaille
+        la représentation abstraite des documents traités.
+        Un fichier Vdoc peut ainsi être relu par Coqdoc pour générer plusieurs
+        types de documentation, sans avoir à réévaluer le fichier. Cela facilite
+        la portabilité des documents, tout en permettant à l'utilisateur de faire
+        des ajustements plus fins concernant la documentation générée (puisque
+        l'on se situe après l'évaluation, le code est par exemple déjà annoté
+        pour permettre la coloration syntaxique)
+      \item L'autre choix est de générer un ou plusieurs documents finaux.
+        On utilise pour cela un module d'impression, qui est en mesure de
+        générer différents types de documentation.
+        Ce module d'impression est paramétré par des "spécifications", qui
+        détaillent le format de sortie des documents finaux. En effet, le
+        module d'impression attend un ensemble de fonctions qui lui
+        permettent de générer un document final.
+        Il est ainsi facilement extensible, car pour rajouter un format de
+        sortie, il suffit de donner sa spécification au module d'impression.
+    \end{enumerate}
+
+    Les sections suivantes détaillent chacune des étapes de la compilation
+    d'un document par Coqdoc.
+    %% FIXME: détailler les sous modules d'impression sur le graphe
     \begin{figure}
-      \fbox{\includegraphics[scale=0.4]{data/devchain.png}}
+      \fbox{\includegraphics[scale=0.5]{data/devchain.png}}
       \caption{Representation de la chaine de compilation de Coqdoc}
+      \label{fig:devchain}
     \end{figure}
     %% traitement
     \subsection{Traitement du langage d'entrée}
+    Cette section détaille les différentes phases d'analyse pour traiter le
+    langage d'entrée de Coqdoc. Nous expliquons tout d'abord les méthodes
+    pour effectuer une analyse syntaxique, puis nous détaillont chaque phase
+    de traitement du langage.
+    Pour expliquer plus facilement le traîtement du langage d'entrée, nous
+    prenons un exemple fil rouge qui accompagnera notre explication de la
+    chaîne de traitement. Le \cref{finput} montre le fichier d'entrée
+    donné à Coqdoc.
+    \lstinputlisting[float,label=finput,caption=Fichier d'exemple Coq]{data/finput.v}
+
+    \subsubsection{Traitement du langage}
+    Le traitement d'un langage se fait en deux phases logiques.
+    \paragraph{Analyse lexicale}
+      La première étape est l'analyse lexicale. Cette phase vise à décomposer
+      le document d'entrée en entités logiques, facilitant le traitement
+      des données par la suite.
+    \paragraph{Analyse syntaxique}
+      La deuxième étape du traitement d'un langage est l'analyse syntaxique.
+      Celle-ci vise à fournir une représentation de plus haut niveau pour
+      la suite de la chaîne de traitement. L'analyseur lexical génère un
+      ensemble d'entités, que l'analyseur syntaxique regroupera en structures
+      de données plus riches.
+      \paragraph{Arbre de syntaxe concrète}
+      \paragraph{Arbre de syntaxe abstraite}
+    %%% FIXME : enrichir
+    \subsubsection{Découpage logique du document}
+    La première phase de traitement du document est un découpage logique
+    en phrases de différent type : la documentation, le code et les
+    commentaires.
+    Ceci est fait selon les délimiteurs respectifs de la documentation et
+    des commentaires. Tout ce qui n'est pas contenu entre ces délimiteurs
+    est considéré comme du code.
+    Chaque élément de code est ensuite découpé en phrases. Ce découpage est
+    fait selon le fait que chaque phrase Coq se termine par un point. Ce
+    découpage en phrase permet de simplifier le traitement sur chaque
+    instruction du fichier d'entrée.
+    A la fin de cette phase de traitement, nous avons donc un ensemble
+    de phrases, chacune appartenant à l'un des types suivants
+    \begin{itemize}
+      \item \textbf{De la Documentation} sous forme de chaînes de caractères
+      \item \textbf{Des commentires} sous forme de chaînes de caractères
+      \item \textbf{Du code} sous forme de chaînes de caracères, chacune
+        de ces chaînes étant terminées par un point.
+    \end{itemize}
+
+    L'exemple \cref{ast1} illustre la représentation de notre fichier après
+    cette première phase de traitement.
+    \subsubsection{Analyse de la documentation}
+    \subsubsection{Deuxième représentation abstraite}
+    %% Decoupage DOC/CODE/COM
+    %% Analyse des tokens
+    %% Premier AST
+    %% Decoupage DOC
+    %% Deuxieme AST
+
     \subsection{Interactions avec l'interprète}
-    \subsection{Protocole d'interaction avec l'interprète} %% FIXME: fusion ???
+    %% Protocole d'interaction existant
+    %% Presentation generale des besoin dans les assistants de preuves
+    %% Detailler l'utilisation du protocole a l'existant
+    %% Etendre ce protocole pour Coqdoc
+    \subsection{Protocole d'interaction avec l'interprète} %% FIXME: reformuler
+    %% Analyse des besoins
+    %% Comment on annote ? OHSHIT PAS DE CST
+    %% Expliquer la recherche et les solutions manquees
+    %% Version finale
     \subsection{Phase d'évaluation du document}
+    %% Detailler les types
+    %% Envoi du code a coqtop
+    %% Traitement des commentaires
+    %% Traitement de la documentation
+    %% Type final, bien mettre en avant que il ne reste plus rien à evaluer
+    %% grâces au types
     \subsection{Génération des documents finaux}
-    %% Détailler le développement de chaque phase
+    %% Un module Print qui attend d'autres modules
+    %% Detailler l'interface attendue
+    %% Generation des documents
+    \subsection{Extension de Coqdoc pour Coq-tox}
+    %% Ecriture d'un nouvel analyseur
+    %% Ajout de requetes
+    %% Restrictions format d'entree/format de sortie (forcer tex -> tex)
+    %% WIN
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
     \subsection{Extensibilité du logiciel}
