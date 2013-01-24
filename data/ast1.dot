@@ -1,0 +1,23 @@
+graph Ast1
+{
+  node [style=filled];
+  subgraph cluster_doc
+  {
+    label="Documentation";
+    Doc [label="* Fichier d'exemple Coq\nCet exemple nous accompagne tout au long du traitement\n\n- Ceci est une liste\n- de deux éléments avec une _emphase_\n"];
+  }
+  subgraph cluster_com
+  {
+  label="                      Commentaire";
+    Com [label="Nous definissons deux variables"];
+  }
+  subgraph cluster_code
+  {
+    label="          Code";
+    Code1 [label="Parameter maVariable : Set."];
+    Code2 [label="Parameter autreVariable : Set."];
+  }
+  Doc -- Com;
+  Com -- Code1;
+  Code1 -- Code2;
+}

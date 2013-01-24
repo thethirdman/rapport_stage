@@ -872,6 +872,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \label{fig:devchain}
     \end{figure}
     %% traitement
+    \clearpage
     \subsection{Traitement du langage d'entrée}
     Cette section détaille les différentes phases d'analyse pour traiter le
     langage d'entrée de Coqdoc. Nous expliquons tout d'abord les méthodes
@@ -884,19 +885,32 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \lstinputlisting[float,label=finput,caption=Fichier d'exemple Coq]{data/finput.v}
 
     \subsubsection{Traitement du langage}
+    \label{trait}
     Le traitement d'un langage se fait en deux phases logiques.
-    \paragraph{Analyse lexicale}
+    \begin{itemize}
+    \item[] \textbf{Analyse lexicale}  :\\
       La première étape est l'analyse lexicale. Cette phase vise à décomposer
       le document d'entrée en entités logiques, facilitant le traitement
       des données par la suite.
-    \paragraph{Analyse syntaxique}
+    \item[] \textbf{Analyse syntaxique} :\\
       La deuxième étape du traitement d'un langage est l'analyse syntaxique.
       Celle-ci vise à fournir une représentation de plus haut niveau pour
       la suite de la chaîne de traitement. L'analyseur lexical génère un
       ensemble d'entités, que l'analyseur syntaxique regroupera en structures
       de données plus riches.
-      \paragraph{Arbre de syntaxe concrète}
-      \paragraph{Arbre de syntaxe abstraite}
+      \item[] \textbf{Arbre de syntaxe concrète} :\\
+      L'analyse syntaxique donne souvent lieu à la génération d'un arbre
+      de syntaxe concrète. Cet arbre est une représentation intérmédiaire
+      entre le document d'entrée et l'arbre de syntaxe abstraite, qui
+      lui représente la structure de donnée sur laquelle les traitements sont
+      appliqués. La différence principale entre ces deux types d'arbres est
+      qu'un arbre de syntaxe concrète est beaucoup plus proche du document
+      source, est à souvent une structure de moins haut niveau (plus proche du
+      document source) que l'AST.  Cela permet ainsi d'effectuer la
+      transformation inverse, pour revenir à un document très proche du
+      document source.
+      \item[] \textbf{Arbre de syntaxe abstraite} :\\
+    \end{itemize}
     %%% FIXME : enrichir
     \subsubsection{Découpage logique du document}
     La première phase de traitement du document est un découpage logique
@@ -913,38 +927,166 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de phrases, chacune appartenant à l'un des types suivants
     \begin{itemize}
       \item \textbf{De la Documentation} sous forme de chaînes de caractères
-      \item \textbf{Des commentires} sous forme de chaînes de caractères
+      \item \textbf{Des commentaires} sous forme de chaînes de caractères
       \item \textbf{Du code} sous forme de chaînes de caracères, chacune
         de ces chaînes étant terminées par un point.
     \end{itemize}
 
     L'exemple \cref{ast1} illustre la représentation de notre fichier après
-    cette première phase de traitement.
+    cette première phase de traitement. Chaque noeud représente un élément
+    logique de notre documentation, le contenu de ce noeud étant les chaînes
+    de caractères stockées dans le noeud de l'arbre de syntaxe abstrait.
+    \begin{figure}
+      \fbox{
+      \includegraphics[scale=0.5]{data/ast1.png}}
+      \caption{Première représentation abstraite}
+      \label{ast1}
+    \end{figure}
     \subsubsection{Analyse de la documentation}
-    \subsubsection{Deuxième représentation abstraite}
-    %% Decoupage DOC/CODE/COM
-    %% Analyse des tokens
-    %% Premier AST
-    %% Decoupage DOC
-    %% Deuxieme AST
+    La deuxième étape consiste ensuite au traitement de la documentation.
+    Chaque élément du type documentation est donc analysé une seconde fois,
+    ceci afin d'effectuer une séparation des différents éléments logiques
+    de la documentation. Après l'analyse, cette documentation est représentée
+    sous la forme d'un arbre qui représente la structure hiérarchique des
+    éléments de mise en forme.
+
+    La liste suivante détaille différents types de noeud dans notre
+    documentation :
+    \begin{itemize}
+      \item Eléments finaux : (contiennent des chaînes de caractère ou rien) \\
+        \begin{itemize}
+            \item Titre
+            \item Règle horizontale
+            \item Notation : notations spéciales pour le format de sortie
+            \item Code Verbatim : code à imprimer dans la documentation
+            \item Contenu : représente les chaînes de caractère simples
+        \end{itemize}
+      \item Eléments récursifs : (contiennent des éléments de documentation) \\
+        \begin{itemize}
+          \item Listes : une liste contient soit d'autres listes, soit des
+                éléments de documentation
+          \item Emphase : l'emphase doit pouvoir mettre en valeur des éléments
+                de la documentation (par exemple, des éléments d'une liste ou
+                du code verbatim)
+        \end{itemize}
+      \item Eléments à évaluer : (seront supprimés après la pahse d'évaluation) \\
+        \begin{itemize}
+          \item Ajout de règles de notation
+          \item Suppression de règles de notation
+          \item Commandes : Un ajout du nouveau Coqdoc est la gestion de
+                commandes plus poussées dans le fichier d'entrée. Celles-ci
+                seront remplacés par des noeauds de documentation après la
+                phase d'évaluation
+        \end{itemize}
+    \end{itemize}
+    Après application de la transformation, la documentation est transformée
+    d'une chaîne de caractrès à une hiérarchie d'éléments décrivant le contenu.
+    La \cref{ast2} détaille par exemple la hiérarchie obtenue pour la
+   documentation après traitement de celle-ci
+    \begin{figure}
+      \includegraphics[scale=0.45]{data/ast2.png}
+      \caption{Traitement de la documentation}
+      \label{ast2}
+    \end{figure}
 
     \subsection{Interactions avec l'interprète}
-    %% Protocole d'interaction existant
+    Pour pouvoir effectuer la mise en forme des différentes sections de code,
+    deux approches étaient possibles :
+      \begin{itemize}
+        \item Effectuer une analyse lexicale et syntaxique du code, pour
+          en obtenir les différents éléments logique, et coder un
+          \textit{pretty-printer} pour imprimer le code de manière lisible.
+          Cela impose de traiter un langage très complexe (composé d'un nombre
+          important de mots clefs et de constructions syntaxiques), et de
+          complexifier de manière importante le logiciel. De plus, on ne
+          possède, avec cette approche que de peu d'extensibilité, car rajouter
+          de nouveaux traitements impose de grands changements dans le code.
+          Cette approche était celle de l'ancien Coqdoc.
+        \item Réutiliser l'interprète pour nous donner des informations sur
+          du code. A partir d'un protocole existant, nous envoyons des séquences
+          de code, et l'interprète est en mesure de renvoyer une version imprimée
+          de manière jolie, avec les bonnes annotations syntaxique.
+          Parce que ce protocole fait l'interface entre l'interprète et d'autre
+          logiciel, il est facilement extensible, car nous avons accès à tous
+          les éléments du compilateur. La duplication de code est donc inexistante
+          avec cette approche, et l'extension du protocole d'interaction entre
+          l'interprète est les logiciels qui l'utilisent est bénéfique pour tous
+          ces logiciels.
+      \end{itemize}
+    C'est la seconde approche qui a été choisie : elle permet de réutiliser
+    l'existant tout en facilitant une extension de ces interactions à nos besoin
+
+    \subsubsection{Protocole d'interaction}
+    Le protocole d'interaction de l'interprète est une communication sous forme
+    de XML, ce qui permet de l'utiliser avec une grande variété d'outils.
+    La liste suivante présente les requêtes de ce protocole :
+    \begin{itemize}
+      \item evars, goals, hints, $ldots$ : Commandes utilisées pour les preuves.
+      Coqdoc n'en aura pas l'utilité.
+      \item inloadpath : permet de savoir si un dossier est dans le chemin
+      de chargement de Coq
+      mkcases
+      \item interp : Prends une phrase Coq sous forme de chaîne, et effectue
+      l'interprétation de cette phrase.
+      \item rewind : permet de revenir en arrière dans l'execution
+      \item status : donne des informations sur le status de l'interprète
+      \item quit : ferme le protocole d'interaction
+    \end{itemize}
+
     %% Presentation generale des besoin dans les assistants de preuves
     %% Detailler l'utilisation du protocole a l'existant
     %% Etendre ce protocole pour Coqdoc
-    \subsection{Protocole d'interaction avec l'interprète} %% FIXME: reformuler
+    \subsection{Extension du protocole d'interaction}
+    Avant de pouvoir être utilisé sous cette forme, le protocole d'interaction
+    a besoin d'être étendu pour pouvoir annoter du code, et situer les
+    différents identifiants.
+
+    Deux commandes ont donc été développés afin de répondre aux besoins de Coqdoc
+    \begin{itemize}
+      \item \texttt{locate} : prends un identifiant sous forme de chaîne de caractères,
+      et renvoie sa localisation (dans quel fichier, module, et sous module).
+      Cette commande doit permettre de pouvoir, a partir d'informations obtenues
+      sur le code, permettre de reconnaître les identifiant, et ainsi pouvoir
+     générer des liens vers l'endroit où ils sont déclarés.
+      \item \texttt{prettyprint} :
+      Cette commande prends une chaîne de caractère, et renvoie une version
+      structure selon les différents éléments la composant : mots clefs,
+      identifiants, nombres, etc $\ldots$. Elle doit de plus donner inclure
+      les informations de mise en forme du code (par exemple, l'indentation).
+    \end{itemize}
+
+    Tandis que le développement de la commande \texttt{locate} a été rapide,
+    le développement de la commande prettyprint a été compliqué car il a fallu
+    combler un manque du logiciel Coq.
+
+    L'approche idéale pour effectuer l'annotation serait d'utiliser
+    l'arbre de syntaxe concrète de Coq. Comme expliqué dans la \cref{trait}.
+    Cet arbre de syntaxe doit théoriquement être en mesure de donner les bonnes
+    annotations puisqu'il possède encore beaucoup d'informations d'ordre
+    syntaxique. Cependant cet arbre de syntaxe concrète n'existe pas dans Coq,
+    qui fait une traduction directement vers une représentation de haut niveau.
+
+    L'approche la plus efficace aurait été de changer la chaîne de traitement
+    de Coq pour pouvoir y insérer cet arbre de syntaxe concrète, mais cela
+    impose une importante reflexion et beaucoups de changement de code. Au
+    vu de la durée du projet, cette solution a été rejetée immédiatement car
+    elle était trop complexe pour le temps disponible.
+
+    Pour implémenter cette commande, il faut donc se reposer sur l'arbre de
+    syntaxe abstraite, qui possède une représentation de très haut niveau,
+    et dont l'annotation serait complexe.
+
+    %%% FIXME
+    Un des mécanismes de traduction de l'arbre de syntaxe vers des chaînes de
+    caractères est le \textit{pretty-printer} de Coqdoc. Son rôle est
+    d'imprimer de manière correctement identée l'arbre de syntaxe. Pour
+    chaque type de noeud de l'arbre, on pourrait donc avoir comme contenu une
+    version correctement indentée, tandis que le protocole de tradu
     %% Analyse des besoins
     %% Comment on annote ? OHSHIT PAS DE CST
     %% Expliquer la recherche et les solutions manquees
     %% Version finale
-    \subsection{Phase d'évaluation du document}
-    %% Detailler les types
-    %% Envoi du code a coqtop
-    %% Traitement des commentaires
-    %% Traitement de la documentation
-    %% Type final, bien mettre en avant que il ne reste plus rien à evaluer
-    %% grâces au types
+    \subsection{Traitement du code annoté}
     \subsection{Génération des documents finaux}
     %% Un module Print qui attend d'autres modules
     %% Detailler l'interface attendue

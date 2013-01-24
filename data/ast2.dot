@@ -1,0 +1,24 @@
+graph Ast1
+{
+  node [style=filled];
+  subgraph cluster_doc
+  {
+    label="Documentation";
+    Title [label="Titre:\nFichier d'exemple Coq"];
+    Content [label="Contenu:\nCet exemple nous accompagne tout au long du traitement"];
+    Lst [label="Liste"];
+    Item1 [label="Elément :"];
+    Content1 [label="Contenu :\n-Ceci est une liste"];
+    Item2 [label="Elément :"];
+    Content2 [label="Contenu :\n- de deux éléments avec une"];
+    Emph [label="Emphase :\nemphase\n"];
+
+  }
+  Title -- Content;
+  Content -- Lst;
+  Lst -- Item1;
+  Lst -- Item2;
+  Item1 -- Content1;
+  Item2 -- Content2;
+  Item2 -- Emph;
+}

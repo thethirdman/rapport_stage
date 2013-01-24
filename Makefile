@@ -2,6 +2,8 @@
 all: rapport abstract
 
 rapport:
+	dot -Tpng data/ast1.dot > data/ast1.png
+	dot -Tpng data/ast2.dot > data/ast2.png
 	dot -Tpng data/devchain.dot > data/devchain.png
 	pdflatex rapport.tex
 	pdflatex rapport.tex
