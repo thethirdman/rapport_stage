@@ -1,10 +1,11 @@
+IMGS=data/ast1.png data/ast2.png data/devchain.png data/trad1.png
 
 all: rapport abstract
 
-rapport:
-	dot -Tpng data/ast1.dot > data/ast1.png
-	dot -Tpng data/ast2.dot > data/ast2.png
-	dot -Tpng data/devchain.dot > data/devchain.png
+%.png:%.dot
+	dot -Tpng $< > $@
+
+rapport: ${IMGS}
 	pdflatex rapport.tex
 	pdflatex rapport.tex
 
@@ -18,7 +19,7 @@ clean:
 	*.ind *.ist *.lof *.log *.lot *.nav *.nlo *.out *.pdfsync *.ps *.snm       \
 	*.synctex.gz *.toc *.vrb *.maf *.mtc *.mtc0
 	rm -f words.aspell
-	rm -f data/devchain.png
+	rm -f ${IMGS}
 
 check:
 	aspell --lang=fr --encoding=utf-8 create master ./words.aspell < ./words.dico

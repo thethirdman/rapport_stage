@@ -1,0 +1,45 @@
+digraph Ast
+{
+  node [style=filled];
+  compound=true;
+  rankdir="TB";
+
+  subgraph cluster_ast
+  {
+    label="Arbre de syntaxe";
+    Noeud1;
+    Expression1;
+    Element1;
+    Element2;
+    Element3;
+  }
+  subgraph cluster_inter
+  {
+    label="Arbre annoté";
+    INoeud1 [label="\"Noeud 1:\""];
+    IExpression1 [label="\"( _ + _ )\""];
+    IElement1 [label="\"Element1\""];
+    IElement2 [label="\"Element2\""];
+    IElement3 [label="\"\n    Element3\""];
+  }
+  subgraph cluster_pp
+  {
+    label="Texte";
+    Pp [label="\"Noeud1: (Element1 + Element2):\n    Element3\""];
+  }
+
+  Noeud1 -> Expression1;
+  Noeud1 -> Element3;
+  Expression1 -> Element1;
+  Expression1 -> Element2;
+
+  INoeud1 -> IExpression1;
+  INoeud1 -> IElement3;
+  IExpression1 -> IElement1;
+  IExpression1 -> IElement2;
+
+  //{rank=max; cluster_pp};
+  //Noeud1 -> Pp [ltail=cluster_ast, lhead=cluster_pp,label="Impression",constraint=false];
+  Noeud1 -> INoeud1 [ltail=cluster_ast,lhead=cluster_inter,label="Traduction",constraint=false];
+  //INoeud1 -> Pp [ltail=cluster_inter, lhead=cluster_pp, label="Impression",constraint=false];
+}

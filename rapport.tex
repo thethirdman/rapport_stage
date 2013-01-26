@@ -8,6 +8,9 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage[french]{cleveref}
+\usepackage[parfill]{parskip}
+\usepackage{tikz}
+
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 
@@ -1079,9 +1082,59 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     %%% FIXME
     Un des mécanismes de traduction de l'arbre de syntaxe vers des chaînes de
     caractères est le \textit{pretty-printer} de Coqdoc. Son rôle est
-    d'imprimer de manière correctement identée l'arbre de syntaxe. Pour
-    chaque type de noeud de l'arbre, on pourrait donc avoir comme contenu une
-    version correctement indentée, tandis que le protocole de tradu
+    d'imprimer de manière correctement identée l'arbre de syntaxe.
+    Instrumenter le code du \textit{pretty-printer} à nos besoins nous
+    permettrait ainsi de profiter de cette étape de traduction de l'arbre de
+    syntaxe vers le texte. L'objectif est donc de modifier ce module de Coq
+    pour, lors de la traduction, conserver les types de l'arbre, et ainsi
+    pouvoir effectuer facilement une coloration syntaxique du coté de Coqdoc.
+
+    La traduction du module d'impression de Coq se fait directement vers des
+    chaînes de caractères. Ceci est problèmatique car cela enlève toutes les
+    informations sémantiques qui serviraient à Coqdoc. La première approche
+    que nous avons adopté était donc de modifier ce module d'impression, pour
+    qu'au lieu de traduire vers des chaînes de caractères, il effectue une
+    traduction vers un arbre de syntaxe allégé, chaque noeud ayant pour contenu
+    les chaînes de caractère issues de l'impression.
+
+    \begin{figure}
+      \begin{tikzpicture}
+        %% Rectangle
+        \draw (-5,-3) -- (-5,1);
+        \draw (-5,-3) -- (2,-3);
+        \draw (2,1) -- (-5,1);
+        \draw (2,1) -- (2,-3);
+
+        %% graphe1
+        \node[draw] (Noeud1) at (-1,0) {Noeud1};
+        \node[draw] (Expression1) at (-3,-1) {Expresion1};
+        \node[draw] (Element3) at (1,-1) {Element3};
+        \node[draw] (Element1) at (-4,-2) {Element1};
+        \node[draw] (Element2) at (-2,-2) {Element2};
+        \draw[->] (Noeud1) -> (Expression1);
+        \draw[->] (Noeud1) -> (Element3);
+        \draw[->] (Expression1) -> (Element1);
+        \draw[->] (Expression1) -> (Element2);
+
+        % Rectangle 2
+        \draw (3,-3) -- (3,1);
+        \draw (3,-3) -- (10,-3);
+        \draw (10,1) -- (3,1);
+        \draw (10,1) -- (10,-3);
+
+        % graphe2
+        \node[draw] (INoeud1)      at (7,0) {"Noeud 1:"};
+        \node[draw] (IExpression1) at (5.75,-1) {"( \_ + \_ )"};
+        \node[draw] (IElement3)    at (8.5,-1) {"\\n    Element3"};
+        \node[draw] (IElement1)    at (4.5,-2) {"Element1"};
+        \node[draw] (IElement2)    at (7,-2) {"Element2"};
+        \draw[->] (INoeud1) -> (IExpression1);
+        \draw[->] (INoeud1) -> (IElement3);
+        \draw[->] (IExpression1) -> (IElement1);
+        \draw[->] (IExpression1) -> (IElement2);
+      \end{tikzpicture}
+      \caption{Traduction de l'arbre de syntaxe abstraite\label{trad1}}
+    \end{figure}
     %% Analyse des besoins
     %% Comment on annote ? OHSHIT PAS DE CST
     %% Expliquer la recherche et les solutions manquees
