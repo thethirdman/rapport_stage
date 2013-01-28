@@ -1,0 +1,24 @@
+digraph Chain
+{
+  edge [arrowsize=1];
+  node [shape=box];
+
+  Start [label="Traitement de l'identifiant"];
+  Loc [shape=diamond,label="Est-ce que l'identifiant\n a été localisé ?"];
+
+  ID_SIMPL [label="Identifiant simple"];
+
+  std [shape=diamond,label="L'identifiant fait partie\n de la bibliothèque standard ?"];
+
+  hyperstd[label="Hyperlien vers \n la bibliothèque standard"];
+  hyperloc[label="Hyperlien interne au projet"];
+
+  Start -> Loc;
+  Loc -> ID_SIMPL [label="Non"];
+  Loc -> std [label="Oui"];
+  std -> hyperstd [label="Oui"];
+  std -> hyperloc [label="Non"];
+
+  {rank=same; Loc ID_SIMPL};
+  {rank=same; std hyperstd};
+}

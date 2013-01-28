@@ -1,4 +1,5 @@
-IMGS=data/ast1.png data/ast2.png data/devchain.png data/trad1.png
+IMGS=data/ast1.png data/ast2.png data/devchain.png data/trad1.png \
+		 data/id1.png
 
 all: rapport abstract
 

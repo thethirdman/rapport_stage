@@ -8,7 +8,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage[french]{cleveref}
-\usepackage[parfill]{parskip}
+\usepackage{parskip}
 \usepackage{tikz}
 
 
@@ -1097,58 +1097,257 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     traduction vers un arbre de syntaxe allégé, chaque noeud ayant pour contenu
     les chaînes de caractère issues de l'impression.
 
-    \begin{figure}
-      \begin{tikzpicture}
-        %% Rectangle
-        \draw (-5,-3) -- (-5,1);
-        \draw (-5,-3) -- (2,-3);
-        \draw (2,1) -- (-5,1);
-        \draw (2,1) -- (2,-3);
+    La première tentative de réécriture du module d'impression consistait
+    en la transformation du code de façon à accueillir des types génériques.
+    Cela permet d'avoir :
+    \begin{itemize}
+      \item Les types correspondant à l'ancienne version du module d'impression
+      \item Des types permettant la traduction vers la structure de donnée
+        adaptée pour Coqdoc
+    \end{itemize}
 
-        %% graphe1
-        \node[draw] (Noeud1) at (-1,0) {Noeud1};
-        \node[draw] (Expression1) at (-3,-1) {Expresion1};
-        \node[draw] (Element3) at (1,-1) {Element3};
-        \node[draw] (Element1) at (-4,-2) {Element1};
-        \node[draw] (Element2) at (-2,-2) {Element2};
-        \draw[->] (Noeud1) -> (Expression1);
-        \draw[->] (Noeud1) -> (Element3);
-        \draw[->] (Expression1) -> (Element1);
-        \draw[->] (Expression1) -> (Element2);
+    Cette approche impose de redéfinir un ensemble conséquent de types :
+    il faut reprendre les types de l'arbre de syntaxe abstraitre pour créer
+    une version de cet arbre avec des chaînes de caractère contenant le
+    résultat de l'impression des noeuds. Il faut également réécrire une partie
+    importante du module d'impression afin d'accueillir ces deux types (le type
+    prééxistant et celui que nous créons). La \cref{trad1} présente
+    l'inclusion du module au sein de l'impression de Coq. Cet arbre annoté
+    correspond à ce que l'on désire obtenir du coté Coqdoc. Cette structure
+    contient toutes les informations nécessaires pour effectuer l'impression
+    du code, tout en conservant la sémantique nécessaire pour effectuer des
+    traitements dessus.
 
-        % Rectangle 2
-        \draw (3,-3) -- (3,1);
-        \draw (3,-3) -- (10,-3);
-        \draw (10,1) -- (3,1);
-        \draw (10,1) -- (10,-3);
+    Cette méthode de traduction ne fut pas terminée pour des raisons de temps.
+    La phase de réécriture que j'ai entreprise était très coûteuse en temps,
+    et nous n'avions pas les garanties qu'à l'issue de cette réécriture le
+    résultat serait acceptable. En effet, même si cette réécriture avait put
+    être achevée à temps, la mise en place de tests et la correction du module
+    écrit aurait également pris beaucoup de temps. Face aux objectifs du stage
+    et face aux impératifs de temps, nous avons donc adopté une méthode dont
+    la qualité des résultats serait moindre, mais dont le développement et la
+    validation seraient plus rapide.
 
-        % graphe2
-        \node[draw] (INoeud1)      at (7,0) {"Noeud 1:"};
-        \node[draw] (IExpression1) at (5.75,-1) {"( \_ + \_ )"};
-        \node[draw] (IElement3)    at (8.5,-1) {"\\n    Element3"};
-        \node[draw] (IElement1)    at (4.5,-2) {"Element1"};
-        \node[draw] (IElement2)    at (7,-2) {"Element2"};
-        \draw[->] (INoeud1) -> (IExpression1);
-        \draw[->] (INoeud1) -> (IElement3);
-        \draw[->] (IExpression1) -> (IElement1);
-        \draw[->] (IExpression1) -> (IElement2);
-      \end{tikzpicture}
-      \caption{Traduction de l'arbre de syntaxe abstraite\label{trad1}}
-    \end{figure}
-    %% Analyse des besoins
-    %% Comment on annote ? OHSHIT PAS DE CST
-    %% Expliquer la recherche et les solutions manquees
-    %% Version finale
+    Cette deuxième approche instrumente toujours le code du module d'impression
+    afin d'obtenir une version de l'arbre annotée. Cependant, plutôt que de
+    procéder à une réécriture complète du type de l'arbre, nous modifions la
+    phase d'impression de cet arbre. l'impression de l'arbre de syntaxe passe
+    par un ensemble réduit de fonctions. En modifiant ces fonctions à nos
+    besoin, nous pouvons ainsi, selon le contexte, selectionner le mode
+    d'impression. Soit l'impression par défaut est utilisée, soit, lors de
+    l'interaction avec Coqdoc, nous utilisons le mode d'impression modifié.
+
+    Comme décrit précédemment, l'interaction entre l'interprète et Coqdoc se
+    fait au moyen d'un protocole XML. En réécrivant les fonctions d'impression,
+    au lieu de générer la version par défaut du code, nous générons une version
+    annotée par XML : chaque noeud appelant les fonctions d'impression est
+    ainsi inclu dans des balises XML portant son nom. La \cref{xml} schématise
+    cette traduction. Le module d'impression peut ainsi générer au choix,
+    selon la destination une version annotée ou pas du résultat de
+    l'impression. L'implémentation et l'intégration d'une telle fonctionnalité
+    fut rapider et facile à tester, et a posteriori, c'était le meilleur compromis
+    entre le temps et la qualité de l'implémentation.
+    \input{cst.tex}
+    \input{xmlpp.tex}
+    \clearpage
+
+    Du coté Coqdoc, il est facile de gérer ce type de messages à partir du XML.
+    En effet, en effectuant une seconde passe sur le contenu du message, nous
+    obtenons une hiérarchie que nous retraduisons dans une version adaptée à
+    nos besoin. Cette nouvelle version comporte les types qui nous intéressent
+    du point de vue Coqdoc, avec une sémantique du code très proche de nos
+    objectifs.
+
     \subsection{Traitement du code annoté}
+    Une fois la hiérarchie du code constituée, et son contenu correctement
+    indenté par l'interprète de Coq, il est facile d'appliquer des traitements
+    à ce code.
+
+    Les traitements à effectuer sur une portion de code sont les suivants :
+    \begin{itemize}
+      \item \textbf{Coloration syntaxique} : \\
+        Pour chaque type de noeud de l'arbre (correspondant à une expression),
+        il faut décider à quel type de coloration il appartient (mot clef,
+        identifiant, litéral, etc$\ldots$).
+      \item \textbf{Règles de notations} : \\
+        L'utilisateur peut définir des règles de traductions concernant
+        certaines "phrases" de code, et Coqdoc doit les appliquer, plus celles
+        déjà présentes par défaut.
+      \item \textbf{Gestion des identifiants} : \\
+        Coqdoc doit être capable de reconnaître les identifiants afin de pouvoir
+        y appliquer des traitements supplémentaires.
+    \end{itemize}
+
+    Les contraintes pour le système de traduction de code sont donc d'avoir
+    un mécanisme extensible à l'éxécution (pour pouvoir rajouter des règles
+    facilement), et d'avoir une possibilité de chaîner des traitements, certaines
+    expressions pouvant être la cible de plusieurs traitements.
+
+    \subsubsection{Le patron de conception chaîne de responsabilité}
+    L'approche choisie pour répondre à cette problématique est l'utilisation
+    du patron de conception chaîne de résponsabilité. Ce patron considère d'un
+    coté un ensemble de commandes (nos règles), et de l'autre coté la donnée sur
+    laquelle les données doivent être appliquées.
+
+    Chaque commande est en fait une fonction qui gère les deux cas suivants :
+    \begin{itemize}
+      \item Si la donnée est du bon type, la commande applique le traitement.
+      \item Sinon, elle appelle la commande suivante dans la hiérarchie.
+    \end{itemize}
+    Une commande transmet ainsi le contrôle à la commande suivante.
+    Quand il n'y a plus de commandes à appliquer, on considère que la donnée
+    est traitée, et elle est prète à être imprimée.
+
+    Ainsi, chaque donnée peut bénéficier d'une série de traitements. Ce qu'il
+    manque est la gestion de l'exensibilité des traitements.
+
+    OCaml est un outil qui se prête très bien à ce patron de conception, et il
+    fut facile d'ajouter un aspect extensible à ce patron. Une fonction
+    \texttt{add\_rule} a ainsi été crée pour cela. Elle attend une autre fonction
+    (décrivant le traitement), et un type (sur lequel le traitement s'applique).
+    Le listing \ref{addrule} décrit l'ajout d'une règle sur le code.
+
+    \lstinputlisting[numbers=left,label=addrule,caption=Exemple d'ajout de règle]{data/addrule.ml}
+
+    La ligne 1 appelle tout d'abord la fonction \texttt{add\_rule} avec le type
+    \texttt{C\_Id} qui correspond au types des identifiants dans le code à traiter.
+    La règle sera donc appliquée uniquement à ce type d'identifiants. Ensuite,
+    sur la ligne 2 on définit la fonction qui décrit la commande à appliquer
+    (le mot clefs \texttt{function}) Cette commande prends deux arguments :
+    \texttt{args} qui correspond aux valeurs contenues dans le type
+    \texttt{C\_Id} (le nom de l'identifiant par exemple), et
+    \texttt{fallback}, qui est la règle suivante à appliquer.
+
+    Ainsi, cette commande s'applique sur tout les noeuds de type \texttt{C\_Id},
+    et s'ils contiennent une chaîne de caractère correspondant à leur nom, alors
+    ils deviennent du type \texttt{Ident}, pour être imprimés avec la bonne
+    coloration.  Sinon, la fonction \texttt{fallback} est appelée, pour
+    appliquer le reste des traitement sur le type \texttt{C\_Id}.
+    \subsubsection{Types décrivant le code}
+    Comme expliqué précedemment, le type fournit par l'interpète est trop riche
+    pour notre utilisation. Nous procédons donc à une phrase de traduction vers
+    un type plus adapté à nos attentes, décrivant uniquement les différents types
+    de constructions du langage Coq. La liste suivante détaille ces types :
+    \begin{itemize}
+      \item Keyword : ce type décrit les différents mots clefs du langage Coq
+      \item Ident : ce type décrit les identifiants
+      \item Literal : tout ce qui est valeurs littérales (entiers, chaînes de
+        caractères, etc $\ldots$)
+      \item Tactic : ce type décrit des constructions particulière au langage
+        Coq qui sont les tactiques, utilisées dans les preuves
+      \item Symbol : On définit également des règles spécifiques pour les symboles
+        imprimés(tel que $\leftarrow$)
+      \item NoFormat : Enfin, tout ce qui n'a pas de règle particulière, ce type
+        ne recevra pas de mise en forme particulière lors de l'impression.
+    \end{itemize}
+    On est ainsi en mesure d'obtenir une coloration syntaxique simple à
+    appliquer.
+
+    De la même manière, il est facile d'ajouter des règles de traductions
+    qui s'appliqueront à ces éléments de code.
+
+    \clearpage
+    \subsection{Gestion des identifiants}
+    %% commande locate
+    Grâces aux règles de traduction du code, on peut facilement insérer une
+    règle pour la gestion des identifiants dans la chaîne de traitement.
+    La chaîne de traitement lorsqu'un identifiant est rencontré est décrite
+    dans la \cref{id1}.
+
+    Sur chaque identifiant, la commande \texttt{locate} a été appliquée. Si
+    l'identifiant est reconnu, on obtient alors son "nom" absolu, qui détaille
+    le fichier et les modules dans lequel il est inclus.
+    On est ensuite en mesure de vérifier s'il appartient bien au projet courant
+    (on générera ainsi un lien hypertexte), s'il appartient à la bibliothèque
+    standard (dans ce cas là, on génère un lien vers la documentation de
+    cette bibliothèque), et sinon, il appartient à aucune bibliothèque,
+    et dans ce cas là on ne génère rien.
+    \begin{figure}
+      \fbox{
+      \includegraphics[scale=0.5]{data/id1.png}}
+      \caption{Chaîne de traitement des identifiants\label{id1}}
+    \end{figure}
+
     \subsection{Génération des documents finaux}
-    %% Un module Print qui attend d'autres modules
-    %% Detailler l'interface attendue
-    %% Generation des documents
-    \subsection{Extension de Coqdoc pour Coq-tox}
-    %% Ecriture d'un nouvel analyseur
-    %% Ajout de requetes
-    %% Restrictions format d'entree/format de sortie (forcer tex -> tex)
-    %% WIN
+    L'étape finale de la chaîne de compilation est la génération de documents
+    finaux.
+
+    Pour gérer cette diversité des formats de sortie, nous avons préalablement
+    un type de documentation générique, dnoc les règles d'impression dépendent
+    du format de sortie.
+
+    Nous avons donc, comme expliqué précedemment, des spcéifications qui
+    correspondent à chaque type de document de sortie, et un module central
+    qui se charge d'utiliser ces spécifications dans l'ordre adapté pour la
+    génération des documents. Ces spécifications sont en fait des fonctions
+    de traductions, chaque module décrivant un type particulier de fichier
+    de sortie. La liste suivante détaille les différentes fonctions
+    attendues :
+    \begin{itemize}
+      \item \texttt{header}     : \\
+        Cette fonction est utilisée pour générer l'en-tête du fichier de
+        sortie.
+      \item \texttt{footer}     : \\
+        De même, celle ci génère la fin du fichier.
+      \item \texttt{doc}        : \\
+        Cette fonction est utilisée pour la traduction des règles de
+        documentation en texte. Pour chaque type dans la documentation, un
+        traitement particulier est appliqué par le module de spécifications
+      \item \texttt{code}       : \\
+        De même, cette fonction s'occupe de la traduction du code
+      \item \texttt{indent}     : \\
+        S'occupe de l'indentation du code, certains formats de fichiers ayant des
+        règles particulières pour celle-ci
+      \item \texttt{newline}    : \\
+        Egalement, certains formats ont des règles particulières pour les
+        retours à la ligne
+      \item \texttt{index}      : \\
+        Cette fonction s'occupe de générer l'index des symboles d'un fichier
+        de documentation. Cela offre un accès rapide au programmeur s'il
+        recherche la définition de certains symboles
+      \item \texttt{file\_index} : \\
+        Permet de générer  l'index des fichiers d'un projet. Cela permet
+        au programmeur d'accéder rapidement à un autre fichier du projet.
+
+      \item \texttt{begindoc}, \texttt{enddoc}, \texttt{begincode}, \texttt{endcode} : \\
+        Ces fonctions s'occupent de gérer le contexte de la documentation :
+        si on est en train de générer de la documentation ou du code.
+    \end{itemize}
+
+    La dernière partie à gérer est la décoration des documents de sortie :
+    afin d'obtenir un produit bien présenté, il est également nécessaire
+    d'inclure des fichiers de style avec la documentation générée. Pour cela,
+    nous réutilisons les fichiers de style du Coqdoc précédent pour la sortie
+    HTML et LaTeX.
+
+    \clearpage
+    \subsection{Extension de Coqdoc pour Coq-tex}
+    Cette section détaille l'extension de Coqdoc afin de pouvoir accueillir
+    les fonctionnalités de Coq-tex. Cela vise à mettre en évidence la simplicité
+    d'extension du logiciel pour l'adapter à des taches annexes.
+    \subsubsection{Traitement du langage}
+    La première partie est l'ajout d'un analyseur syntaxique pour gérer le
+    langage spécial de Coq-tex. Celui est très simple, puisqu'il à juste
+    à reconnaitre les environnements \texttt{example}, \texttt{example*} et
+    \texttt{eval}. Ce qui est contenu dans ces environnements est du code, le
+    reste est de la documentation\footnote{Cette documentation ne sera pas
+    mise en forme, et aucun traitement ne lui sera appliqué, l'objectif étant
+    de la copier dans le fichier de sortie}.
+    Pour chaque type d'environnement, nous créeons effectuons une traduction
+    vers le type commande lors du traitement du langage, qui seront ainsi
+    traitées lors de la phase d'évaluation.
+
+    \subsubsection{Evaluation du code}
+    Chacune de ces requêtes sera ainsi évaluée, et l'interaction sera faite avec
+    l'interpète pour traiter le code. Après cette évaluation, nous avons
+    un type code, qui sera inclut dans la documentation.
+    \subsubsection{Ajout d'options}
+    Enfin, nous rajoutons les options de Coq-tex à celles de Coqdoc, afin
+    de pouvoir copier le comportement de l'ancien Coq-tex. Nous appliquons
+    également une restriction sur le type de documents générés, puisque, à
+    partir d'un document LaTeX, nous désirons obtenir un autre document LaTeX avec
+    le traitement du code source effectué.
+    \clearpage
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
     \subsection{Extensibilité du logiciel}
