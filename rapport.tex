@@ -1330,6 +1330,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 
     \clearpage
     \subsection{Extension de Coqdoc pour Coq-tex}
+    \label{coqtex}
     Cette section détaille l'extension de Coqdoc afin de pouvoir accueillir
     les fonctionnalités de Coq-tex. Cela vise à mettre en évidence la simplicité
     d'extension du logiciel pour l'adapter à des taches annexes.
@@ -1358,18 +1359,126 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \clearpage
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
-    %% Ce qui est fait
-    %% Ce qu'il reste à faire
+    À l'issue de ce stage, nous avons une version préliminaire de Coqdoc
+    fonctionelle. L'ensemble des caractéristiques principales du logiciel sont
+    implémentées, et la chaîne de traitement est bien définie et finalisée.
+    Le logiciel est en mesure de générer des documents dans plusieurs formats,
+    et gère les formats d'entrée de Coqdoc et de Coq-tex.
+
+    Nous parlons d'une version préliminaire car le logiciel n'a pas pu être
+    finalisé. Il reste encore quelques développements afin d'en faire un logiciel
+    prêt à être publié dans le projet Coq. Les développements qui restent à faire
+    sont les suivants :
+    \begin{itemize}
+      \item Gestion des options : des options du précédent logiciel ne
+        sont pas encore gérées. Cela demandera quelques développements dont la
+        durée est jugée très faible, ces options étant facile à insérer dans
+        le logiciel.
+      \item Gestion des erreurs : Un autre aspect de la finition de Coqdoc
+        est la reprise et la gestion des erreurs, pour pouvoir fournir à
+        l'utilisateur un compréhension claire du comportement de Coqdoc.
+    \end{itemize}
+
+    Ces deux développements sont d'importance mineure et sont facile à
+    implémenter pour avoir un logiciel complètement finalisé.
+    Je pense que l'absence de finalisation du logiciel est dûe à l'importante
+    phase d'expérimentations faite au cours de ce stage, qui a été très
+    coûteuse en temps. La \cref{results} montre les résultats obtenus à l'issue
+    de ce stage, qui démontrent l'utilisabilité du logiciel.
+
     \subsection{Extensibilité du logiciel}
-    %% ROXOR
-    \subsection{Finalisation de Coqdoc}
-    %% rendre ça comme un vrai logiciel
+    L'autre objectif anoncé de ce stage était de réaliser un logiciel
+    extensible. Nous considérons cet objectif atteint, la \cref{coqtex} mettant
+    en évidence qu'il est très facile de rajouter des fonctionnalités à ce
+    logiciel.
+
+    Pour les fichiers d'entrée, il est facile de rajouter un format de fichier
+    accepté par Coq, juste en ajoutant un module de traitement du langage. Ce
+    module doit juste effectuer la traduction du langage source vers la
+    représentation intermédiaire de Coq. Cette représentation intermédiaire est
+    très facilement extensible si nécessaire pour correspondre aux besoins de
+    l'utilisateur
+
+    La phase d'évaluation, quant à elle, s'étend également facilement, en
+    acceptant des commandes utilisateur issues du fichier d'entrée. Le patron
+    de conception chaîne de contrôle rend également très simple l'ajout de
+    nouvelles règles de traitement sur le code.
+
+    Enfin, pour ce qui est de la génération de documents, il est le rajout
+    d'un module de générant un nouveau format de documentation est simple à
+    mettre en place.
+
     \subsection{Perspectives d'évolution du logiciel}
-    %% Fournir des axes d'ouverture sur la variété d'applications
+    La conception du logiciel permet de proposer un grand nombre de perspectives
+    d'évolution, et ce, à plusieurs niveaux. La liste suivante détailles les
+    principales idées énoncées au cours de ce stage, et avance d'autre possibilitées.
+    \begin{itemize}
+      \item Tutoriaux interactifs : grâce à l'utilisation de Javascript,
+        il serait possible de construire des documents interactifs.
+        L'utilisateur pourrait ainsi apprendre à se servir de Coq, ou rejouer
+        pas à pas des démonstrations de preuves.
+      \item Redaction de livres sur Coq : avec quelques ajustement, Coqdoc
+        ferait un bon support pour la rédaction de livres dont le sujet est
+        Coq. Grâce à l'extensibilité sur les formats de sortie, il serait
+        possible de générer de tels documents dans une grande variété de
+        formats (notamment des formats e-book).
+    \end{itemize}
+
+    Toutes ces idées reposent autour d'une interaction riche avec l'interprète,
+    et d'un modèle d'éditions à travers des documents structurés, ce que
+    fournit Coqdoc.
+
     \subsubsection{Protocole d'interaction}
-    %% Parler de CoqIDE, et des possibilités infinies du protocole
+    Concernant le protocole d'interaction, il constitue une brique centrale
+    dans divers logiciel gravitant autour du compilateur Coq. On peut par exemple
+    citer CoqIDE, qui est à l'origine de ce protocole.
+    L'extension de ce protocole d'interaction est simple, et tous les outils
+    qui l'utilisent peuvent en bénéficier.
+
+    Ce protocole d'interaction ne se limte pas forcément à la génération de
+    documents, et il serait également possible de mettre en place des outils
+    dédiés à l'analyse des performances, les tests unitaires ou encore la
+    réécriture de code source.
+
 \chapter{Conclusion générale}
-%% 2
+Ce stage fut pour moi une réussite sur de nombreux plans. J'ai pris plaisir
+à travailler au sein de l'équipe \pir, qui a su m'accueillir chaleuresement, et
+m'offrir un très bon encradement au cours de ces 5 mois.
+
+Tout d'abord, concernant le traitement du langage d'entrée, cela m'a permis
+de valider mes acquis en analyse syntaxique et lexicale, et plus généralement
+en traitement du lanage. Cette première partie est implémentée et fonctionnelle
+et, elle est facilement extensible pour de nouveaux formats d'entrée.
+
+L'interaction avec l'interprète m'a mis face à des difficultés auxquelles j'ai
+su répondre. En prenant en compte les impératifs de temps et la complexité du
+logiciel, j'ai été amené à choisir une approche donnant des résultats
+satisfaisant pour le projet. La phase d'évaluation autour de cette interaction
+m'a permis de concevoir une architecture de traitement à la fois générique et
+facilement extensible, tout en offrant des garanties de solidité pour le
+programmeur.
+
+Enfin, la génération de documents m'a amené à structuer une représentation
+intérmédiaire dans Coqdoc de façon à ce qu'il soit facile de générer plusieurs
+types de documents de sortie, chacun avec leurs spécificités. Cette représentation
+est ainsi capable de s'abstraire des particularités de chaque format de sortie.
+
+Ce stage m'a permis de valider un nombre important de compétences enseignées
+à l'Epita. Tout d'abord, les aspects techniques, mes compétences en
+programmation et en développement d'un projet ayant été mises à l'épreuve sur
+une application du monde réel.
+
+Un autre aspect est celui de la conception du logiciel, notamment le découpage
+en briques architecturales et l'attention porté à l'extensibilité. A travers
+le travail sur Coqdoc, j'ai pu valider de telles compétences.
+
+Enfin, j'ai pu découvrir les différents thèmes de recherche au sein de l'équipe
+\pir et plus largement au sein du laboratoire PPS.
+
+%% Reussite
+%% Aspect conception
+%% Amelioration des competences techniques
+%% Decouverte des sujets de recherche dans le domain
+%% Socialisation
 \input{annexes.tex}
 \end{document}
-
