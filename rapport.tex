@@ -215,11 +215,11 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     industriels, l’INRIA est un acteur majeur dans le développement des STIC en
     France.
 
-    L’INRIA est actif au sein d’instances de normalisation comme l’IETF,
-    l’ISO ou le W3C dont il a été le pilote européen de 1995 à fin 2002.
+    L’INRIA est actif au sein d’instances de normalisation comme l’IETF\footnote{Internet engineering task force},
+    l’ISO\footnote{Organisation internationale de normalisation} ou le W3C\footnote{Worldwide web consortium} dont il a été le pilote européen de 1995 à fin 2002.
     Enfin l’institut entretient d’importantes relations internationales : en
-    Europe, l’INRIA s’implique fortement dans le 6ème PCRDT où il participe
-    à plus de 40 actions ainsi que dans le consortium ERCIM, qui regroupe 17
+    Europe, l’INRIA s’implique fortement dans le 6ème PCRDT\footnote{Programme Cadre de Recherche et Développement Technologique} où il participe
+    à plus de 40 actions ainsi que dans le consortium ERCIM\footnote{Consortium de recherche européen pour l'informatique et les mathématiques}, qui regroupe 17
     organismes de recherche. A l’international, l’institut collabore avec de
     nombreuses institutions scientifiques via plusieurs laboratoires de
     recherche conjoints (LIAMA, PPS), les « équipes de recherche associées »,
@@ -471,14 +471,13 @@ Cette section détaille le travail effectué au cours de ce stage de fin de tron
 commun. Nous détaillons tout d'abord les objectifs à atteindre en présentant
 les outils utilisés, et en expliquant les spécificités propre à ce stage.
 Nous expliquons ensuite les différentes phases de la conception du logiciel,
-y compris le développement. Enfin, nos offrons une analyse critique des
+et les phases du développement. Enfin, nos offrons une analyse critique des
 résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 %% 40 -> 50
   \section{Le cahier des charges}
   Cette section détaille les objectifs du stage à travers une analyse des outils
-  existants (plus précisément, "l'ancien" Coqdoc, et Coq-tex), un état de
-  l'art sur ce genre d'outils, et nous détaillons les objectif à atteindre pour
-  le nouveau Coqdoc.
+  existants (plus précisément, "l'ancien" Coqdoc, et Coq-tex),
+  et nous détaillons les objectif à atteindre pour le nouveau Coqdoc.
     \subsection{Logiciels de documentation}
     Lors du développement d'un logiciel, le code source est souvent insuffisant
     pour détailler le fonctionnement du programme, car il manque en clarté et
@@ -492,7 +491,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     contenues dans le code source afin d'en constituer un guide de référence
     ou un manuel, sous forme de pages web ou de documents PDF.
     Cela permet au programmeur de bénéficier d'un document décrivant clairement
-    le projet, et de détailler les fonctionnalités accessibles au programmeur.
+    le projet, et qui détaille les fonctionnalités accessibles au programmeur.
 
     L'utilisation d'un générateur de documentation possède plusieurs intérêts :
     \begin{itemize}
@@ -563,7 +562,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       espace. Le nombre d'astérisques déterminant le niveau d'importance du
       titre.
       \item[] \textbf{Listes :} \\
-        Tout ligne commençant par un tiret et précédée de \texttt{n} espaces
+        Toute ligne commençant par un tiret et précédée de \texttt{n} espaces
         est un élément d'une liste, dont le niveau de profondeur est déterminé
         par le nombre d'espaces
       \item[] \textbf{Séparateur horizontal :} \\
@@ -607,7 +606,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \item \textbf{Mise en forme de la documentation} \\
         La première étape est la traduction des informations de mise en forme
         contenues dans la documentation. Le rôle de Coqdoc ici est de générer
-        les balises adéquates dans le format de
+        les balises adéquates dans le format de sortie
       \item \textbf{Analyse syntaxique du code source} \\
         Coqdoc a également pour rôle de mettre en forme le code source des
         fichiers lus en entrée. Pour cela il effectue une analyse syntaxique
@@ -644,6 +643,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
             documentation, en proposant un lien vers la déclaration de
             l'identifiant, pour permettre à l'utilisateur d'obtenir de plus
             amples informations à propos de celui-ci si nécessaire.
+
             Cette génération de liens se base sur des fichiers issus de la
             compilation ayant pour extension \texttt{.glob} qui détaille les
             identifiants déclarés dans un fichier. Grâce à ceux ci, Coqdoc peut
@@ -658,8 +658,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         \end{enumerate}
     \end{itemize}
 
-    \subsubsection{Nécéssités d'amélioration}
-    %% FIXME ?
+    \subsubsection{Nécessités d'amélioration}
     Nous détaillons dans cette section les raisons qui motivent la refonte
     du logiciel Coqdoc :
     \begin{itemize}
@@ -673,7 +672,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         bénéficierait d'une plus grande variété de cas d'utilisation qui
         gravitent autour du même concept de présentation de code et de mise
         en forme d'une documentation autour. On peut par exemple citer
-        la généraiton d'une documentation interactive, où l'on peut rejouer
+        la génération d'une documentation interactive, où l'on peut rejouer
         les preuves Coq dans le navigateur internet.
       \item \textbf{Redondance de certains éléments logiciels} : \\
         Coqdoc fait une analyse de code source, et celle-ci est faite par de
@@ -786,7 +785,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     En arrivant dans ce stage, j'avais également plusieurs objectifs personnels
     que je désirais réaliser dans ce stage. Tout d'abord, améliorer
     mes compétences dans le langage de programmation Ocaml (une présentation
-    du langage est incluse ci-après), qui est un langage dont les spécifictés
+    du langage est incluse ci-après), qui est un langage dont les spécificités
     m'intéressent beaucoup.
     Une autre aspect était de découvrir les sujets de recherches au sein de
     l'équipe \pir, et de voir si les sujets explorés m'intéressaient.
@@ -812,13 +811,13 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         d'OCaml permet d'apporter des garanties sur la validité du compilateur
         Coq, et le fait que les deux langages soient proche facilite le
         développement de Coq.
-      \item \textbf{Ecriture de compilateurs} : \\
+      \item \textbf{Écriture de compilateurs} : \\
         Ocaml est particulièrement adapté pour l'écriture de compilateurs.
         Coqdoc peut être considéré comme un compilateur car il passe un fichier
         en représentation abstraite, procède à une évaluation et génère un
-        document prêt à ètre utilisé. Le typage fort de Ocaml, le haut niveau
+        document prêt à être utilisé. Le typage fort de Ocaml, le haut niveau
         d'abstraction et l'aspect fonctionnel du langage facilite grandement
-        l'écriture de compilateur.
+        l'écriture de compilateurs.
       \item \textbf{Limitation des dépendances, et facilité d'intégration} : \\
         Une raison plus pragmatique est également que pour faciliter la gestion
         du projet, rajouter des dépendances à d'autres logiciels (par exemple,
@@ -871,17 +870,17 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     %% FIXME: détailler les sous modules d'impression sur le graphe
     \begin{figure}
       \fbox{\includegraphics[scale=0.5]{data/devchain.png}}
-      \caption{Representation de la chaine de compilation de Coqdoc}
-      \label{fig:devchain}
+      \caption{Représentation de la chaîne de compilation de Coqdoc}
+      \label{fig.devchain}
     \end{figure}
     %% traitement
     \clearpage
     \subsection{Traitement du langage d'entrée}
     Cette section détaille les différentes phases d'analyse pour traiter le
     langage d'entrée de Coqdoc. Nous expliquons tout d'abord les méthodes
-    pour effectuer une analyse syntaxique, puis nous détaillont chaque phase
+    pour effectuer une analyse syntaxique, puis nous détaillons chaque phase
     de traitement du langage.
-    Pour expliquer plus facilement le traîtement du langage d'entrée, nous
+    Pour expliquer plus facilement le traitement du langage d'entrée, nous
     prenons un exemple fil rouge qui accompagnera notre explication de la
     chaîne de traitement. Le \cref{finput} montre le fichier d'entrée
     donné à Coqdoc.
@@ -889,7 +888,8 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 
     \subsubsection{Traitement du langage}
     \label{trait}
-    Le traitement d'un langage se fait en deux phases logiques.
+    Le traitement d'un langage se fait en plusieurs phases logiques. Nous
+    rappelons brièvement celles-ci :
     \begin{itemize}
     \item[] \textbf{Analyse lexicale}  :\\
       La première étape est l'analyse lexicale. Cette phase vise à décomposer
@@ -903,35 +903,39 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       de données plus riches.
       \item[] \textbf{Arbre de syntaxe concrète} :\\
       L'analyse syntaxique donne souvent lieu à la génération d'un arbre
-      de syntaxe concrète. Cet arbre est une représentation intérmédiaire
+      de syntaxe concrète. Cet arbre est une représentation intermédiaire
       entre le document d'entrée et l'arbre de syntaxe abstraite, qui
       lui représente la structure de donnée sur laquelle les traitements sont
       appliqués. La différence principale entre ces deux types d'arbres est
       qu'un arbre de syntaxe concrète est beaucoup plus proche du document
-      source, est à souvent une structure de moins haut niveau (plus proche du
+      source, est a une structure de moins haut niveau (plus proche du
       document source) que l'AST.  Cela permet ainsi d'effectuer la
       transformation inverse, pour revenir à un document très proche du
       document source.
       \item[] \textbf{Arbre de syntaxe abstraite} :\\
+      L'arbre de syntaxe abstraite est la réprésentation choisie pour appliquer
+      des traitements sur le document d'entrée. Le haut niveau d'abstraction
+      de cette structure de donnée permet de facilement modifier ses différent
+      éléments, ceci afin de pouvoir effectuer une traduction simple vers la
+      représentation finale, et générer le document de sortie.
     \end{itemize}
-    %%% FIXME : enrichir
     \subsubsection{Découpage logique du document}
     La première phase de traitement du document est un découpage logique
-    en phrases de différent type : la documentation, le code et les
+    en phrases de différents types : la documentation, le code et les
     commentaires.
     Ceci est fait selon les délimiteurs respectifs de la documentation et
     des commentaires. Tout ce qui n'est pas contenu entre ces délimiteurs
     est considéré comme du code.
     Chaque élément de code est ensuite découpé en phrases. Ce découpage est
     fait selon le fait que chaque phrase Coq se termine par un point. Ce
-    découpage en phrase permet de simplifier le traitement sur chaque
+    découpage en phrases permet de simplifier le traitement sur chaque
     instruction du fichier d'entrée.
     A la fin de cette phase de traitement, nous avons donc un ensemble
     de phrases, chacune appartenant à l'un des types suivants
     \begin{itemize}
       \item \textbf{De la Documentation} sous forme de chaînes de caractères
       \item \textbf{Des commentaires} sous forme de chaînes de caractères
-      \item \textbf{Du code} sous forme de chaînes de caracères, chacune
+      \item \textbf{Du code} sous forme de chaînes de caractères, chacune
         de ces chaînes étant terminées par un point.
     \end{itemize}
 
@@ -945,6 +949,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \caption{Première représentation abstraite}
       \label{ast1}
     \end{figure}
+    \clearpage
     \subsubsection{Analyse de la documentation}
     La deuxième étape consiste ensuite au traitement de la documentation.
     Chaque élément du type documentation est donc analysé une seconde fois,
@@ -956,7 +961,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     La liste suivante détaille différents types de noeud dans notre
     documentation :
     \begin{itemize}
-      \item Eléments finaux : (contiennent des chaînes de caractère ou rien) \\
+      \item \textbf{Éléments finaux} : (contiennent des chaînes de caractère ou rien)
         \begin{itemize}
             \item Titre
             \item Règle horizontale
@@ -964,7 +969,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
             \item Code Verbatim : code à imprimer dans la documentation
             \item Contenu : représente les chaînes de caractère simples
         \end{itemize}
-      \item Eléments récursifs : (contiennent des éléments de documentation) \\
+      \item \textbf{Éléments récursifs} : (contiennent des éléments de documentation)
         \begin{itemize}
           \item Listes : une liste contient soit d'autres listes, soit des
                 éléments de documentation
@@ -972,18 +977,18 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
                 de la documentation (par exemple, des éléments d'une liste ou
                 du code verbatim)
         \end{itemize}
-      \item Eléments à évaluer : (seront supprimés après la pahse d'évaluation) \\
+      \item \textbf{Éléments à évaluer} : (seront supprimés après la phase d'évaluation)
         \begin{itemize}
           \item Ajout de règles de notation
           \item Suppression de règles de notation
           \item Commandes : Un ajout du nouveau Coqdoc est la gestion de
                 commandes plus poussées dans le fichier d'entrée. Celles-ci
-                seront remplacés par des noeauds de documentation après la
+                seront remplacés par des noeuds de documentation après la
                 phase d'évaluation
         \end{itemize}
     \end{itemize}
     Après application de la transformation, la documentation est transformée
-    d'une chaîne de caractrès à une hiérarchie d'éléments décrivant le contenu.
+    d'une chaîne de caractères à une hiérarchie d'éléments décrivant le contenu.
     La \cref{ast2} détaille par exemple la hiérarchie obtenue pour la
    documentation après traitement de celle-ci
     \begin{figure}
@@ -1001,10 +1006,10 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           \textit{pretty-printer} pour imprimer le code de manière lisible.
           Cela impose de traiter un langage très complexe (composé d'un nombre
           important de mots clefs et de constructions syntaxiques), et de
-          complexifier de manière importante le logiciel. De plus, on ne
-          possède, avec cette approche que de peu d'extensibilité, car rajouter
-          de nouveaux traitements impose de grands changements dans le code.
-          Cette approche était celle de l'ancien Coqdoc.
+          complexifier de manière importante le logiciel. Ecrire un module
+          d'analyse du langage Coq insère également de la redondance dans le
+          projet, puisque le compilateur Coq effectue déjà cette analyse. Cette
+          approche était celle de l'ancien Coqdoc.
         \item Réutiliser l'interprète pour nous donner des informations sur
           du code. A partir d'un protocole existant, nous envoyons des séquences
           de code, et l'interprète est en mesure de renvoyer une version imprimée
@@ -1013,7 +1018,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           logiciel, il est facilement extensible, car nous avons accès à tous
           les éléments du compilateur. La duplication de code est donc inexistante
           avec cette approche, et l'extension du protocole d'interaction entre
-          l'interprète est les logiciels qui l'utilisent est bénéfique pour tous
+          l'interprète et les logiciels qui l'utilisent est bénéfique pour tous
           ces logiciels.
       \end{itemize}
     C'est la seconde approche qui a été choisie : elle permet de réutiliser
@@ -1024,14 +1029,13 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de XML, ce qui permet de l'utiliser avec une grande variété d'outils.
     La liste suivante présente les requêtes de ce protocole :
     \begin{itemize}
-      \item evars, goals, hints, $ldots$ : Commandes utilisées pour les preuves.
+      \item evars, goals, hints, $\ldots$ : Commandes utilisées pour les preuves.
       Coqdoc n'en aura pas l'utilité.
       \item inloadpath : permet de savoir si un dossier est dans le chemin
       de chargement de Coq
-      mkcases
       \item interp : Prends une phrase Coq sous forme de chaîne, et effectue
       l'interprétation de cette phrase.
-      \item rewind : permet de revenir en arrière dans l'execution
+      \item rewind : permet de revenir en arrière dans l'exécution
       \item status : donne des informations sur le status de l'interprète
       \item quit : ferme le protocole d'interaction
     \end{itemize}
@@ -1050,11 +1054,12 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       et renvoie sa localisation (dans quel fichier, module, et sous module).
       Cette commande doit permettre de pouvoir, a partir d'informations obtenues
       sur le code, permettre de reconnaître les identifiant, et ainsi pouvoir
-     générer des liens vers l'endroit où ils sont déclarés.
+     générer des liens vers l'endroit où ils sont déclarés dans la documentation
+     produite.
       \item \texttt{prettyprint} :
       Cette commande prends une chaîne de caractère, et renvoie une version
-      structure selon les différents éléments la composant : mots clefs,
-      identifiants, nombres, etc $\ldots$. Elle doit de plus donner inclure
+      structurée selon les différents éléments la composant : mots clefs,
+      identifiants, nombres, etc $\ldots$. Elle doit de plus donner
       les informations de mise en forme du code (par exemple, l'indentation).
     \end{itemize}
 
@@ -1063,26 +1068,28 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     combler un manque du logiciel Coq.
 
     L'approche idéale pour effectuer l'annotation serait d'utiliser
-    l'arbre de syntaxe concrète de Coq. Comme expliqué dans la \cref{trait}.
-    Cet arbre de syntaxe doit théoriquement être en mesure de donner les bonnes
+    l'arbre de syntaxe concrète de Coq. Comme expliqué dans la \cref{trait},
+    cet arbre de syntaxe doit théoriquement être en mesure de donner les bonnes
     annotations puisqu'il possède encore beaucoup d'informations d'ordre
-    syntaxique. Cependant cet arbre de syntaxe concrète n'existe pas dans Coq,
+    syntaxique. Son niveau d'abstraction est théoriquement adapté à nos besoins,
+    car il représente encore fidèlement le code source que Coqdoc cherche à
+    traiter. Cependant cet arbre de syntaxe concrète n'existe pas dans Coq,
     qui fait une traduction directement vers une représentation de haut niveau.
 
     L'approche la plus efficace aurait été de changer la chaîne de traitement
     de Coq pour pouvoir y insérer cet arbre de syntaxe concrète, mais cela
-    impose une importante reflexion et beaucoups de changement de code. Au
+    impose une importante réflexion et beaucoup de changement de code. Au
     vu de la durée du projet, cette solution a été rejetée immédiatement car
     elle était trop complexe pour le temps disponible.
 
     Pour implémenter cette commande, il faut donc se reposer sur l'arbre de
     syntaxe abstraite, qui possède une représentation de très haut niveau,
-    et dont l'annotation serait complexe.
+    et dont l'annotation est complexe.
 
     %%% FIXME
     Un des mécanismes de traduction de l'arbre de syntaxe vers des chaînes de
     caractères est le \textit{pretty-printer} de Coqdoc. Son rôle est
-    d'imprimer de manière correctement identée l'arbre de syntaxe.
+    d'imprimer de manière correctement indentée l'arbre de syntaxe.
     Instrumenter le code du \textit{pretty-printer} à nos besoins nous
     permettrait ainsi de profiter de cette étape de traduction de l'arbre de
     syntaxe vers le texte. L'objectif est donc de modifier ce module de Coq
@@ -1090,7 +1097,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     pouvoir effectuer facilement une coloration syntaxique du coté de Coqdoc.
 
     La traduction du module d'impression de Coq se fait directement vers des
-    chaînes de caractères. Ceci est problèmatique car cela enlève toutes les
+    chaînes de caractères. Ceci est problématique car cela enlève toutes les
     informations sémantiques qui serviraient à Coqdoc. La première approche
     que nous avons adopté était donc de modifier ce module d'impression, pour
     qu'au lieu de traduire vers des chaînes de caractères, il effectue une
@@ -1101,17 +1108,18 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     en la transformation du code de façon à accueillir des types génériques.
     Cela permet d'avoir :
     \begin{itemize}
-      \item Les types correspondant à l'ancienne version du module d'impression
-      \item Des types permettant la traduction vers la structure de donnée
-        adaptée pour Coqdoc
+      \item L'ancien comportement du module d'impression, sans modifier le code
+        l'utilisant
+      \item Un nouveau comportement permettant la traduction vers la
+        structure de donnée adaptée pour Coqdoc
     \end{itemize}
 
     Cette approche impose de redéfinir un ensemble conséquent de types :
-    il faut reprendre les types de l'arbre de syntaxe abstraitre pour créer
+    il faut reprendre les types de l'arbre de syntaxe abstraite pour créer
     une version de cet arbre avec des chaînes de caractère contenant le
     résultat de l'impression des noeuds. Il faut également réécrire une partie
     importante du module d'impression afin d'accueillir ces deux types (le type
-    prééxistant et celui que nous créons). La \cref{trad1} présente
+    préexistant et celui que nous créons). La \cref{trad1} présente
     l'inclusion du module au sein de l'impression de Coq. Cet arbre annoté
     correspond à ce que l'on désire obtenir du coté Coqdoc. Cette structure
     contient toutes les informations nécessaires pour effectuer l'impression
@@ -1131,9 +1139,9 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     Cette deuxième approche instrumente toujours le code du module d'impression
     afin d'obtenir une version de l'arbre annotée. Cependant, plutôt que de
     procéder à une réécriture complète du type de l'arbre, nous modifions la
-    phase d'impression de cet arbre. l'impression de l'arbre de syntaxe passe
+    phase d'impression de cet arbre. L'impression de l'arbre de syntaxe passe
     par un ensemble réduit de fonctions. En modifiant ces fonctions à nos
-    besoin, nous pouvons ainsi, selon le contexte, selectionner le mode
+    besoin, nous pouvons ainsi, selon le contexte, sélectionner le mode
     d'impression. Soit l'impression par défaut est utilisée, soit, lors de
     l'interaction avec Coqdoc, nous utilisons le mode d'impression modifié.
 
@@ -1141,11 +1149,11 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     fait au moyen d'un protocole XML. En réécrivant les fonctions d'impression,
     au lieu de générer la version par défaut du code, nous générons une version
     annotée par XML : chaque noeud appelant les fonctions d'impression est
-    ainsi inclu dans des balises XML portant son nom. La \cref{xml} schématise
+    ainsi inclus dans des balises XML portant le type du noeud. La \cref{xml} schématise
     cette traduction. Le module d'impression peut ainsi générer au choix,
     selon la destination une version annotée ou pas du résultat de
     l'impression. L'implémentation et l'intégration d'une telle fonctionnalité
-    fut rapider et facile à tester, et a posteriori, c'était le meilleur compromis
+    fut rapide et facile à tester, et a posteriori, c'était le meilleur compromis
     entre le temps et la qualité de l'implémentation.
     \input{cst.tex}
     \input{xmlpp.tex}
@@ -1168,7 +1176,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \item \textbf{Coloration syntaxique} : \\
         Pour chaque type de noeud de l'arbre (correspondant à une expression),
         il faut décider à quel type de coloration il appartient (mot clef,
-        identifiant, litéral, etc$\ldots$).
+        identifiant, littéral, etc$\ldots$).
       \item \textbf{Règles de notations} : \\
         L'utilisateur peut définir des règles de traductions concernant
         certaines "phrases" de code, et Coqdoc doit les appliquer, plus celles
@@ -1179,13 +1187,13 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \end{itemize}
 
     Les contraintes pour le système de traduction de code sont donc d'avoir
-    un mécanisme extensible à l'éxécution (pour pouvoir rajouter des règles
+    un mécanisme extensible à l'exécution (pour pouvoir rajouter des règles
     facilement), et d'avoir une possibilité de chaîner des traitements, certaines
     expressions pouvant être la cible de plusieurs traitements.
 
     \subsubsection{Le patron de conception chaîne de responsabilité}
     L'approche choisie pour répondre à cette problématique est l'utilisation
-    du patron de conception chaîne de résponsabilité. Ce patron considère d'un
+    du patron de conception chaîne de responsabilité. Ce patron considère d'un
     coté un ensemble de commandes (nos règles), et de l'autre coté la donnée sur
     laquelle les données doivent être appliquées.
 
@@ -1196,10 +1204,10 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \end{itemize}
     Une commande transmet ainsi le contrôle à la commande suivante.
     Quand il n'y a plus de commandes à appliquer, on considère que la donnée
-    est traitée, et elle est prète à être imprimée.
+    est traitée, et elle est prête à être imprimée.
 
     Ainsi, chaque donnée peut bénéficier d'une série de traitements. Ce qu'il
-    manque est la gestion de l'exensibilité des traitements.
+    manque est la gestion de l'extensibilité des traitements.
 
     OCaml est un outil qui se prête très bien à ce patron de conception, et il
     fut facile d'ajouter un aspect extensible à ce patron. Une fonction
@@ -1224,7 +1232,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     coloration.  Sinon, la fonction \texttt{fallback} est appelée, pour
     appliquer le reste des traitement sur le type \texttt{C\_Id}.
     \subsubsection{Types décrivant le code}
-    Comme expliqué précedemment, le type fournit par l'interpète est trop riche
+    Comme expliqué précédemment, le type fournit par l'interprète est trop riche
     pour notre utilisation. Nous procédons donc à une phrase de traduction vers
     un type plus adapté à nos attentes, décrivant uniquement les différents types
     de constructions du langage Coq. La liste suivante détaille ces types :
@@ -1246,7 +1254,6 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     De la même manière, il est facile d'ajouter des règles de traductions
     qui s'appliqueront à ces éléments de code.
 
-    \clearpage
     \subsection{Gestion des identifiants}
     %% commande locate
     Grâces aux règles de traduction du code, on peut facilement insérer une
@@ -1267,16 +1274,17 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \includegraphics[scale=0.5]{data/id1.png}}
       \caption{Chaîne de traitement des identifiants\label{id1}}
     \end{figure}
+    \clearpage
 
     \subsection{Génération des documents finaux}
     L'étape finale de la chaîne de compilation est la génération de documents
     finaux.
 
     Pour gérer cette diversité des formats de sortie, nous avons préalablement
-    un type de documentation générique, dnoc les règles d'impression dépendent
-    du format de sortie.
+    défini un type de documentation générique, donc les règles d'impression
+    dépendent du format de sortie.
 
-    Nous avons donc, comme expliqué précedemment, des spcéifications qui
+    Nous avons donc, comme expliqué précédemment, des spécifications qui
     correspondent à chaque type de document de sortie, et un module central
     qui se charge d'utiliser ces spécifications dans l'ordre adapté pour la
     génération des documents. Ces spécifications sont en fait des fonctions
@@ -1284,32 +1292,32 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de sortie. La liste suivante détaille les différentes fonctions
     attendues :
     \begin{itemize}
-      \item \texttt{header}     : \\
+      \item \texttt{header}     :
         Cette fonction est utilisée pour générer l'en-tête du fichier de
         sortie.
-      \item \texttt{footer}     : \\
+      \item \texttt{footer}     :
         De même, celle ci génère la fin du fichier.
-      \item \texttt{doc}        : \\
+      \item \texttt{doc}        :
         Cette fonction est utilisée pour la traduction des règles de
         documentation en texte. Pour chaque type dans la documentation, un
         traitement particulier est appliqué par le module de spécifications
-      \item \texttt{code}       : \\
+      \item \texttt{code}       :
         De même, cette fonction s'occupe de la traduction du code
-      \item \texttt{indent}     : \\
+      \item \texttt{indent}     :
         S'occupe de l'indentation du code, certains formats de fichiers ayant des
         règles particulières pour celle-ci
-      \item \texttt{newline}    : \\
-        Egalement, certains formats ont des règles particulières pour les
+      \item \texttt{newline}    :
+        Également, certains formats ont des règles particulières pour les
         retours à la ligne
-      \item \texttt{index}      : \\
+      \item \texttt{index}      :
         Cette fonction s'occupe de générer l'index des symboles d'un fichier
         de documentation. Cela offre un accès rapide au programmeur s'il
         recherche la définition de certains symboles
-      \item \texttt{file\_index} : \\
+      \item \texttt{file\_index} :
         Permet de générer  l'index des fichiers d'un projet. Cela permet
         au programmeur d'accéder rapidement à un autre fichier du projet.
 
-      \item \texttt{begindoc}, \texttt{enddoc}, \texttt{begincode}, \texttt{endcode} : \\
+      \item \texttt{begindoc}, \texttt{enddoc}, \texttt{begincode}, \texttt{endcode} :
         Ces fonctions s'occupent de gérer le contexte de la documentation :
         si on est en train de générer de la documentation ou du code.
     \end{itemize}
@@ -1328,18 +1336,18 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \subsubsection{Traitement du langage}
     La première partie est l'ajout d'un analyseur syntaxique pour gérer le
     langage spécial de Coq-tex. Celui est très simple, puisqu'il à juste
-    à reconnaitre les environnements \texttt{example}, \texttt{example*} et
+    à reconnaître les environnements \texttt{example}, \texttt{example*} et
     \texttt{eval}. Ce qui est contenu dans ces environnements est du code, le
     reste est de la documentation\footnote{Cette documentation ne sera pas
     mise en forme, et aucun traitement ne lui sera appliqué, l'objectif étant
     de la copier dans le fichier de sortie}.
-    Pour chaque type d'environnement, nous créeons effectuons une traduction
+    Pour chaque type d'environnement, nous créons effectuons une traduction
     vers le type commande lors du traitement du langage, qui seront ainsi
     traitées lors de la phase d'évaluation.
 
-    \subsubsection{Evaluation du code}
+    \subsubsection{Évaluation du code}
     Chacune de ces requêtes sera ainsi évaluée, et l'interaction sera faite avec
-    l'interpète pour traiter le code. Après cette évaluation, nous avons
+    l'interprète pour traiter le code. Après cette évaluation, nous avons
     un type code, qui sera inclut dans la documentation.
     \subsubsection{Ajout d'options}
     Enfin, nous rajoutons les options de Coq-tex à celles de Coqdoc, afin
@@ -1350,11 +1358,16 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \clearpage
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
+    %% Ce qui est fait
+    %% Ce qu'il reste à faire
     \subsection{Extensibilité du logiciel}
+    %% ROXOR
     \subsection{Finalisation de Coqdoc}
+    %% rendre ça comme un vrai logiciel
     \subsection{Perspectives d'évolution du logiciel}
+    %% Fournir des axes d'ouverture sur la variété d'applications
     \subsubsection{Protocole d'interaction}
-    \subsubsection{Enrichissement de Coqdoc}
+    %% Parler de CoqIDE, et des possibilités infinies du protocole
 \chapter{Conclusion générale}
 %% 2
 \input{annexes.tex}

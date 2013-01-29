@@ -3,8 +3,8 @@
 Les lignes qui suivent sont une liste
 - Un premier élément
 - Un second élément :
-    - Un sous liste d'un seul élément
-- Un dernier élément de cette liste
+    - Une sous liste d'un seul élément
+- Le dernier élément de cette liste
 
 La ligne suivante produit un séparateur horizontal :
 ----
