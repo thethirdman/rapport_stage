@@ -10,7 +10,7 @@
 \usepackage[french]{cleveref}
 \usepackage{parskip}
 \usepackage{tikz}
-\usepackage{hyperref}
+%%\usepackage{hyperref}
 \usepackage{minitoc}
 
 
@@ -72,7 +72,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
   technologique, qui est l'acteur principal de la recherche en informatique en
   France.
 
-  Je fut intégré à l'équipe \pir appartenant au laboratoire Preuves, Programmes et
+  Je fus intégré à l'équipe \pir{} appartenant au laboratoire Preuves, Programmes et
   Systèmes.
 
   Le laboratoire \textbf{Preuve, programmes et systèmes} est une unité mixte
@@ -88,7 +88,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
   l'implémentation d'un tel logiciel.
 
   Ce stage fut effectué sous la direction de \yrg, maître de conférence à
-  l'université Paris Diderot.
+  l'université Paris Diderot, et chercheur au sein du laboratoire \pir.
   %% FIXME
 
   \section{Problématique du stage}
@@ -104,7 +104,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
   \section{Motivations et perspectives}
   Le stage offre des perspectives très intéressantes en relation directe
   avec mes objectifs professionnels, tout en mettant en application les
-  compétences que j'ai acquises au cours de cycle de tronc commun.
+  compétences que j'ai acquises au cours du cycle de tronc commun.
   %%% FIXME
 
   \subsection{Validation des acquis de tronc commun}
@@ -150,15 +150,18 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
   \begin{itemize}
     \item la prise de connaissance des problématiques à résoudre
     \item la conception du logiciel de documentation
-    \item l'implémentation de ce logiciel
+    \item l'implémentation de ce logiciel \\
   \end{itemize}
 
   Une première partie présentes les différentes structures au sein desquelles
   s'est effectué mon stage, ainsi que l'intégration des réalisation de ce stage
-  dans les travaux de l'entreprise. \\
-  Dans une deuxième partie, analysons l'existant et définissons la méthodologie
-  et les objectifs du stage. \\
+  dans les travaux de l'entreprise.
+
+  Dans une deuxième partie, nous analysons l'existant et définissons la méthodologie
+  et les objectifs du stage.
+
   La troisième partie détaillera la phase de réalisation technique.
+
   Enfin, dans une dernière partie, nous offrons une analyse critique des
   résultats de ce stage.
 
@@ -179,10 +182,9 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     \item Algorithmique, programmation, logiciels et architectures
     \item Réseaux, systèmes et services, calcul distribué
     \item Perception, cognition, interaction
-    \item STIC pour les sciences de la vie et de l'environnement
+    \item STIC pour les sciences de la vie et de l'environnement \\
   \end{itemize}
 
-  % \subsection{Collaborations avec l'industrie}
   L'INRIA travaille avec de nombreux \textbf{partenaires industriels}.
   Les principaux partenaires sont les suivants :
   \begin{itemize}
@@ -211,7 +213,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     du ministère de l'économie, des finances et de l'industrie. \\
     INRIA est signataire du Pacte PME depuis le 17 décembre 2008, et l'institut
     participe à l'espace européen de la recherche à travers le consortium
-    ERCIM, dont il a été l'un des membres fondateurs en 1989.
+    ERCIM\footnote{Consortium de recherche européen pour l'informatique et les mathématiques}, dont il a été l'un des membres fondateurs en 1989.
 
     L’INRIA a pour vocation d’entreprendre des recherches fondamentales et
     appliquées dans les domaines des sciences et des technologies de l’information
@@ -228,10 +230,12 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     l’ISO\footnote{Organisation internationale de normalisation} ou le W3C\footnote{Worldwide web consortium} dont il a été le pilote européen de 1995 à fin 2002.
     Enfin l’institut entretient d’importantes relations internationales : en
     Europe, l’INRIA s’implique fortement dans le 6ème PCRDT\footnote{Programme Cadre de Recherche et Développement Technologique} où il participe
-    à plus de 40 actions ainsi que dans le consortium ERCIM\footnote{Consortium de recherche européen pour l'informatique et les mathématiques}, qui regroupe 17
+    à plus de 40 actions ainsi que dans le consortium ERCIM, qui regroupe 17
     organismes de recherche. A l’international, l’institut collabore avec de
     nombreuses institutions scientifiques via plusieurs laboratoires de
-    recherche conjoints (LIAMA, PPS), les « équipes de recherche associées »,
+    recherche conjoints (LIAMA\footnote{Laboratoire Franco-Chinois
+    d'informatique, d'automatique et de mathématiques appliquées}, PPS), les
+    équipes de recherche associées,
     et différents programmes de coopération.
 
     \subsection{Les missions de l'INRIA}
@@ -277,9 +281,10 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
       \item \textbf{4 représentants du personnel} de l'institut ou leurs
         suppléants dont deux chercheurs, élus pour une durée de quatre ans
         renouvelable une fois, selon des modalités fixées par arrêté du
-        ministre chargé de la recherche et du ministre chargé de l'industrie.
+        ministre chargé de la recherche et du ministre chargé de l'industrie. \\
     \end{itemize}
 
+    \subsubsection{L'INRIA en chiffres}
     L'INRIA est structuré en 6 unités de recherche à travers la France :
     Rocquencourt et son antenne Parisienne, Rennes, Sophia Antipolis, Grenoble,
     Nancy, Bordeau, Lille, Saclay, Marseille, Lyon et Metz. \\
@@ -289,12 +294,12 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
       \item 4200 personnes, dont 2500 rémunérées par l'INRIA
       \item 3150 scientifiques: 1200 doctorants, 250 post-doctorants et 600
         ingénieurs R\&D
-      \item 300 stagiaires
+      \item 300 stagiaires \\
     \end{itemize}
     Au sein de ces scientifiques, on compte notamment :
     \begin{itemize}
       \item 6 membres de \textbf{l'académie de sciences}
-      \item 16 lauréats du \textbf{conseil européen de la recherche}
+      \item 16 lauréats du \textbf{conseil européen de la recherche} \\
     \end{itemize}
 
     Les chiffres clefs de la recherche scientifique à l'INRIA :
@@ -303,13 +308,13 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
       \item 67 équipes associées, de dimension internationale
       \item 4500 publications scientifiques
       \item 24 conférences internationales
-      \item 105 projets européens dans lesquels s'implique l'INRIA
+      \item 105 projets européens dans lesquels s'implique l'INRIA \\
     \end{itemize}
 
     Les chiffres pour les partenariats avec l'industrie :
     \begin{itemize}
       \item 230 brevets en activité
-      \item 100 entreprises crées par l'institut
+      \item 100 entreprises crées par l'institut \\
     \end{itemize}
 
     L'INRIA bénéficie d'un budget de 231 M\euro{} dont 125,8 M\euro{} alloués à la
@@ -321,8 +326,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     que leur directeurs respectifs
     \begin{figure}
     \includegraphics[scale=0.85]{data/organigrammeinria.pdf}
-    \caption{Organigramme des différents services de l'INRIA}
-    \label{orga}
+    \caption{Organigramme des différents services de l'INRIA\label{orga}}
     \end{figure}
 
     %% structure logique
@@ -330,7 +334,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
   \section{Le service}
   Cette section présente le laboratoire PPS. Ce n'est pas à proprement parler
   un service de l'INRIA, car c'est un groupe de recherche multidisciplinaire
-  regroupant des chercheurs de tous horizons, et de toutes structures de
+  regroupant des chercheurs de divers horizons, et de plusieurs structures de
   recherche.
     \subsection{Le laboratoire Preuves, Programmes  et Systèmes}
     PPS est un laboratoire qui regroupe les chercheurs venant de l'informatique
@@ -345,7 +349,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     qui constitue les fondements des langages de programmations du paradigme fonctionnels} en un
     outil utilisé pour établir des preuves mathématiques. Réciproquement, le
     savoir de la logique mathématique devient un élément de réponse pour les
-    problèmes posés par l'industrie.
+    problèmes posés par l'industrie dans le domaine de l'informatique.
 
     \subsection{Thématiques de recherche du laboratoire}
       Les thématiques du laboratoire peuvent être regroupées en six directions
@@ -396,9 +400,9 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
       \end{itemize}
 
       \subsection{L'équipe \pir}
-      L'équipe \pir{} est composée de chercheur faisant partie du laboratoire
-      PPS, mais également de scientifique appartenant à l'université
-      Paris-Diderot, et l'INRIA.
+      L'équipe \pir{} est composée de chercheurs faisant partie du laboratoire
+      PPS, mais également de scientifiques appartenant à l'université
+      Paris-Diderot ou l'INRIA.
 
       Ses sujets de recherche sont les suivants :
       \begin{itemize}
@@ -448,7 +452,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
       L'utilisation d'un logiciel de documentation est très importante lors du
       développement d'un projet.
       Au sein du développement de Coq, Coqdoc possède plusieurs cas
-      d'utilisation qui en font un outil très utilisé, et dont l'amélioration
+      d'utilisations qui en font un outil très utilisé, et dont l'amélioration
       est supposée offrir plusieurs avantage. La liste suivante
       présente les différents cas d'utilisations de Coqdoc dans le projet :
       \begin{itemize}
@@ -523,15 +527,19 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         PDF.
     \end{itemize}
 
-    L'exemple \cref{fig1} présente un morceau de code documenté, et le rendu
+    Les exemples \cref{source1,fig1} présentent un morceau de code documenté, et le rendu
     généré par coqdoc.
-
     \begin{figure}
       \lstinputlisting
         {data/source1.v}
+        \caption{Exemple de fichier d'entrée donné à Coqdoc\label{source1}}
+    \end{figure}
+
+    \begin{figure}
+
       \fbox{
       \includegraphics[trim=0mm 0mm 2cm 0cm,clip=true, width=\textwidth]{data/rendu1.png}}
-      \caption{Exemple de rendu généré par coqdoc}
+      \caption{Exemple de rendu généré par Coqdoc à partir de la \cref{source1}}
       \label{fig1}
     \end{figure}
 
@@ -597,7 +605,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           \item \texttt{\$} pour une notation mathématique en sortie LaTeX
         \end{itemize}
     \end{itemize}
-    Le \cref{source2} donne un exemple de ces règles de mise en forme
+    Le listing \ref{source2} donne un exemple de ces règles de mise en forme
     dans le fichier d'entrée
     \lstinputlisting[label=source2,caption=Exemple des règles de mise en forme de Coqdoc]{data/source2.v}
 
@@ -751,7 +759,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       \item \texttt{coq\_example*} : \\
         Le code contenu dans ces balises sera extrait et interprété, et il
         sera recopié dans le fichier de sortie. Cependant, les réponses de
-        l'interprète seront ignorées;.
+        l'interprète seront ignorées.
       \item \texttt{coq\_eval} : \\
         Les phrases contenues dans l'environnement \texttt{coq\_eval} seront
         évaluées silencieusement. Seulement le résultat de leur évaluation sera
@@ -761,8 +769,8 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \subsubsection{Facilité de fusion avec Coqdoc}
     Coq-tex reprend la même idée que Coqdoc dans le sens où ces deux outils
     ont un rôle de traduction : ils prennent un document d'entrée pour effectuer
-    une évaluation de certaines portions du code contenues dans celui-ci, et
-    générer un document mis en forme.
+    une évaluation de certaines portions du code contenues dans celui-ci, afin
+    de générer un document mis en forme.
 
     Ainsi ces deux outils ont des rôles de documentation du code source, et
     partagent d'importantes similarités dans leur fonctionnement. Une fusion
@@ -779,6 +787,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     Les sections précédentes on démontré le besoin de réécrire le logiciel
     Coqdoc. La majeure partie de mon stage s'est concentrée sur la conception
     et la réécriture de ce logiciel.
+
     Nous rappelons brièvement les objectifs introduit dans les sections
     précédentes concernant le logiciel produit pendant ce stage :
     \begin{itemize}
@@ -788,16 +797,20 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         lettrée.
       \item L'attention doit être portée sur une architecture extensible, qui
         permette aux développeurs de rajouter de nouveaux comportements
-        et d'enrichir le logiciel.
+        et d'enrichir le logiciel. \\
     \end{itemize}
 
     En arrivant dans ce stage, j'avais également plusieurs objectifs personnels
-    que je désirais réaliser dans ce stage. Tout d'abord, améliorer
+    que je désirais réaliser dans ce stage.
+
+    Tout d'abord, améliorer
     mes compétences dans le langage de programmation OCaml (une présentation
     du langage est incluse ci-après), qui est un langage dont les spécificités
     m'intéressent beaucoup.
+
     Une autre aspect était de découvrir les sujets de recherches au sein de
     l'équipe \pir, et de voir si les sujets explorés m'intéressaient.
+
     Enfin, le sujet de ce stage me permet également de valider les acquis de
     ma formation à travers la conception et l'écriture d'un logiciel complexe.
 
@@ -852,7 +865,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         faciliter les différentes phases de traitement.
       \item La phase d'évaluation permet d'obtenir la représentation finale
         des fichiers d'entrée : les commandes entrées dans Coqdoc (l'ajout
-        de symbole par exemple) sont évaluées, tandis que le code sera annoté
+        de symboles par exemple) sont évaluées, tandis que le code sera annoté
         et mis en forme.
       \item Un des choix suivant est de sauvegarder cette représentation
         finale sous forme de Vdoc : c'est un format de fichier qui détaille
@@ -891,7 +904,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de traitement du langage.
     Pour expliquer plus facilement le traitement du langage d'entrée, nous
     prenons un exemple fil rouge qui accompagnera notre explication de la
-    chaîne de traitement. Le \cref{finput} montre le fichier d'entrée
+    chaîne de traitement. Le listing \ref{finput} montre le fichier d'entrée
     donné à Coqdoc.
     \lstinputlisting[float,label=finput,caption=Fichier d'exemple Coq]{data/finput.v}
 
@@ -935,10 +948,11 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     Ceci est fait selon les délimiteurs respectifs de la documentation et
     des commentaires. Tout ce qui n'est pas contenu entre ces délimiteurs
     est considéré comme du code.
-    Chaque élément de code est ensuite découpé en phrases. Ce découpage est
-    fait selon le fait que chaque phrase Coq se termine par un point. Ce
-    découpage en phrases permet de simplifier le traitement sur chaque
-    instruction du fichier d'entrée.
+
+    Chaque élément de code est ensuite découpé en phrases.
+    Ce découpage est
+    fait selon le fait que chaque phrase Coq se termine par un point. Cela
+    permet de simplifier le traitement sur chaque instruction du fichier d'entrée.
     A la fin de cette phase de traitement, nous avons donc un ensemble
     de phrases, chacune appartenant à l'un des types suivants
     \begin{itemize}
@@ -974,7 +988,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         \begin{itemize}
             \item Titre
             \item Règle horizontale
-            \item Notation : notations spéciales pour le format de sortie
+            \item Notation : notations spéciales pour dépendant du format de sortie
             \item Code Verbatim : code à imprimer dans la documentation
             \item Contenu : représente les chaînes de caractère simples
         \end{itemize}
@@ -1023,8 +1037,8 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           du code. A partir d'un protocole existant, nous envoyons des séquences
           de code, et l'interprète est en mesure de renvoyer une version imprimée
           de manière jolie, avec les bonnes annotations syntaxique.
-          Parce que ce protocole fait l'interface entre l'interprète et d'autre
-          logiciel, il est facilement extensible, car nous avons accès à tous
+          Parce que ce protocole fait l'interface entre l'interprète et d'autres
+          logiciels, il est facilement extensible, car nous avons accès à tous
           les éléments du compilateur. La duplication de code est donc inexistante
           avec cette approche, et l'extension du protocole d'interaction entre
           l'interprète et les logiciels qui l'utilisent est bénéfique pour tous
@@ -1038,15 +1052,15 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de XML, ce qui permet de l'utiliser avec une grande variété d'outils.
     La liste suivante présente les requêtes de ce protocole :
     \begin{itemize}
-      \item evars, goals, hints, $\ldots$ : Commandes utilisées pour les preuves.
+      \item \texttt{evars}, \texttt{goals}, \texttt{hints}, $\ldots$ : Commandes utilisées pour les preuves.
       Coqdoc n'en aura pas l'utilité.
-      \item inloadpath : permet de savoir si un dossier est dans le chemin
+    \item \texttt{inloadpath} : permet de savoir si un dossier est dans le chemin
       de chargement de Coq
-      \item interp : Prends une phrase Coq sous forme de chaîne, et effectue
+    \item \texttt{interp} : Prends une phrase Coq sous forme de chaîne, et effectue
       l'interprétation de cette phrase.
-      \item rewind : permet de revenir en arrière dans l'exécution
-      \item status : donne des informations sur le status de l'interprète
-      \item quit : ferme le protocole d'interaction
+    \item \texttt{rewind} : permet de revenir en arrière dans l'exécution
+    \item \texttt{status} : donne des informations sur le status de l'interprète
+      \item \texttt{quit} : ferme le protocole d'interaction
     \end{itemize}
 
     %% Presentation generale des besoin dans les assistants de preuves
@@ -1069,7 +1083,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       Cette commande prends une chaîne de caractère, et renvoie une version
       structurée selon les différents éléments la composant : mots clefs,
       identifiants, nombres, etc $\ldots$. Elle doit de plus donner
-      les informations de mise en forme du code (par exemple, l'indentation).
+      les informations de mise en forme du code (par exemple, l'indentation). \\
     \end{itemize}
 
     Tandis que le développement de la commande \texttt{locate} a été rapide,
@@ -1171,7 +1185,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     Du coté Coqdoc, il est facile de gérer ce type de messages à partir du XML.
     En effet, en effectuant une seconde passe sur le contenu du message, nous
     obtenons une hiérarchie que nous retraduisons dans une version adaptée à
-    nos besoin. Cette nouvelle version comporte les types qui nous intéressent
+    nos besoins. Cette nouvelle version comporte les types qui nous intéressent
     du point de vue Coqdoc, avec une sémantique du code très proche de nos
     objectifs.
 
@@ -1204,7 +1218,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     L'approche choisie pour répondre à cette problématique est l'utilisation
     du patron de conception chaîne de responsabilité. Ce patron considère d'un
     coté un ensemble de commandes (nos règles), et de l'autre coté la donnée sur
-    laquelle les données doivent être appliquées.
+    laquelle les commandes doivent être appliquées.
 
     Chaque commande est en fait une fonction qui gère les deux cas suivants :
     \begin{itemize}
@@ -1241,20 +1255,20 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     coloration.  Sinon, la fonction \texttt{fallback} est appelée, pour
     appliquer le reste des traitement sur le type \texttt{C\_Id}.
     \subsubsection{Types décrivant le code}
-    Comme expliqué précédemment, le type fournit par l'interprète est trop riche
+    Comme expliqué précédemment, le type fourni par l'interprète est trop riche
     pour notre utilisation. Nous procédons donc à une phrase de traduction vers
     un type plus adapté à nos attentes, décrivant uniquement les différents types
     de constructions du langage Coq. La liste suivante détaille ces types :
     \begin{itemize}
-      \item Keyword : ce type décrit les différents mots clefs du langage Coq
-      \item Ident : ce type décrit les identifiants
-      \item Literal : tout ce qui est valeurs littérales (entiers, chaînes de
+      \item \texttt{Keyword} : ce type décrit les différents mots clefs du langage Coq
+      \item \texttt{Ident} : ce type décrit les identifiants
+      \item \texttt{Literal} : tout ce qui est valeurs littérales (entiers, chaînes de
         caractères, etc $\ldots$)
-      \item Tactic : ce type décrit des constructions particulière au langage
+      \item \texttt{Tactic} : ce type décrit des constructions particulière au langage
         Coq qui sont les tactiques, utilisées dans les preuves
-      \item Symbol : On définit également des règles spécifiques pour les symboles
+      \item \texttt{Symbol} : On définit également des règles spécifiques pour les symboles
         imprimés(tel que $\leftarrow$)
-      \item NoFormat : Enfin, tout ce qui n'a pas de règle particulière, ce type
+      \item \texttt{NoFormat} : Enfin, tout ce qui n'a pas de règle particulière, ce type
         ne recevra pas de mise en forme particulière lors de l'impression.
     \end{itemize}
     On est ainsi en mesure d'obtenir une coloration syntaxique simple à
@@ -1276,7 +1290,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     On est ensuite en mesure de vérifier s'il appartient bien au projet courant
     (on générera ainsi un lien hypertexte), s'il appartient à la bibliothèque
     standard (dans ce cas là, on génère un lien vers la documentation de
-    cette bibliothèque), et sinon, il appartient à aucune bibliothèque,
+    cette bibliothèque), et sinon, il n'appartient à aucune bibliothèque,
     et dans ce cas là on ne génère rien.
     \begin{figure}
       \fbox{
@@ -1393,11 +1407,23 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     Je pense que l'absence de finalisation du logiciel est due à l'importante
     phase d'expérimentations faite au cours de ce stage, qui a été très
     coûteuse en temps. La \cref{results} montre les résultats obtenus à l'issue
-    de ce stage, qui démontrent l'utilisabilité du logiciel.
+    de ce stage, qui démontrent l'utilisabilité du logiciel. J'estime que le temps
+    manquant pour finir ce logiciel était d'approximativement d'un mois, à
+    l'issue duquel Coqdoc aurait pu être pleinement intégré.
+
+    Cette version préliminaire offre déjà des améliorations par rapport à
+    l'ancien Coqdoc. Tout d'abord, le nouveau logiciel n'utilise plus les
+    fichiers \texttt{.glob} pour traiter les identifiants, étant capable de
+    fournir encore plus d'informations sur ceux ci que l'ancien logiciel.
+
+    Également, la gestion des notations a été enrichie pour pouvoir transformer
+    les notations définies par l'utilisateur en une commande spécifique au
+    format de sortie.
 
     \subsection{Extensibilité du logiciel}
     L'autre objectif annoncé de ce stage était de réaliser un logiciel
-    extensible. Nous considérons cet objectif atteint, la \cref{coqtex} mettant
+    extensible. Nous considérons cet objectif atteint, la \cref{coqtex}
+    qui détaille l'ajout de Coq-tex dans Coqdoc mettant
     en évidence qu'il est très facile de rajouter des fonctionnalités à ce
     logiciel.
 
@@ -1413,8 +1439,8 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de conception chaîne de contrôle rend également très simple l'ajout de
     nouvelles règles de traitement sur le code.
 
-    Enfin, pour ce qui est de la génération de documents, il est le rajout
-    d'un module de générant un nouveau format de documentation est simple à
+    Enfin, pour ce qui est de la génération de documents, le rajout
+    d'un nouveau module spécifiant un nouveau format de documentation est simple à
     mettre en place.
 
     \subsection{Perspectives d'évolution du logiciel}
