@@ -10,6 +10,8 @@
 \usepackage[french]{cleveref}
 \usepackage{parskip}
 \usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{minitoc}
 
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -39,6 +41,13 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
 \date{FIXME}
 
 \begin{document}
+
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+\renewcommand{\labelitemiii}{$\diamond$}
+\renewcommand{\labelitemiv}{$\ast$}
+
+\dominitoc
 \maketitle
 \thispagestyle{empty}
 
@@ -784,7 +793,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 
     En arrivant dans ce stage, j'avais également plusieurs objectifs personnels
     que je désirais réaliser dans ce stage. Tout d'abord, améliorer
-    mes compétences dans le langage de programmation Ocaml (une présentation
+    mes compétences dans le langage de programmation OCaml (une présentation
     du langage est incluse ci-après), qui est un langage dont les spécificités
     m'intéressent beaucoup.
     Une autre aspect était de découvrir les sujets de recherches au sein de
@@ -805,17 +814,17 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     suivante détaille les différents avantages à utiliser OCaml :
     \begin{itemize}
       \item \textbf{Langage du compilateur Coq} : \\
-        Coq est principalement codé en OCaml. Coq et Ocaml sont des langages
+        Coq est principalement codé en OCaml. Coq et OCaml sont des langages
         de programmations partageant d'important traits communs : ils sont tout
         deux du paradigme fonctionnel et sont statiquement typés. L'utilisation
         d'OCaml permet d'apporter des garanties sur la validité du compilateur
         Coq, et le fait que les deux langages soient proche facilite le
         développement de Coq.
       \item \textbf{Écriture de compilateurs} : \\
-        Ocaml est particulièrement adapté pour l'écriture de compilateurs.
+        OCaml est particulièrement adapté pour l'écriture de compilateurs.
         Coqdoc peut être considéré comme un compilateur car il passe un fichier
         en représentation abstraite, procède à une évaluation et génère un
-        document prêt à être utilisé. Le typage fort de Ocaml, le haut niveau
+        document prêt à être utilisé. Le typage fort de OCaml, le haut niveau
         d'abstraction et l'aspect fonctionnel du langage facilite grandement
         l'écriture de compilateurs.
       \item \textbf{Limitation des dépendances, et facilité d'intégration} : \\
@@ -823,7 +832,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
         du projet, rajouter des dépendances à d'autres logiciels (par exemple,
         d'autres compilateurs de langage) n'est pas une bonne chose, tant pour
         la portabilité que l'évolution de la suite d'outils Coq. Choisir
-        Ocaml et les outils qui lui sont liés facilitent le processus
+        OCaml et les outils qui lui sont liés facilitent le processus
         d'intégration de Coqdoc au sein de Coq
     \end{itemize}
     %% FIXME ?
@@ -913,7 +922,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
       transformation inverse, pour revenir à un document très proche du
       document source.
       \item[] \textbf{Arbre de syntaxe abstraite} :\\
-      L'arbre de syntaxe abstraite est la réprésentation choisie pour appliquer
+      L'arbre de syntaxe abstraite est la représentation choisie pour appliquer
       des traitements sur le document d'entrée. Le haut niveau d'abstraction
       de cette structure de donnée permet de facilement modifier ses différent
       éléments, ceci afin de pouvoir effectuer une traduction simple vers la
@@ -1006,7 +1015,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
           \textit{pretty-printer} pour imprimer le code de manière lisible.
           Cela impose de traiter un langage très complexe (composé d'un nombre
           important de mots clefs et de constructions syntaxiques), et de
-          complexifier de manière importante le logiciel. Ecrire un module
+          complexifier de manière importante le logiciel. Écrire un module
           d'analyse du langage Coq insère également de la redondance dans le
           projet, puisque le compilateur Coq effectue déjà cette analyse. Cette
           approche était celle de l'ancien Coqdoc.
@@ -1360,7 +1369,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
   \section{Interprétation et critique des résultats}
     \subsection{Version préliminaire de Coqdoc stable}
     À l'issue de ce stage, nous avons une version préliminaire de Coqdoc
-    fonctionelle. L'ensemble des caractéristiques principales du logiciel sont
+    fonctionnelle. L'ensemble des caractéristiques principales du logiciel sont
     implémentées, et la chaîne de traitement est bien définie et finalisée.
     Le logiciel est en mesure de générer des documents dans plusieurs formats,
     et gère les formats d'entrée de Coqdoc et de Coq-tex.
@@ -1381,13 +1390,13 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
 
     Ces deux développements sont d'importance mineure et sont facile à
     implémenter pour avoir un logiciel complètement finalisé.
-    Je pense que l'absence de finalisation du logiciel est dûe à l'importante
+    Je pense que l'absence de finalisation du logiciel est due à l'importante
     phase d'expérimentations faite au cours de ce stage, qui a été très
     coûteuse en temps. La \cref{results} montre les résultats obtenus à l'issue
     de ce stage, qui démontrent l'utilisabilité du logiciel.
 
     \subsection{Extensibilité du logiciel}
-    L'autre objectif anoncé de ce stage était de réaliser un logiciel
+    L'autre objectif annoncé de ce stage était de réaliser un logiciel
     extensible. Nous considérons cet objectif atteint, la \cref{coqtex} mettant
     en évidence qu'il est très facile de rajouter des fonctionnalités à ce
     logiciel.
@@ -1411,13 +1420,13 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \subsection{Perspectives d'évolution du logiciel}
     La conception du logiciel permet de proposer un grand nombre de perspectives
     d'évolution, et ce, à plusieurs niveaux. La liste suivante détailles les
-    principales idées énoncées au cours de ce stage, et avance d'autre possibilitées.
+    principales idées énoncées au cours de ce stage, et avance d'autre possibilités.
     \begin{itemize}
       \item Tutoriaux interactifs : grâce à l'utilisation de Javascript,
         il serait possible de construire des documents interactifs.
         L'utilisateur pourrait ainsi apprendre à se servir de Coq, ou rejouer
         pas à pas des démonstrations de preuves.
-      \item Redaction de livres sur Coq : avec quelques ajustement, Coqdoc
+      \item Rédaction de livres sur Coq : avec quelques ajustement, Coqdoc
         ferait un bon support pour la rédaction de livres dont le sujet est
         Coq. Grâce à l'extensibilité sur les formats de sortie, il serait
         possible de générer de tels documents dans une grande variété de
@@ -1435,19 +1444,19 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     L'extension de ce protocole d'interaction est simple, et tous les outils
     qui l'utilisent peuvent en bénéficier.
 
-    Ce protocole d'interaction ne se limte pas forcément à la génération de
+    Ce protocole d'interaction ne se limite pas forcément à la génération de
     documents, et il serait également possible de mettre en place des outils
     dédiés à l'analyse des performances, les tests unitaires ou encore la
     réécriture de code source.
 
 \chapter{Conclusion générale}
 Ce stage fut pour moi une réussite sur de nombreux plans. J'ai pris plaisir
-à travailler au sein de l'équipe \pir, qui a su m'accueillir chaleuresement, et
-m'offrir un très bon encradement au cours de ces 5 mois.
+à travailler au sein de l'équipe \pir, qui a su m'accueillir chaleureusement, et
+m'offrir un très bon encadrement au cours de ces 5 mois.
 
 Tout d'abord, concernant le traitement du langage d'entrée, cela m'a permis
 de valider mes acquis en analyse syntaxique et lexicale, et plus généralement
-en traitement du lanage. Cette première partie est implémentée et fonctionnelle
+en traitement du langage. Cette première partie est implémentée et fonctionnelle
 et, elle est facilement extensible pour de nouveaux formats d'entrée.
 
 L'interaction avec l'interprète m'a mis face à des difficultés auxquelles j'ai
@@ -1458,8 +1467,8 @@ m'a permis de concevoir une architecture de traitement à la fois générique et
 facilement extensible, tout en offrant des garanties de solidité pour le
 programmeur.
 
-Enfin, la génération de documents m'a amené à structuer une représentation
-intérmédiaire dans Coqdoc de façon à ce qu'il soit facile de générer plusieurs
+Enfin, la génération de documents m'a amené à structurer une représentation
+intermédiaire dans Coqdoc de façon à ce qu'il soit facile de générer plusieurs
 types de documents de sortie, chacun avec leurs spécificités. Cette représentation
 est ainsi capable de s'abstraire des particularités de chaque format de sortie.
 
