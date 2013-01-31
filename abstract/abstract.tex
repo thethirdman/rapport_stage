@@ -1,0 +1,145 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{xspace}
+\usepackage{tikz}
+
+\begin{document}
+
+\newcommand{\pir}[0]{\textbf{$\pi r^2$}\xspace}
+
+\input{title.tex}
+
+\section{The company}
+\subsection{General presentation}
+INRIA stands for the National institute of research in computer science and
+automatics. It is the main research organism about computer science in France.
+The institute has for vocation to undertake applied and fundamental research
+in the domain of information and communication sciences and technologies (ICST).
+
+INRIA is a public institute under the leader of the French ministry of research
+and the ministry of economy.
+
+The institute has collaborations with many industrial actors, and is also
+a start-up creator, which commercialize technologies developed at INRIA.
+It also has many international partners, with multinational companies and
+foreign universities. It is also active in many international organizations
+such as ISO, W3C or IETF.
+
+\section{The service}
+\subsection{The proof program and systems laboratory}
+The PPS laboratory brings together researchers coming from computer science and
+mathematical logic. The laboratory is focused around the idea that logic
+and mathematical fields can improve computer science, and that reciprocally,
+computer science can advance research in mathematics.
+
+The main research work led by PPS revolves around the Curry-Howard correspondence
+between programs and proofs.
+
+\subsection{The $\pi r^2$ research team}
+
+The \pir research team is made of scientists of many scientific instances~: PPS,
+INRIA and Paris-Diderot university. Its research topics are the following~:
+\begin{itemize}
+\item A fundamental research around the correspondence between proofs and programs
+\item A theoretical research around the formalism that underlies the Coq proof assistant
+\item An implementation field with the development of Coq, especially in the view of Coq as dependently-typed programming language
+\end{itemize}
+The Coq proof assistant is a software which checks proofs and extracts
+certified programs from these proofs. It is used for mathematical proofs, certification
+of critical software, and the fundamental research in computer science.
+
+\section{Existing state of affairs}
+
+The Coq project is made of several tools revolving around the Coq compiler, which
+is both a proof assistant and a program compiler. One of the tools is Coqdoc,
+a documentation software.
+
+Coqdoc allows the programmer to document Coq source files in order to ease the
+development of a project, the documentation describing its behavior. This
+documentation is included in the source files, making it easy to update.
+Coqdoc's role is to translate the source files in order to extract this documentation
+and generate a more human readable format, such as a PDF or web-pages. Coqdoc provides
+reference manuals and development documentation to the end-user.
+
+\section{Subject of the internship}
+
+The internship subject was to fully rewrite Coqdoc in order to make a better version
+of the existing software. Indeed, the previous version has several flaws, motivating a full rewrite :
+\begin{itemize}
+\item Maintainability difficulty : because of its internal design, Coqdoc is hard
+to maintain. One of the goals for this internship is to design a well written software
+which is easy to modify and maintaining.
+\item Extensibility : the current version of Coqdoc is hard to extend for other
+use cases because of its strict design.
+\item Redundancy of software elements : Coq's language processing is done in many
+  parts inside the Coq project. A full rewrite would allow to reuse thoses
+  modules, removing the one included in the previous version of Coqdoc
+\end{itemize}
+
+To summarize, the goal of this internship is to make a new documentation tool which is
+both simple and extensible.
+\section{Timeline of the internship}
+The following chart details the different phases of the internship. The software
+design revolves around a 3 step processing : a front-end reading the Coq's
+source files and translating into an intermediate representation, an
+interpretation phase where this representation is translated, and finally a
+back-end to generate the documentation. The interpretation phase is based
+around an interaction protocol with the compiler, which was very complex to
+develop.
+\newcommand{\start}[3]
+{
+  \node[text width=3cm] at (0 - 1,#2) {#1};
+  \node at (0,#2) [circle, fill=black] {};
+  \node[text width=10cm] at (0 + 6, #2) {#3};
+}
+
+\newcommand{\pt}[3]{
+  \node[text width=3cm] at (0 - 1,-#2) {#1};
+  \node at (0,-#2) [circle, fill=black] {};
+  \node[text width=10cm] at (0 + 6, -#2) {#3};
+
+  \draw (0, -#2) -- (0,0);
+}
+
+\begin{tikzpicture}
+\start{Week 1 - 2}{0}{
+Analysis of the existing state of affairs, conception of the software design};
+\pt{Week 2 - 4}{2}{Writing of the front-end, language processing into an
+intermediate representation};
+\pt{Week 4 - 6}{4}{Refinement of the intermediate generic representation};
+\pt{Week 6 - 10}{6}{Development of the interaction protocol};
+\pt{Week 10 - 12}{8}{Development of the evaluation module processing the
+ intermediate representation};
+\pt{Week 12 - 14}{10}{Development of the back-end}
+\pt{Week 14 - 16}{12}{Finalization of the software and bug-fixes}
+
+
+\end{tikzpicture}
+\clearpage
+\section{Internship feedback}
+This internship was very enjoyable for many reasons. I learned a lot both
+technically and theoretically, on the aspects of functional programming and
+software development. The other works done in the laboratory are very interesting,
+and opened my vision on other research and work topics in the domain of computer
+science
+
+I met a lot of interesting people who provided me with a lot of insight on
+my future career and professional orientation after EPITA.
+
+\section{Skills acquired}
+The following list summarizes the skills I acquired or improved during this internship.
+\begin{itemize}
+\item Learn a lot about software design
+\item Development of complex applications
+\item Improvements on the Ocaml programming language
+\item Better understanding of language processing
+\end{itemize}
+\section{Conclusion}
+
+This internship was a success on many aspects, and I enjoyed it. The team
+was very welcoming and I appreciated a lot the atmosphere in the laboratory.
+I improved a lot of skills during the time spent at INRIA, and discovered the
+research subjects of the laboratory in which I worked.
+\end{document}
