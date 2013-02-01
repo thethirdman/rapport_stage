@@ -3,6 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 \usetheme{Amsterdam}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
 
 \newcommand{\email}[0]{francois.ripault@epita.fr}
 
@@ -40,16 +42,32 @@
 \end{frame}
 
 \section{Introduction}
-  \begin{tframe}{What is Coqdoc ?}
-  \begin{itemize}[<+->]
-  \end{itemize}
-  \end{tframe}
+\begin{frame}
+  \begin{columns}[2]
 
-  \begin{tframe}{Why a new Coqdoc ?}
-  \end{tframe}
+    \begin{column}{0.5\textwidth}
+      What is Coqdoc ?
+      \begin{itemize}
+        \item Documentation tool of Coq
+        \item Point2
+        \item Point3
+      \end{itemize}
+    \end{column}
+
+    \begin{column}{0.5\textwidth}
+      Why a new Coqdoc ?
+      \begin{itemize}[<+->]
+        \item Coqdoc is hard to maintain
+        \item Lack of extensibility
+      \end{itemize}
+    \end{column}
+
+  \end{columns}
+\end{frame}
 
 \section{Coqdoc-ng's architecture}
   \begin{frame}{Coqdoc-ng's architecture}
+    \input{architecture.tex}
   \end{frame}
 
   \begin{tframe}{Frontend}
