@@ -1,0 +1,88 @@
+\documentclass[compress]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usetheme{Amsterdam}
+
+\newcommand{\email}[0]{francois.ripault@epita.fr}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+  \begin{center}
+  \usebeamerfont{title}\inserttitle\par
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+    \bigskip
+    \usebeamerfont{author}\insertauthor\par
+    \scriptsize \texttt{\email} \par
+    \usebeamerfont{institute}\insertinstitute\par
+    \vfill
+    \usebeamerfont{date}\insertdate\par
+    %\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+    \end{center}
+}
+
+\newenvironment{tframe}[1]{
+  \subsection{#1}
+  \begin{frame}{#1}
+  }{
+  \end{frame}
+  }
+
+%% FIXME: title
+\title{Presenting the new Coqdoc}
+
+\author{François Ripault}
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Introduction}
+  \begin{tframe}{What is Coqdoc ?}
+  \begin{itemize}[<+->]
+  \end{itemize}
+  \end{tframe}
+
+  \begin{tframe}{Why a new Coqdoc ?}
+  \end{tframe}
+
+\section{Coqdoc-ng's architecture}
+  \begin{frame}{Coqdoc-ng's architecture}
+  \end{frame}
+
+  \begin{tframe}{Frontend}
+  \end{tframe}
+
+  \begin{tframe}{Evaluation}
+  \end{tframe}
+
+
+  \begin{tframe}{Interaction with Coqtop}
+  \end{tframe}
+
+  \begin{tframe}{New commands : Locate and Prettyprint}
+  \end{tframe}
+
+  \begin{tframe}{An imperfect solution for Prettyprint}
+  \end{tframe}
+
+  \begin{tframe}{Backend}
+  \end{tframe}
+
+\section{Demo}
+  \begin{tframe}{Demo}
+  \end{tframe}
+
+\section{Remaining work}
+  \begin{tframe}{What's left to do}
+  \end{tframe}
+  \begin{tframe}{New possibilities for Coqdoc}
+  \end{tframe}
+
+\section{Conclusion}
+  \begin{tframe}{Conclusion}
+  \end{tframe}
+
+\end{document}
