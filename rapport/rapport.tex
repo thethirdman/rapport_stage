@@ -325,7 +325,7 @@ commentstyle=\color{dkgreen}, basicstyle=\ttfamily\footnotesize}
     L'organigramme \cref{orga} présente les différents services de l'INRIA ainsi
     que leur directeurs respectifs
     \begin{figure}
-    \includegraphics[scale=0.85]{data/organigrammeinria.pdf}
+    \includegraphics[scale=0.85]{../data/organigrammeinria.pdf}
     \caption{Organigramme des différents services de l'INRIA\label{orga}}
     \end{figure}
 
@@ -531,14 +531,14 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     généré par coqdoc.
     \begin{figure}
       \lstinputlisting
-        {data/source1.v}
+        {../data/source1.v}
         \caption{Exemple de fichier d'entrée donné à Coqdoc\label{source1}}
     \end{figure}
 
     \begin{figure}
 
       \fbox{
-      \includegraphics[trim=0mm 0mm 2cm 0cm,clip=true, width=\textwidth]{data/rendu1.png}}
+      \includegraphics[trim=0mm 0mm 2cm 0cm,clip=true, width=\textwidth]{../data/rendu1.png}}
       \caption{Exemple de rendu généré par Coqdoc à partir de la \cref{source1}}
       \label{fig1}
     \end{figure}
@@ -607,7 +607,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     \end{itemize}
     Le listing \ref{source2} donne un exemple de ces règles de mise en forme
     dans le fichier d'entrée
-    \lstinputlisting[label=source2,caption=Exemple des règles de mise en forme de Coqdoc]{data/source2.v}
+    \lstinputlisting[label=source2,caption=Exemple des règles de mise en forme de Coqdoc]{../data/source2.v}
 
     \subsubsection{Format des fichiers de sortie :}
     Le rôle de Coqdoc est d'effectuer une traduction du format d'entrée
@@ -891,7 +891,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     d'un document par Coqdoc.
     %% FIXME: détailler les sous modules d'impression sur le graphe
     \begin{figure}
-      \fbox{\includegraphics[scale=0.5]{data/devchain.png}}
+      \fbox{\includegraphics[scale=0.5]{../data/devchain.png}}
       \caption{Représentation de la chaîne de compilation de Coqdoc}
       \label{fig.devchain}
     \end{figure}
@@ -906,7 +906,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     prenons un exemple fil rouge qui accompagnera notre explication de la
     chaîne de traitement. Le listing \ref{finput} montre le fichier d'entrée
     donné à Coqdoc.
-    \lstinputlisting[float,label=finput,caption=Fichier d'exemple Coq]{data/finput.v}
+    \lstinputlisting[float,label=finput,caption=Fichier d'exemple Coq]{../data/finput.v}
 
     \subsubsection{Traitement du langage}
     \label{trait}
@@ -968,7 +968,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     de caractères stockées dans le noeud de l'arbre de syntaxe abstrait.
     \begin{figure}
       \fbox{
-      \includegraphics[scale=0.5]{data/ast1.png}}
+      \includegraphics[scale=0.5]{../data/ast1.png}}
       \caption{Première représentation abstraite}
       \label{ast1}
     \end{figure}
@@ -1015,7 +1015,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     La \cref{ast2} détaille par exemple la hiérarchie obtenue pour la
    documentation après traitement de celle-ci
     \begin{figure}
-      \includegraphics[scale=0.45]{data/ast2.png}
+      \includegraphics[scale=0.45]{../data/ast2.png}
       \caption{Traitement de la documentation}
       \label{ast2}
     \end{figure}
@@ -1238,7 +1238,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     (décrivant le traitement), et un type (sur lequel le traitement s'applique).
     Le listing \ref{addrule} décrit l'ajout d'une règle sur le code.
 
-    \lstinputlisting[numbers=left,label=addrule,caption=Exemple d'ajout de règle]{data/addrule.ml}
+    \lstinputlisting[numbers=left,label=addrule,caption=Exemple d'ajout de règle]{../data/addrule.ml}
 
     La ligne 1 appelle tout d'abord la fonction \texttt{add\_rule} avec le type
     \texttt{C\_Id} qui correspond au types des identifiants dans le code à traiter.
@@ -1294,7 +1294,7 @@ résultats que nous avons obtenus à l'issue de ce stage de fin de tronc commun.
     et dans ce cas là on ne génère rien.
     \begin{figure}
       \fbox{
-      \includegraphics[scale=0.5]{data/id1.png}}
+      \includegraphics[scale=0.5]{../data/id1.png}}
       \caption{Chaîne de traitement des identifiants\label{id1}}
     \end{figure}
     \clearpage
