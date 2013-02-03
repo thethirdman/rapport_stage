@@ -126,8 +126,8 @@
   \begin{tframe}{Interaction with Coqtop}
     Why interact with Coqtop ?
     \begin{itemize}[<+->]
-      \item Xml protocol (already used by CoqIDE)
       \item Remove code processing in Coqdoc
+      \item Xml protocol (already used by CoqIDE)
       \item Easy to add new mechanisms
     \end{itemize}
     \vfill
@@ -144,7 +144,7 @@
     \begin{itemize}
       \item Locate : locate an identifier
         \begin{itemize}
-          \item Generate hyperlinks
+          \item Generate hyperlinks between different modules/files
           \item Easy to do
         \end{itemize}
         \vfill
@@ -158,47 +158,98 @@
   \end{tframe}
 
   \begin{tframe}{An imperfect solution for Prettyprint}
+    Method :
     \begin{itemize}
       \item Use Coq's \texttt{Printing} module
       \item Annotate the output with tags
-      \item Semantic and indentation obtained
+      \item Semantic kept and indentation obtained
+    \end{itemize}
+    Implementation :
+    \begin{itemize}
+      \item Make tags besed on AST types (VernacExpr and ConstrExpr)
+      \item Each node translation is surrounded with a tag function
+      \item Generates Xml content carrying the tags
     \end{itemize}
   \end{tframe}
-  %FIXME
-  \begin{frame}{Code processing diagram}
-    \resizebox{\textwidth}{!}{\input{../rapport/xmlpp}}
-  \end{frame}
 
   \begin{tframe}{Processing rules for the code}
-  \end{tframe}
-
-  \begin{tframe}{Identifiers}
+    Main tasks :
+    \begin{itemize}
+      \item Annotate code for syntactic coloration
+      \item Apply printing rules
+      \item Process identifiers
+    \end{itemize}
+    \vfill
+    Chain of control design pattern :
+    \begin{itemize}
+      \item Easy to add rules
+      \item Extensible
+      \item Different type of rules on a same node
+    \end{itemize}
+    Output : rich type representing code
   \end{tframe}
 
   \begin{frame}{Code type}
+    Three main code types :
+    \begin{itemize}
+      \item Formatting : keywords, literals, tactics, $\ldots$
+      \item Identifiers : contain hyperlinks
+      \item No format
+    \end{itemize}
   \end{frame}
 
-  \begin{tframe}{Backend}
+  \begin{tframe}{Identifiers}
+    Identifier processing chain :
+    \begin{itemize}
+      \item Locate each identifier
+      \item Ignore undeclared identifiers
+      \item Special cases for standard library or external library
+      \item Generate a link type
+    \end{itemize}
+  \end{tframe}
+
+  \begin{tframe}{Back-end}
+    Back-end structure
+    \begin{itemize}
+      \item Central module in charge of printing
+      \item Specification modules for each output type
+        \begin{itemize}
+          \item Printing functions for each type (documentation and code)
+          \item Hyperlink generation function
+          \item Index generation functions
+        \end{itemize}
+    \end{itemize}
   \end{tframe}
 
 \section{Extending Coqdoc : Coq-tex}
-  \begin{frame}{Extending Coqdoc : Coq-tex}
+  \begin{tframe}{Extending Coqdoc : Coq-tex}
     \begin{itemize}[<+->]
       \item Add a new frontend
       \item Process queries
       \item Use the LaTeX backend
-      \item Logical constraints on input -> output type
+      \item Add Coq-tex options to Coqdoc
     \end{itemize}
-  \end{frame}
+  \end{tframe}
 
 \section{Demo}
   \begin{tframe}{Demo}
+    \begin{center}
+      Demo
+    \end{center}
   \end{tframe}
 
 \section{Remaining work}
   \begin{tframe}{What's left to do}
+    \begin{itemize}
+      \item Bugfixes
+      \item Retro-compatibility (mostly options)
+      \item Clean errors
+    \end{itemize}
   \end{tframe}
   \begin{tframe}{New possibilities for Coqdoc}
+    \begin{itemize}
+      \item FIXME
+    \end{itemize}
   \end{tframe}
 
 \section{Conclusion}
