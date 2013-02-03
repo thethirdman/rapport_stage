@@ -4,7 +4,7 @@
 \usepackage[french]{babel}
 \usetheme{Amsterdam}
 \usepackage{tikz}
-\usetikzlibrary{shapes}
+\usetikzlibrary{shapes,arrows}
 
 \newcommand{\email}[0]{francois.ripault@epita.fr}
 
@@ -41,16 +41,15 @@
 \titlepage
 \end{frame}
 
-\section{Introduction}
-\begin{frame}
+\begin{frame}{Introduction}
   \begin{columns}[2]
 
     \begin{column}{0.5\textwidth}
       What is Coqdoc ?
       \begin{itemize}
-        \item Documentation tool of Coq
-        \item Point2
-        \item Point3
+        \item Documentation tool for Coq
+        \item Many possible use cases
+        \item We would like to do more with it
       \end{itemize}
     \end{column}
 
@@ -59,35 +58,138 @@
       \begin{itemize}[<+->]
         \item Coqdoc is hard to maintain
         \item Lack of extensibility
+        \item Better integration of the tool
       \end{itemize}
     \end{column}
 
   \end{columns}
 \end{frame}
 
+\begin{frame}
+  \tableofcontents
+\end{frame}
+
 \section{Coqdoc-ng's architecture}
   \begin{frame}{Coqdoc-ng's architecture}
+    %% FIME : pointe flèches
     \input{architecture.tex}
   \end{frame}
 
-  \begin{tframe}{Frontend}
+  \begin{tframe}{Front-end}
+    Role :
+    \begin{itemize}
+      \item Translation into an abstract representation
+      \item Multiple parsers and lexers
+      \item Selected parser depends on the input file/option
+    \end{itemize}
+
+    \vfill
+    Two processing phases :
+    \begin{enumerate}
+      \item Separation between comments, documentation and code
+      \item Documentation processing
+    \end{enumerate}
   \end{tframe}
+  \begin{frame}{Front-end}
+      Abstract representation  :
+      \begin{itemize}
+        \item Comments : \texttt{string}
+        \item Code : \texttt{string} (for now $\ldots$)
+        \item Documentation : \\
+          \begin{itemize}
+            \item Simple elements (content, title, horizontal rule)
+            \item Recursive elements (lists, emphasis)
+            \item Elements subject to evaluation (query, printing rule)
+          \end{itemize}
+      \end{itemize}
+    \end{frame}
 
   \begin{tframe}{Evaluation}
+    Translation for each type :
+    \begin{itemize}
+      \item Comments : \\
+         \begin{itemize}
+           \item Treat begin/end hide/show : set a global state
+           \item Remove everything
+        \end{itemize}
+      \item Documentation : Translate elements subject to evaluation \\
+        \begin{itemize}
+          \item Query : apply the function
+          \item Printing rule : set a new printing rule in the global state
+          \item Apply the printing rules on the rest
+        \end{itemize}
+      \item Code : interaction with Coqtop
+    \end{itemize}
   \end{tframe}
 
 
   \begin{tframe}{Interaction with Coqtop}
+    Why interact with Coqtop ?
+    \begin{itemize}[<+->]
+      \item Xml protocol (already used by CoqIDE)
+      \item Remove code processing in Coqdoc
+      \item Easy to add new mechanisms
+    \end{itemize}
+    \vfill
+    Objectives for code processing :
+    \begin{itemize}
+      \item Indentation
+      \item Syntactic coloration
+      \item Identifier processing
+      \item Notations processing %%FIXME
+    \end{itemize}
   \end{tframe}
 
   \begin{tframe}{New commands : Locate and Prettyprint}
+    \begin{itemize}
+      \item Locate : locate an identifier
+        \begin{itemize}
+          \item Generate hyperlinks
+          \item Easy to do
+        \end{itemize}
+        \vfill
+      \item Prettyprint : indents and annotates code
+        \begin{itemize}
+          \item Coqtop indents and tags each element
+          \item Coqdoc translates the tags
+          \item Hard to do : no CST
+        \end{itemize}
+    \end{itemize}
   \end{tframe}
 
   \begin{tframe}{An imperfect solution for Prettyprint}
+    \begin{itemize}
+      \item Use Coq's \texttt{Printing} module
+      \item Annotate the output with tags
+      \item Semantic and indentation obtained
+    \end{itemize}
   \end{tframe}
+  %FIXME
+  \begin{frame}{Code processing diagram}
+    \resizebox{\textwidth}{!}{\input{../rapport/xmlpp}}
+  \end{frame}
+
+  \begin{tframe}{Processing rules for the code}
+  \end{tframe}
+
+  \begin{tframe}{Identifiers}
+  \end{tframe}
+
+  \begin{frame}{Code type}
+  \end{frame}
 
   \begin{tframe}{Backend}
   \end{tframe}
+
+\section{Extending Coqdoc : Coq-tex}
+  \begin{frame}{Extending Coqdoc : Coq-tex}
+    \begin{itemize}[<+->]
+      \item Add a new frontend
+      \item Process queries
+      \item Use the LaTeX backend
+      \item Logical constraints on input -> output type
+    \end{itemize}
+  \end{frame}
 
 \section{Demo}
   \begin{tframe}{Demo}
