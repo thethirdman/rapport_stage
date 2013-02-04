@@ -3,10 +3,19 @@
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 \usetheme{Amsterdam}
+
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{color}
+
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows}
 
+\lstset{language=caml, frame=single, basicstyle=\ttfamily\scriptsize, commentstyle=\color{dkgreen}}
+
 \newcommand{\email}[0]{francois.ripault@epita.fr}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
 
 \defbeamertemplate*{title page}{customized}[1][]
 {
@@ -20,8 +29,7 @@
     \vfill
     \usebeamerfont{date}\insertdate\par
     %\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
-    \end{center}
-}
+    \end{center} }
 
 \newenvironment{tframe}[1]{
   \subsection{#1}
@@ -66,7 +74,10 @@
 \end{frame}
 
 \begin{frame}
-  \tableofcontents
+  \begin{multicols}{2}
+    \small
+    \tableofcontents
+  \end{multicols}
 \end{frame}
 
 \section{Coqdoc-ng's architecture}
@@ -104,23 +115,33 @@
       \end{itemize}
     \end{frame}
 
-  \begin{tframe}{Evaluation}
+    \subsection{Evaluation}
+    \begin{frame}[containsverbatim]{Evaluation}
     Translation for each type :
     \begin{itemize}
       \item Comments : \\
          \begin{itemize}
-           \item Treat begin/end hide/show : set a global state
-           \item Remove everything
+           \item Treat show commands : set a global state
+             \begin{lstlisting}
+(* begin hide *)
+  some code ...
+(* end hide*)
+\end{lstlisting}
+           \item Remove every comment
         \end{itemize}
       \item Documentation : Translate elements subject to evaluation \\
         \begin{itemize}
           \item Query : apply the function
+\begin{lstlisting}
+(** @query{some,arguments} *)
+\end{lstlisting}
+
           \item Printing rule : set a new printing rule in the global state
           \item Apply the printing rules on the rest
         \end{itemize}
       \item Code : interaction with Coqtop
     \end{itemize}
-  \end{tframe}
+  \end{frame}
 
 
   \begin{tframe}{Interaction with Coqtop}
@@ -140,24 +161,28 @@
     \end{itemize}
   \end{tframe}
 
-  \begin{tframe}{New commands : Locate and Prettyprint}
+  \begin{tframe}{New commands : \texttt{locate} and \texttt{prettyprint}}
     \begin{itemize}
-      \item Locate : locate an identifier
+      \item \texttt{locate} : locates an identifier
         \begin{itemize}
-          \item Generate hyperlinks between different modules/files
-          \item Easy to do
+          \item From a name, returns its ``absolute'' name
+          \item Generate hyperlinks between different modules being documented
+          \item Easy to implement
         \end{itemize}
         \vfill
-      \item Prettyprint : indents and annotates code
+      \item \texttt{prettyprint} : indents and annotates code
         \begin{itemize}
           \item Coqtop indents and tags each element
-          \item Coqdoc translates the tags
-          \item Hard to do : no CST
+          \item Coqdoc translates the tags into final elements \\
+            \small (syntactic coloration, processing of identifiers, $\ldots$)
+          \item Hard to do : no good level of abstraction \\
+            \small (lack of a concrete syntax tree)
         \end{itemize}
     \end{itemize}
   \end{tframe}
 
   \begin{tframe}{An imperfect solution for Prettyprint}
+
     Method :
     \begin{itemize}
       \item Use Coq's \texttt{Printing} module
@@ -166,11 +191,30 @@
     \end{itemize}
     Implementation :
     \begin{itemize}
-      \item Make tags besed on AST types (VernacExpr and ConstrExpr)
+      \item Make tags based on AST types (VernacExpr and ConstrExpr)
       \item Each node translation is surrounded with a tag function
       \item Generates Xml content carrying the tags
     \end{itemize}
   \end{tframe}
+
+  \begin{frame}[containsverbatim]{Code modification example}
+  Before:
+    \begin{lstlisting}
+(* some code *)
+| CApp (_,(None,a),l) -> pr_app (pr mt) a l, lapp
+(* some code *)
+    \end{lstlisting}
+
+    After :
+    \begin{lstlisting}
+(* some code *)
+| CApp (_,(None,a),l) ->
+  tag C_CApp (pr_app (pr mt) a l), lapp
+(* some code *)
+    \end{lstlisting}
+
+    The \texttt{tag} function surrounds the output with XML tags
+  \end{frame}
 
   \begin{tframe}{Processing rules for the code}
     Main tasks :
@@ -184,9 +228,9 @@
     \begin{itemize}
       \item Easy to add rules
       \item Extensible
-      \item Different type of rules on a same node
+      \item Multiple rules applied on a same node
     \end{itemize}
-    Output : rich type representing code
+    Output : better type for representing code
   \end{tframe}
 
   \begin{frame}{Code type}
@@ -201,10 +245,10 @@
   \begin{tframe}{Identifiers}
     Identifier processing chain :
     \begin{itemize}
-      \item Locate each identifier
+      \item \texttt{locate} each identifier
       \item Ignore undeclared identifiers
       \item Special cases for standard library or external library
-      \item Generate a link type
+      \item Generate a link type used in the output module.
     \end{itemize}
   \end{tframe}
 
