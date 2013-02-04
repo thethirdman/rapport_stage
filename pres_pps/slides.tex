@@ -63,7 +63,7 @@
 
     \begin{column}{0.5\textwidth}
       Why a new Coqdoc ?
-      \begin{itemize}[<+->]
+      \begin{itemize}
         \item Coqdoc is hard to maintain
         \item Lack of extensibility
         \item Better integration of the tool
@@ -74,10 +74,7 @@
 \end{frame}
 
 \begin{frame}
-  \begin{multicols}{2}
-    \small
     \tableofcontents
-  \end{multicols}
 \end{frame}
 
 \section{Coqdoc-ng's architecture}
@@ -146,7 +143,7 @@
 
   \begin{tframe}{Interaction with Coqtop}
     Why interact with Coqtop ?
-    \begin{itemize}[<+->]
+    \begin{itemize}
       \item Remove code processing in Coqdoc
       \item Xml protocol (already used by CoqIDE)
       \item Easy to add new mechanisms
@@ -198,39 +195,49 @@
   \end{tframe}
 
   \begin{frame}[containsverbatim]{Code modification example}
-  Before:
-    \begin{lstlisting}
-(* some code *)
-| CApp (_,(None,a),l) -> pr_app (pr mt) a l, lapp
-(* some code *)
-    \end{lstlisting}
 
-    After :
-    \begin{lstlisting}
+    Modification of the printing module (in red) :
+    \begin{lstlisting}[escapeinside=\<\>]
 (* some code *)
 | CApp (_,(None,a),l) ->
-  tag C_CApp (pr_app (pr mt) a l), lapp
+  <\textcolor{red}{tag C\_CApp}> (pr_app (pr mt) a l), lapp
 (* some code *)
     \end{lstlisting}
 
-    The \texttt{tag} function surrounds the output with XML tags
+    The \texttt{tag} function surrounds the output with XML tags \\
+    Example output :
+    \begin{lstlisting}[language=xml]
+<checkmayeval>Eval compute in
+  <cnotation>
+    <unpmetavar> <prim>5</prim></unpmetavar>
+    <unpterminal> +</unpterminal>
+    <unpmetavar><prim>5</prim></unpmetavar>
+  </cnotation>
+</checkmayeval>.
+\end{lstlisting}
   \end{frame}
 
   \begin{tframe}{Processing rules for the code}
-    Main tasks :
-    \begin{itemize}
-      \item Annotate code for syntactic coloration
-      \item Apply printing rules
-      \item Process identifiers
-    \end{itemize}
-    \vfill
-    Chain of control design pattern :
-    \begin{itemize}
-      \item Easy to add rules
-      \item Extensible
-      \item Multiple rules applied on a same node
-    \end{itemize}
-    Output : better type for representing code
+        Main tasks :
+        \begin{itemize}
+          \item Annotate code for syntactic coloration
+          \item Apply printing rules
+          \item Process identifiers
+        \end{itemize}
+        \vfill
+        Chain of responsibility design pattern :
+        %% FIXME ?
+        \begin{itemize}
+          \item Apply a set of commands to a data
+          \item Each command is a function taking the next command to apply as an argument
+        \end{itemize}
+        Advantages :
+        \begin{itemize}
+          \item Easy to add rules
+          \item Extensible
+          \item Possibility to chain commands
+        \end{itemize}
+        Output : better type for representing code
   \end{tframe}
 
   \begin{frame}{Code type}
@@ -245,7 +252,7 @@
   \begin{tframe}{Identifiers}
     Identifier processing chain :
     \begin{itemize}
-      \item \texttt{locate} each identifier
+      \item Use \texttt{locate} command on each identifier
       \item Ignore undeclared identifiers
       \item Special cases for standard library or external library
       \item Generate a link type used in the output module.
@@ -267,37 +274,57 @@
 
 \section{Extending Coqdoc : Coq-tex}
   \begin{tframe}{Extending Coqdoc : Coq-tex}
-    \begin{itemize}[<+->]
-      \item Add a new frontend
+    How coq-tex works :
+    \begin{itemize}
+      \item Code in 3 environments :
+        \begin{itemize}
+          \item \texttt{coq\_example} : print input and result of evaluation
+          \item \texttt{coq\_example*} : only print input
+          \item \texttt{coq\_eval} : only print the result of evaluation
+        \end{itemize}
+      \item Everything else is left unprocessed
+    \end{itemize}
+    Parts to add :
+    \begin{itemize}
+      \item Add a new frontend : each environment is translated into a
+        query type
       \item Process queries
-      \item Use the LaTeX backend
+      \item Modify the $\LaTeX$ back-end
       \item Add Coq-tex options to Coqdoc
     \end{itemize}
   \end{tframe}
 
 \section{Demo}
-  \begin{tframe}{Demo}
+  \begin{frame}{Demo}
     \begin{center}
       Demo
     \end{center}
-  \end{tframe}
+  \end{frame}
 
-\section{Remaining work}
-  \begin{tframe}{What's left to do}
+  \section{Remaining work}
+  \begin{frame}{Remaining work}
+    What's left to do :
     \begin{itemize}
       \item Bugfixes
       \item Retro-compatibility (mostly options)
       \item Clean errors
     \end{itemize}
-  \end{tframe}
-  \begin{tframe}{New possibilities for Coqdoc}
+    Two scopes of improvement :
     \begin{itemize}
-      \item FIXME
+      \item XML protocol
+      \item Coqdoc
     \end{itemize}
-  \end{tframe}
+  \end{frame}
 
-\section{Conclusion}
-  \begin{tframe}{Conclusion}
-  \end{tframe}
+  \begin{frame}{Conclusion}
+    State of Coqdoc :
+    \begin{itemize}
+      \item Mostly working prototype
+      \item Little work left to do before release
+      \item Space for enrichment %FIXME ?
+    \end{itemize}
+    \vfill
+  \begin{center} \large Questions ? \end{center}
+  \end{frame}
 
 \end{document}
