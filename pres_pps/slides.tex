@@ -39,7 +39,7 @@
   }
 
 %% FIXME: title
-\title{Presenting the new Coqdoc}
+\title{Introducing the new Coqdoc}
 
 \author{François Ripault}
 
@@ -50,16 +50,13 @@
 
 \begin{frame}{Introduction}
   \begin{columns}[2]
-
     \begin{column}{0.5\textwidth}
       What is Coqdoc ?
       \begin{itemize}
         \item Documentation tool for Coq
         \item Many possible use cases
-        \item We would like to do more with it
       \end{itemize}
     \end{column}
-
     \begin{column}{0.5\textwidth}
       Why a new Coqdoc ?
       \begin{itemize}
@@ -68,7 +65,6 @@
         \item Better integration of the tool
       \end{itemize}
     \end{column}
-
   \end{columns}
 \end{frame}
 
@@ -272,11 +268,17 @@
   \end{tframe}
 
 \section{Extending Coqdoc}
-\begin{tframe}{Extending the notations}
+\subsection{Extending the notations}
+\begin{frame}[containsverbatim]{Extending the notations}
+  A richer notations system :
   \begin{itemize}
-    \item
+    \item Generate output specific commands for the code
+      the code : \texttt{sum(a,b)} becomes
+      \begin{verbatim}
+      \sum^{a}_{b}
+      \end{verbatim}
   \end{itemize}
-\end{tframe}
+\end{frame}
 \begin{tframe}{New file format: Vdoc}
   A new file format : \texttt{.vdoc}
   \begin{itemize}
@@ -285,7 +287,6 @@
     \item Used to generate Coqdoc's documents
     \item Better control over generated files
   \end{itemize}
-  Not implemented yet
 \end{tframe}
 
   \begin{tframe}{Coq-tex}
