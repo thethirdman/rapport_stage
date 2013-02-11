@@ -43,7 +43,6 @@
 
 \author{François Ripault}
 
-
 \begin{document}
 \begin{frame}
 \titlepage
@@ -272,8 +271,24 @@
     \end{itemize}
   \end{tframe}
 
-\section{Extending Coqdoc : Coq-tex}
-  \begin{tframe}{Extending Coqdoc : Coq-tex}
+\section{Extending Coqdoc}
+\begin{tframe}{Extending the notations}
+  \begin{itemize}
+    \item
+  \end{itemize}
+\end{tframe}
+\begin{tframe}{New file format: Vdoc}
+  A new file format : \texttt{.vdoc}
+  \begin{itemize}
+    \item Portable file : back-end independent
+    \item Saved after evaluation
+    \item Used to generate Coqdoc's documents
+    \item Better control over generated files
+  \end{itemize}
+  Not implemented yet
+\end{tframe}
+
+  \begin{tframe}{Coq-tex}
     How coq-tex works :
     \begin{itemize}
       \item Code in 3 environments :
