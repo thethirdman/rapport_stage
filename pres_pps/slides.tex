@@ -62,7 +62,7 @@
       \begin{itemize}
         \item Coqdoc is hard to maintain
         \item Lack of extensibility
-        \item Better integration of the tool
+        \item We'd want a better integration of the tool
       \end{itemize}
     \end{column}
   \end{columns}
@@ -129,7 +129,7 @@
 \end{lstlisting}
 
           \item Printing rule : set a new printing rule in the global state
-          \item Apply the printing rules on the rest
+          \item Apply the printing rules on the rest of the documentation
         \end{itemize}
       \item Code : interaction with Coqtop
     \end{itemize}
@@ -140,7 +140,7 @@
     Why interact with Coqtop ?
     \begin{itemize}
       \item Remove code processing in Coqdoc
-      \item Xml protocol (already used by CoqIDE)
+      \item Xml protocol (already used by CoqIDE) : \texttt{eval} command
       \item Easy to add new mechanisms
     \end{itemize}
     \vfill
@@ -277,6 +277,9 @@
       \begin{verbatim}
       \sum^{a}_{b}
       \end{verbatim}
+    \item Use Coq's notation system
+    \item Process the notations in the evaluation module
+    \item Translate using the back-end
   \end{itemize}
 \end{frame}
 \begin{tframe}{New file format: Vdoc}
@@ -302,7 +305,7 @@
     \end{itemize}
     Parts to add :
     \begin{itemize}
-      \item Add a new frontend : each environment is translated into a
+      \item Add a new front-end : each environment is translated into a
         query type
       \item Process queries
       \item Modify the $\LaTeX$ back-end
@@ -335,9 +338,9 @@
   \begin{frame}{Conclusion}
     State of Coqdoc :
     \begin{itemize}
-      \item Mostly working prototype
+      \item Working prototype
       \item Little work left to do before release
-      \item Space for enrichment %FIXME ?
+      \item Room for improvement
     \end{itemize}
     \vfill
   \begin{center} \large Questions ? \end{center}
