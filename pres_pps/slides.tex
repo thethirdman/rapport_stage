@@ -77,6 +77,9 @@
     %% FIME : pointe flèches
     \input{architecture.tex}
   \end{frame}
+  \begin{frame}[containsverbatim]{Coqdoc's input files}
+    \lstinputlisting{input.v}
+    \end{frame}
 
   \begin{tframe}{Front-end}
     Role :
@@ -106,6 +109,52 @@
           \end{itemize}
       \end{itemize}
     \end{frame}
+    \begin{frame}[containsverbatim]{Our document}
+    \begin{center}
+      \scalebox{0.7}{
+      \begin{tikzpicture}
+      \node[draw, thick, fill=blue!20] (1) at (0,0) {Doc :       " * Example\_doc $\ldots$"};
+      \node[draw, thick, fill=blue!20] (2) at (0, -2) {Comment : " Now we write $\ldots$"};
+      \node[draw, thick, fill=blue!20] (3) at (0,-4) {Code :     "Definition id $\ldots$"};
+      \node[draw, thick, fill=blue!20] (4) at (0,-6) {Comment : "This returns the $\ldots$"};
+      \node[draw, thick, fill=blue!20] (5) at (0,-8) {Code : "Eval compute in $\ldots$"};
+
+      \draw[->] (1.south) -- (2.north);
+      \draw[->] (2.south) -- (3.north);
+      \draw[->] (3.south) -- (4.north);
+      \draw[->] (4.south) -- (5.north);
+    \end{tikzpicture}
+  }
+    \end{center}
+    \end{frame}
+    \begin{frame}{After parsing the documentation}
+    \scalebox{0.7}{
+    \begin{tikzpicture}
+      \node[draw, thick, fill=blue!20] (1) at (-3,0) {Doc : Title};
+      \node[draw, thick, fill=blue!20] (1a) at (0,0) {Doc : Content};
+      \node[draw, thick, fill=blue!20] (1b) at (3,0) {Doc : Hrule};
+      \node[draw, thick, fill=blue!20] (1c) at (6,0) {Doc : List};
+      \node[draw, thick, fill=blue!20] (1d) at (4.5,-2) {Doc : Item};
+      \node[draw, thick, fill=blue!20] (1e) at (7.5,-2) {Doc : Item};
+      \node[draw, thick, fill=blue!20] (2) at (3, -4) {Comment : " Now we write $\ldots$"};
+      \node[draw, thick, fill=blue!20] (3) at (3,-5) {Code :     "Definition id $\ldots$"};
+      \node[draw, thick, fill=blue!20] (4) at (3,-6) {Comment : "This returns the $\ldots$"};
+      \node[draw, thick, fill=blue!20] (5) at (3,-7) {Code : "Eval compute in $\ldots$"};
+
+      \draw[->] (1.east) -- (1a.west);
+      \draw[->] (1a.east) -- (1b.west);
+      \draw[->] (1b.east) -- (1c.west);
+      \draw[->] (1c.south) -- (1d.north);
+      \draw[->] (1c.south) -- (1e.north);
+
+      \draw[->] (1c.east) to[out=0, in=90] (9,-2) to[out=-90,in=90] (2.north);
+      \draw[->] (2.south) -- (3.north);
+      \draw[->] (3.south) -- (4.north);
+      \draw[->] (4.south) -- (5.north);
+    \end{tikzpicture}
+  }
+    \end{frame}
+
 
     \subsection{Evaluation}
     \begin{frame}[containsverbatim]{Evaluation}
@@ -133,6 +182,27 @@
         \end{itemize}
       \item Code : interaction with Coqtop
     \end{itemize}
+  \end{frame}
+  \begin{frame}[After the evaluation]
+    \scalebox{0.7}{
+    \begin{tikzpicture}
+      \node[draw, thick, fill=blue!20] (1) at (-3,0) {Doc : Title};
+      \node[draw, thick, fill=blue!20] (1a) at (0,0) {Doc : Content};
+      \node[draw, thick, fill=blue!20] (1b) at (3,0) {Doc : Hrule};
+      \node[draw, thick, fill=blue!20] (1c) at (6,0) {Doc : List};
+      \node[draw, thick, fill=blue!20] (1d) at (5,-2) {Doc : Item};
+      \node[draw, thick, fill=blue!20] (1e) at (8,-2) {Doc : Item};
+      \node[draw, thick, fill=blue!20] (3) at (2,-4) {Code :     "Definition id $\ldots$"};
+      \node[draw, thick, fill=blue!20] (5) at (2,-6) {Code : "Eval compute in $\ldots$"};
+      \draw[->] (1.east) -- (1a.west);
+      \draw[->] (1a.east) -- (1b.west);
+      \draw[->] (1b.east) -- (1c.west);
+      \draw[->] (1c.south) -- (1d.north);
+      \draw[->] (1c.south) -- (1e.north);
+      \draw[->] (1c.east) to[out=0, in=90] (10,-2) to[out=-90,in=90] (3.north);
+      \draw[->] (3.south) -- (5.north);
+    \end{tikzpicture}
+  }
   \end{frame}
 
 
@@ -253,6 +323,44 @@
       \item Generate a link type used in the output module.
     \end{itemize}
   \end{tframe}
+  \begin{frame}{Code and hyperlinks Result}
+    \scalebox{0.7}{
+    \begin{tikzpicture}
+      \node[draw, thick, fill=blue!20] (1) at (-3,0) {Doc : Title};
+      \node[draw, thick, fill=blue!20] (1a) at (0,0) {Doc : Content};
+      \node[draw, thick, fill=blue!20] (1b) at (3,0) {Doc : Hrule};
+      \node[draw, thick, fill=blue!20] (1c) at (6,0) {Doc : List};
+      \node[draw, thick, fill=blue!20] (1d) at (5,-2) {Doc : Item};
+      \node[draw, thick, fill=blue!20] (1e) at (8,-2) {Doc : Item};
+
+      \node[draw, thick, fill=blue!20] (3) at (-3,-5) {Code : Keyword \textcolor{red}{"Definition"}};
+      \node[draw, thick, fill=blue!20] (3a) at (2,-5) {Code : Id      \textcolor{red}{"id"}};
+      \node[draw, thick, fill=blue!20, minimum size=0.7cm] (3b) at (5,-5) {$\ldots$};
+
+      \node[draw, thick, fill=blue!20] (5) at (-3,-8) {Code : Keyword \textcolor{red}{"Eval"}};
+      \node[draw, thick, fill=blue!20, minimum size=0.7cm] (5a) at (1,-8) {$\ldots$};
+      \node[draw, thick, fill=blue!20] (5b) at (4,-8) {Code : Id \textcolor{red}{"id"}};
+      \node[draw, thick, fill=blue!20] (5c) at (8,-8) {Code : Literal \textcolor{red}{"42"}};
+
+      \draw[->] (1.east) -- (1a.west);
+      \draw[->] (1a.east) -- (1b.west);
+      \draw[->] (1b.east) -- (1c.west);
+      \draw[->] (1c.south) -- (1d.north);
+      \draw[->] (1c.south) -- (1e.north);
+      \draw[->] (1c.east) to[out=0, in=90] (10,-1) to[out=-90,in=90] (3.north);
+
+      \draw[->] (3.east) -- (3a.west);
+      \draw[->] (3a.east) -- (3b.west);
+
+      \draw[->] (5.east) -- (5a.west);
+      \draw[->] (5a.east) -- (5b.west);
+      \draw[->] (5b.east) -- (5c.west);
+      \draw[->] (3b.south) to[out=-90, in=90] (5.north);
+
+      \draw[->,dashed, color=blue] (3a.south) -- (5b.north);
+    \end{tikzpicture}
+  }
+  \end{frame}
 
   \begin{tframe}{Back-end}
     Back-end structure
@@ -302,7 +410,7 @@
     \end{itemize}
     Parts to add :
     \begin{itemize}
-      \item Add a new frontend : each environment is translated into a
+      \item Add a new front-end : each environment is translated into a
         query type
       \item Process queries
       \item Modify the $\LaTeX$ back-end
