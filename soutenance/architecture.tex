@@ -1,0 +1,30 @@
+\begin{figure}
+  \begin{tikzpicture}
+
+  \node[draw, ellipse, thick, fill=blue!20] (V) at (-3,0) {Coq File};
+  \node[draw, ellipse, thick, fill=blue!20] (Tex) at (-3,-1) {Coq-tex File};
+
+  \node[draw, thick, fill=blue!20] (front) at (1,-0.5) {Front-end};
+  \draw[->] (V.east) -- (front.west);
+  \draw[->] (Tex.east) -- (front.west);
+
+  \node[draw, thick, fill=blue!20] (eval) at (1, -2) {Evaluation};
+  \draw[->, -latex'] (front.south) -- node[right, color=black] {AST} (eval.north);
+
+  \node[draw, thick, fill=red!20] (coqtop) at (5,-2) {Coqtop};
+  %\draw[->, dashed, -latex'] (eval.east)  -- node[above, color=black] {Interaction} (coqtop.west);
+  \draw[<->, dashed] (eval.east)  -- node[above] {Interaction} (coqtop.west);
+
+  \node[draw, thick, fill=blue!20] (back) at (1, -4) {Back-end};
+  \draw[->] (eval.south) -- (back.north);
+
+  \node[draw, thick, fill=yellow!20] (spec-html) at (-3, -3.5) {Html spec};
+  \draw[->,-latex'] (spec-html.east) -- node[above] {Specification} (back.west);
+  \node[draw, thick, fill=yellow!20] (spec-latex) at (-3, -4.5) {LaTeX spec};
+  \draw[->] (spec-latex.east) -- (back.west);
+
+  \node[draw, thick, ellipse, fill=blue!20] (output) at (5, -4.5) {Output file(s)};
+  \draw[->,-latex'] (back.east) -- node[above] {Print} (output.west);
+
+  \end{tikzpicture}
+\end{figure}

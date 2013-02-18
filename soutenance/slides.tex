@@ -1,0 +1,114 @@
+\documentclass[compress]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usetheme{Amsterdam}
+
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\lstset{language=caml, frame=single, basicstyle=\ttfamily\scriptsize, commentstyle=\color{dkgreen}}
+
+\newcommand{\email}[0]{francois.ripault@epita.fr}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+
+\defbeamertemplate*{title page}{customized}[1][]
+{
+  \begin{center}
+  \usebeamerfont{title}\inserttitle\par
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+    \bigskip
+    \usebeamerfont{author}\insertauthor\par
+    \scriptsize \texttt{\email} \par
+    \usebeamerfont{institute}\insertinstitute\par
+    \usebeamerfont{date}\insertdate\par
+    %\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+    \end{center} }
+
+\newenvironment{tframe}[1]{
+  \subsection{#1}
+  \begin{frame}{#1}
+  }{
+  \end{frame}
+  }
+
+%% FIXME: title
+\title{Soutenance de stage de fin de tronc commun : \\ Refonte du logiciel Coqdoc}
+
+\author{François Ripault}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Introduction}
+  Motivations de ce stage
+
+  \vfill
+
+  \begin{columns}[2]
+    \begin{column}{0.5\textwidth}
+    Aspect ingénierie :
+  \begin{itemize}
+    \item Validation des acquis
+    \item Acquisition de nouvelles compétences
+    \item Production d'un logiciel
+  \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      Aspect recherche :
+  \begin{itemize}
+    \item Introduction aux sujets de recherche
+      de PPS
+    \item Interaction avec des scientifiques
+  \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Presentation de l'entreprise}
+\begin{tframe}{L'INRIA}
+  Présentation de l'entreprise :
+  \begin{itemize}
+    \item Institut national de recherche en informatique et en automatique
+    \item Activité scientifique centrée sur l'informatique, et ses interactions
+      avec d'autres sciences.
+    \item Collaboration avec de nombreux partenaires industriels et académiques
+    \item Créateur de start-ups
+  \end{itemize}
+\end{tframe}
+\begin{tframe}{Le laboratoire PPS}
+  Présentation du service
+  \begin{itemize}
+    \item Laboratoire Preuves, Programmes et Systèmes
+    \item Equipe multi-disciplinaire
+    \item Liens entre les mathématiques et l'informatique
+  \end{itemize}
+\end{tframe}
+
+\section{Enseignements du stage}
+
+\begin{tframe}{Validation des acquis}
+\end{tframe}
+\begin{tframe}{Obtention de nouvelles compétences}
+\end{tframe}
+\begin{tframe}{Réalisation complète d'un logiciel}
+\end{tframe}
+\begin{tframe}{Interactions avec le monde de la science}
+\end{tframe}
+
+\begin{frame}{Conclusion}
+\end{frame}
+
+\end{document}
