@@ -57,10 +57,13 @@
 \end{frame}
 
 \begin{frame}{Introduction}
-  \underline{Motivations de ce stage :}
-
-  \vfill
-
+  \begin{itemize}
+    \item Stage effectué du 3 septembre 2012 au 11 janvier 2013
+    \item Au sein de l'INRIA
+    \item Refonte du logiciel de documentation Coqdoc
+  \end{itemize}
+\end{frame}
+  \begin{frame}{Motivations du stage}
   \begin{columns}[2]
     \begin{column}{0.5\textwidth}
     Aspect ingénierie :
@@ -92,7 +95,7 @@
     \item Institut national de recherche en informatique et en automatique
     \item Activité scientifique centrée sur l'informatique, et ses interactions
       avec d'autres sciences.
-    \item Collaboration avec de nombreux partenaires industriels et académiques
+    \item Collaborations avec de nombreux partenaires industriels et académiques
     \item Créateur de start-ups
   \end{itemize}
   \begin{figure}
@@ -121,27 +124,49 @@
   \end{figure}
 \end{tframe}
 
+\section{Le logiciel produit}
+
+\begin{tframe}{Fonctionnement de Coqdoc}
+  \begin{figure}
+    \lstinputlisting{input.v}
+  \end{figure}
+\end{tframe}
+
+\begin{tframe}{Architecture du logiciel}
+  \begin{figure}
+    \input{../pres_pps/architecture.tex}
+  \end{figure}
+\end{tframe}
+
+\begin{tframe}{Exemple de document de sortie}
+\begin{center}
+\includegraphics[scale=0.4]{input.png}
+\end{center}
+\end{tframe}
+
+\section{Déroulement du stage}
+\begin{frame}{Déroulement du stage}
+  \begin{itemize}
+    \item Découverte du contexte du stage
+    \item Développement du logiciel
+    \item Réunions de travail hebdomadaires
+    \item Un jour de la semaine dédié à la recherche
+    \item Présentation en anglais du logiciel (14 février)
+  \end{itemize}
+\end{frame}
+
 \section{Enseignements du stage}
 
 \begin{tframe}{Validation des compétences}
-      Compétences techniques :
+      Aspect techniques :
       \begin{itemize}
         \item Perfectionnement en Ocaml
         \item Traitement du langage
-      \end{itemize}
-
-      \medskip
-
-      Compétences de ``gestion de projet'' :
-      \begin{itemize}
         \item Commentaire de code
         \item Réalisation d'une base de test
-        \item Intégration du logiciel réalisé
       \end{itemize}
-\end{tframe}
 
-\begin{tframe}{Conception Logicielle}
-      Réécriture entière de Coqdoc :
+  Conception Logicielle
       \begin{itemize}
         \item Conception de l'architecture
         \item Création d'un logiciel extensible
@@ -165,6 +190,7 @@
     \item Sujet très lié à l'aspect ingénierie
     \item Fortement ancré dans le monde de la recherche
   \end{itemize}
+    \vfill
+  \begin{center} \large Questions ? \end{center}
 \end{frame}
-
 \end{document}
